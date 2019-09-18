@@ -14,7 +14,10 @@
   "autoload": {
     "psr-4": {
       "AlecRabbit\\Wcwidth\\": "src\\Wcwidth"
-    }
+    },
+    "files": [
+      "src\\bootstrap.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
