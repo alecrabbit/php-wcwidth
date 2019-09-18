@@ -1,6 +1,6 @@
 {
   "name": "alecrabbit/php-wcwidth",
-  "description": "Awesome package description",
+  "description": "Calculate width of unicode strings rendered to a terminal",
   "type": "library",
   "require": {
     "php": ">=7.2"
