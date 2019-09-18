@@ -2,6 +2,8 @@
 
 namespace AlecRabbit\Wcwidth;
 
+// @codeCoverageIgnoreStart
+
 // @link https://github.com/jquast/wcwidth
 // Zero_Width table. Created by setup.py.
 // Generated: 2019-09-18T10:00:11.143684
@@ -447,27 +449,4 @@ define(
         [0x30000, 0x3fffd,],  # (nil)                   ..
     ]
 );
-
-function bisearch($ucs, array $table): int
-{
-    $lbound = 0;
-    $ubound = count($table) - 1;
-
-    if ($ucs < $table[0][0] || $ucs > $table[$ubound][1]) {
-        return 0;
-    }
-    while ($ubound >= $lbound) {
-        $mid = ($lbound + $ubound); // 2
-        if ($ucs > $table[$mid][1]) {
-
-            $lbound = $mid + 1;
-        } elseif ($ucs < $table[$mid][0]) {
-
-            $ubound = $mid - 1;
-        } else {
-            return 1;
-        }
-    }
-    return 0;
-}
-
+// @codeCoverageIgnoreEnd
