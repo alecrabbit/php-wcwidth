@@ -14,3 +14,8 @@
 
 This is kinda port of python's [jquast/wcwidth](https://github.com/jquast/wcwidth)
 
+### Installation
+
+```bash
+$ composer require alecrabbit/php-wcwidth
+```
