@@ -10,6 +10,11 @@ class WcWidthTest extends TestCase
     /** @test */
     public function helloJp(): void
     {
+        // Width of Japanese phrase: コンニチハ, セカイ!
+        // Given a phrase of 5 and 3 Katakana ideographs, joined with
+        // 3 English-ASCII punctuation characters, totaling 11, this
+        // phrase consumes 19 cells of a terminal emulator.
+
         $phrase = 'コンニチハ, セカイ!';
         $expect_length_each = [2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1];
         $expect_length_phrase = array_sum($expect_length_each);
@@ -37,7 +42,7 @@ class WcWidthTest extends TestCase
 
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
-    
+
     /** @test */
     public function csiWithNegative(): void
     {
@@ -72,14 +77,50 @@ class WcWidthTest extends TestCase
     }
 
     /** @test */
+    public function clockStringWidth(): void
+    {
+        // String containing clock symbols
+        $phrase = '🕐🕑';
+        $expect_length_each = [2, 2];
+        $expect_length_phrase = 4;
+
+        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+    }
+
+    /** @test */
+    public function combiningEnclosing(): void
+    {
+        // CYRILLIC CAPITAL LETTER A + COMBINING CYRILLIC HUNDRED THOUSANDS SIGN is А҈ of length 1.
+        $phrase = "\u{0410}\u{0488}";
+        $expect_length_each = [1, 0];
+        $expect_length_phrase = 1;
+
+        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+    }
+
+    /** @test */
+    public function combiningSpacing(): void
+    {
+        // Balinese kapal (ship) is ᬓᬨᬮ᭄ of length 4.
+        $phrase = 'ᬓᬨᬮ᭄';
+        $expect_length_each = [1, 1, 1, 1];
+        $expect_length_phrase = 4;
+
+        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+    }
+
+    /** @test */
     public function wcswidthSubstr(): void
     {
+        //   Test wcswidth() optional 2nd parameter, `n`.
+        //  `n` determines at which position of the string
+        //  to stop counting length.
+
         $phrase = 'コンニチハ, セカイ!';
         $expect_length_each = [2, 2, 2, 2, 2, 1, 1,];
         $expect_length_phrase = array_sum($expect_length_each);
 
         $length_phrase = WcWidth::wcswidth($phrase, 7);
         $this->assertSame($length_phrase, $expect_length_phrase);
-
     }
 }
