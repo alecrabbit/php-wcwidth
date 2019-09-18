@@ -465,12 +465,12 @@ if (!\function_exists(__NAMESPACE__ . '\wcwidth')) {
 
 if (!\function_exists(__NAMESPACE__ . '\wcswidth')) {
     /**
-     * @param string $subject
+     * @param null|string $subject
      * @param null|int $n
      * @return int
      */
-    function wcswidth(string $subject, ?int $n = null): int
+    function wcswidth(?string $subject = null, ?int $n = null): int
     {
-        return UCode::wcswidth($subject, $n);
+        return UCode::wcswidth($subject ?? '', $n);
     }
 }
