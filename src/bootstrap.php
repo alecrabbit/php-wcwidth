@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Wcwidth;
+namespace AlecRabbit\Helpers;
 
 // @codeCoverageIgnoreStart
 
@@ -9,6 +9,7 @@ namespace AlecRabbit\Wcwidth;
 // Generated: 2019-09-18T10:00:11.143684
 // Source: DerivedGeneralCategory-12.1.0.txt
 // Date:  2019-03-10, 10:53:08 GMT
+
 define(
     __NAMESPACE__ . '\\' . 'ZERO_WIDTH',
     [
@@ -450,3 +451,26 @@ define(
     ]
 );
 // @codeCoverageIgnoreEnd
+
+if (!\function_exists(__NAMESPACE__ . '\wcwidth')) {
+    /**
+     * @param string $wc
+     * @return int
+     */
+    function wcwidth(string $wc): int
+    {
+        return UCode::wcwidth($wc);
+    }
+}
+
+if (!\function_exists(__NAMESPACE__ . '\wcswidth')) {
+    /**
+     * @param string $subject
+     * @param null|int $n
+     * @return int
+     */
+    function wcswidth(string $subject, ?int $n = null): int
+    {
+        return UCode::wcswidth($subject, $n);
+    }
+}

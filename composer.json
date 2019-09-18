@@ -13,7 +13,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\Wcwidth\\": "src\\Wcwidth"
+      "AlecRabbit\\Helpers\\": "src\\Helpers"
     },
     "files": [
       "src\\bootstrap.php"

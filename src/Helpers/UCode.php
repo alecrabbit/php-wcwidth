@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Wcwidth;
+namespace AlecRabbit\Helpers;
 
-class P
+class UCode
 {
     /**
      * @param string $subject

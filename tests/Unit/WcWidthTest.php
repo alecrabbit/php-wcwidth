@@ -2,7 +2,7 @@
 
 namespace AlecRabbit\Tests\Wcwidth;
 
-use AlecRabbit\Wcwidth\P;
+use AlecRabbit\Helpers\UCode;
 use PHPUnit\Framework\TestCase;
 
 class WcWidthTest extends TestCase
@@ -25,8 +25,8 @@ class WcWidthTest extends TestCase
     protected function validate(array $expect_length_each, int $expect_length_phrase, string $phrase): void
     {
         $chrArray = preg_split('//u', $phrase, -1, PREG_SPLIT_NO_EMPTY);
-        $length_each = array_map([P::class, 'wcwidth'], $chrArray);
-        $length_phrase = P::wcswidth($phrase, mb_strlen($phrase));
+        $length_each = array_map('AlecRabbit\Helpers\wcwidth', $chrArray);
+        $length_phrase = UCode::wcswidth($phrase, mb_strlen($phrase));
 
         $this->assertSame($length_each, $expect_length_each);
         $this->assertSame($length_phrase, $expect_length_phrase);
@@ -120,7 +120,7 @@ class WcWidthTest extends TestCase
         $expect_length_each = [2, 2, 2, 2, 2, 1, 1,];
         $expect_length_phrase = array_sum($expect_length_each);
 
-        $length_phrase = P::wcswidth($phrase, 7);
+        $length_phrase = UCode::wcswidth($phrase, 7);
         $this->assertSame($length_phrase, $expect_length_phrase);
     }
 }
