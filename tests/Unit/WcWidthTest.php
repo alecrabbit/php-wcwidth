@@ -44,6 +44,16 @@ class WcWidthTest extends TestCase
     }
 
     /** @test */
+    public function mbMessage(): void
+    {
+        $phrase = 'mᚹä漢d字';
+        $expect_length_each = [1, 1, 1, 2, 1, 2,];
+        $expect_length_phrase = array_sum($expect_length_each);
+
+        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+    }
+
+    /** @test */
     public function csiWithNegative(): void
     {
         // CSI (Control sequence initiate) reports width -1.
