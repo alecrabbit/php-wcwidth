@@ -44,6 +44,12 @@ class WcWidthTest extends TestCase
     }
 
     /** @test */
+    public function nullString(): void
+    {
+        $this->assertSame(0, wcswidth(null));
+    }
+
+    /** @test */
     public function mbMessage(): void
     {
         $phrase = 'mᚹä漢d字';

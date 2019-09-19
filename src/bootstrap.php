@@ -469,7 +469,7 @@ if (!\function_exists(__NAMESPACE__ . '\wcswidth')) {
      * @param null|int $n
      * @return int
      */
-    function wcswidth(?string $subject = null, ?int $n = null): int
+    function wcswidth(?string $subject, ?int $n = null): int
     {
         if (null === $subject) {
             return 0;
