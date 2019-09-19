@@ -471,6 +471,9 @@ if (!\function_exists(__NAMESPACE__ . '\wcswidth')) {
      */
     function wcswidth(?string $subject = null, ?int $n = null): int
     {
-        return UCode::wcswidth($subject ?? '', $n);
+        if(null === $subject) {
+            return 0;
+        }
+        return UCode::wcswidth($subject, $n);
     }
 }
