@@ -36,13 +36,7 @@ class UCode
     {
         $ucs = mb_ord($wc);
 
-        if ($ucs === 0 ||
-            $ucs === 0x034F ||
-            (0x200B <= $ucs && $ucs <= 0x200F) ||
-            $ucs === 0x2028 ||
-            $ucs === 0x2029 ||
-            (0x202A <= $ucs && $ucs <= 0x202E) ||
-            (0x2060 <= $ucs && $ucs <= 0x2063)) {
+        if (self::isB($ucs)) {
             return 0;
         }
 
@@ -94,5 +88,20 @@ class UCode
             }
         }
         return 0;
+    }
+
+    /**
+     * @param int $ucs
+     * @return bool
+     */
+    protected static function isB(int $ucs): bool
+    {
+        return $ucs === 0 ||
+            $ucs === 0x034F ||
+            (0x200B <= $ucs && $ucs <= 0x200F) ||
+            $ucs === 0x2028 ||
+            $ucs === 0x2029 ||
+            (0x202A <= $ucs && $ucs <= 0x202E) ||
+            (0x2060 <= $ucs && $ucs <= 0x2063);
     }
 }
