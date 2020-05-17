@@ -55,7 +55,7 @@ class UCode
 
     /**
      * @param string $subject
-     * @return array
+     * @return array<string>
      */
     protected static function split(string $subject): array
     {
@@ -69,6 +69,11 @@ class UCode
         return $_split;
     }
 
+    /**
+     * @param int $ucs
+     * @param array<array<int>> $table
+     * @return int
+     */
     protected static function bisearch(int $ucs, array $table): int
     {
         $lbound = 0;
