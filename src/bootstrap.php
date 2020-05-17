@@ -7,13 +7,15 @@ namespace AlecRabbit\Helpers;
 // @codeCoverageIgnoreStart
 
 // @link https://github.com/jquast/wcwidth
-//# EastAsianWidth-13.0.0.txt
-//# Date: 2029-01-21, 18:14:00 GMT [KW, LI]
-//# © 2020 Unicode®, Inc.
-
-//# DerivedGeneralCategory-13.0.0.txt
-//# Date: 2019-10-21, 14:30:32 GMT
-//# © 2019 Unicode®, Inc.
+// @link http://www.unicode.org/Public/UNIDATA/EastAsianWidth.txt
+// EastAsianWidth-13.0.0.txt
+// Date: 2029-01-21, 18:14:00 GMT [KW, LI]
+// © 2020 Unicode®, Inc.
+//
+// @link http://www.unicode.org/Public/UNIDATA/extracted/DerivedGeneralCategory.txt
+// DerivedGeneralCategory-13.0.0.txt
+// Date: 2019-10-21, 14:30:32 GMT
+// © 2019 Unicode®, Inc.
 
 use function function_exists;
 
