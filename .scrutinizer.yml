@@ -1,26 +1,18 @@
 build:
   environment:
-    php: 7.2.22
+    php: 7.3.25
 
   nodes:
     analysis:
       tests:
         override:
-        - php-scrutinizer-run
-        - phpcs-run
-
-    tests-and-coverage:
-      tests:
-        override:
-        - command: 'php ./vendor/bin/phpunit --coverage-clover=clover.xml'
-          coverage:
-            file: clover.xml
-            format: clover
+          - php-scrutinizer-run
+          - phpcs-run
 
 filter:
   paths:
-  - src/
+    - src/
 
   excluded_paths:
-  - tests/
-  - bin/
+    - tests/
+    - bin/
