@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  &app-service app:
+    # https://github.com/alecrabbit/docker-php73-cli-alpine-debug
+    image: dralec/php80-cli-alpine-debug
+    hostname: *app-service
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}" # Set variables in .env file
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      - ./:/var/www
+    environment:
+      DOCKER_TERM: "${TERM:-}"      # pass host $TERM variable
+      COLORTERM: "${COLORTERM:-}"   # pass host $COLORTERM variable
+      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1 remote_autostart=off remote_port=9009"
+      PHP_IDE_CONFIG: "serverName=Docker"
+    command: keep-alive.sh
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.220.0/28
