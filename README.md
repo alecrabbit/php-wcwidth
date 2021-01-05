@@ -2,7 +2,6 @@
 
 [![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-wcwidth.svg)](https://php.net)
 [![Build Status](https://github.com/alecrabbit/php-wcwidth/workflows/build/badge.svg)](https://github.com/alecrabbit/php-wcwidth/actions)
-[![Appveyor Status](https://img.shields.io/appveyor/ci/alecrabbit/php-wcwidth.svg?label=appveyor)](https://ci.appveyor.com/project/alecrabbit/php-wcwidth/branch/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alecrabbit/php-wcwidth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alecrabbit/php-wcwidth/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/alecrabbit/php-wcwidth/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/alecrabbit/php-wcwidth/?branch=master)
 [![Total Downloads](https://poser.pugx.org/alecrabbit/php-wcwidth/downloads)](https://packagist.org/packages/alecrabbit/php-wcwidth)
