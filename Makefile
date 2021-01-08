@@ -24,3 +24,6 @@ run_phpunit:
 	@echo "\n$(COMMENT_COLOR)Testing...$(STOP_COLOR)\n";
 	@docker-compose exec app phpunit
 
+changelog:
+	@echo "\n$(COMMENT_COLOR)Updating changelog...$(STOP_COLOR)\n";
+	-git-chglog -o CHANGELOG.md
