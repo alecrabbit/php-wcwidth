@@ -397,26 +397,26 @@ define(
         [0x3190, 0x31e3,],  // Ideographic Annotation L..Cjk Stroke Q
         [0x31f0, 0x321e,],  // Katakana Letter Small Ku..Parenthesized Korean Cha
         [0x3220, 0x3247,],  // Parenthesized Ideograph ..Circled Ideograph Koto
-        [0x3250, 0x4dbf,],  // Partnership Sign        ..
+        [0x3250, 0x4dbf,],  // Partnership Sign        ..(nil)
         [0x4e00, 0xa48c,],  // Cjk Unified Ideograph-4e..Yi Syllable Yyr
         [0xa490, 0xa4c6,],  // Yi Radical Qot          ..Yi Radical Ke
         [0xa960, 0xa97c,],  // Hangul Choseong Tikeut-m..Hangul Choseong Ssangyeo
         [0xac00, 0xd7a3,],  // Hangul Syllable Ga      ..Hangul Syllable Hih
-        [0xf900, 0xfaff,],  // Cjk Compatibility Ideogr..
+        [0xf900, 0xfaff,],  // Cjk Compatibility Ideogr..(nil)
         [0xfe10, 0xfe19,],  // Presentation Form For Ve..Presentation Form For Ve
         [0xfe30, 0xfe52,],  // Presentation Form For Ve..Small Full Stop
         [0xfe54, 0xfe66,],  // Small Semicolon         ..Small Equals Sign
         [0xfe68, 0xfe6b,],  // Small Reverse Solidus   ..Small Commercial At
         [0xff01, 0xff60,],  // Fullwidth Exclamation Ma..Fullwidth Right White Pa
         [0xffe0, 0xffe6,],  // Fullwidth Cent Sign     ..Fullwidth Won Sign
-        [0x16fe0, 0x16fe4,],  // Tangut Iteration Mark   ..
-        [0x16ff0, 0x16ff1,],  // [nil]                   ..
-        [0x17000, 0x187f7,],  // [nil]                   ..
-        [0x18800, 0x18cd5,],  // Tangut Component-001    ..
-        [0x18d00, 0x18d08,],  // [nil]                   ..
+        [0x16fe0, 0x16fe4,],  // Tangut Iteration Mark   ..(nil)
+        [0x16ff0, 0x16ff1,],  // (nil)                   ..(nil)
+        [0x17000, 0x187f7,],  // (nil)                   ..(nil)
+        [0x18800, 0x18cd5,],  // Tangut Component-001    ..(nil)
+        [0x18d00, 0x18d08,],  // (nil)                   ..(nil)
         [0x1b000, 0x1b11e,],  // Katakana Letter Archaic ..Hentaigana Letter N-mu-m
-        [0x1b150, 0x1b152,],  // [nil]                   ..
-        [0x1b164, 0x1b167,],  // [nil]                   ..
+        [0x1b150, 0x1b152,],  // Hiragana Letter Small Wi..Hiragana Letter Small Wo
+        [0x1b164, 0x1b167,],  // Katakana Letter Small Wi..Katakana Letter Small N
         [0x1b170, 0x1b2fb,],  // Nushu Character-1b170   ..Nushu Character-1b2fb
         [0x1f004, 0x1f004,],  // Mahjong Tile Red Dragon ..Mahjong Tile Red Dragon
         [0x1f0cf, 0x1f0cf,],  // Playing Card Black Joker..Playing Card Black Joker
@@ -448,24 +448,24 @@ define(
         [0x1f680, 0x1f6c5,],  // Rocket                  ..Left Luggage
         [0x1f6cc, 0x1f6cc,],  // Sleeping Accommodation  ..Sleeping Accommodation
         [0x1f6d0, 0x1f6d2,],  // Place Of Worship        ..Shopping Trolley
-        [0x1f6d5, 0x1f6d7,],  // [nil]                   ..
+        [0x1f6d5, 0x1f6d7,],  // Hindu Temple            ..(nil)
         [0x1f6eb, 0x1f6ec,],  // Airplane Departure      ..Airplane Arriving
-        [0x1f6f4, 0x1f6fc,],  // Scooter                 ..
-        [0x1f7e0, 0x1f7eb,],  // [nil]                   ..
-        [0x1f90c, 0x1f93a,],  // [nil]                   ..Fencer
+        [0x1f6f4, 0x1f6fc,],  // Scooter                 ..(nil)
+        [0x1f7e0, 0x1f7eb,],  // Large Orange Circle     ..Large Brown Square
+        [0x1f90c, 0x1f93a,],  // (nil)                   ..Fencer
         [0x1f93c, 0x1f945,],  // Wrestlers               ..Goal Net
-        [0x1f947, 0x1f978,],  // First Place Medal       ..
-        [0x1f97a, 0x1f9cb,],  // Face With Pleading Eyes ..
-        [0x1f9cd, 0x1f9ff,],  // [nil]                   ..Nazar Amulet
-        [0x1fa70, 0x1fa74,],  // [nil]                   ..
-        [0x1fa78, 0x1fa7a,],  // [nil]                   ..
-        [0x1fa80, 0x1fa86,],  // [nil]                   ..
-        [0x1fa90, 0x1faa8,],  // [nil]                   ..
-        [0x1fab0, 0x1fab6,],  // [nil]                   ..
-        [0x1fac0, 0x1fac2,],  // [nil]                   ..
-        [0x1fad0, 0x1fad6,],  // [nil]                   ..
-        [0x20000, 0x2fffd,],  // Cjk Unified Ideograph-20..
-        [0x30000, 0x3fffd,],  // [nil]                   ..
+        [0x1f947, 0x1f978,],  // First Place Medal       ..(nil)
+        [0x1f97a, 0x1f9cb,],  // Face With Pleading Eyes ..(nil)
+        [0x1f9cd, 0x1f9ff,],  // Standing Person         ..Nazar Amulet
+        [0x1fa70, 0x1fa74,],  // Ballet Shoes            ..(nil)
+        [0x1fa78, 0x1fa7a,],  // Drop Of Blood           ..Stethoscope
+        [0x1fa80, 0x1fa86,],  // Yo-yo                   ..(nil)
+        [0x1fa90, 0x1faa8,],  // Ringed Planet           ..(nil)
+        [0x1fab0, 0x1fab6,],  // (nil)                   ..(nil)
+        [0x1fac0, 0x1fac2,],  // (nil)                   ..(nil)
+        [0x1fad0, 0x1fad6,],  // (nil)                   ..(nil)
+        [0x20000, 0x2fffd,],  // Cjk Unified Ideograph-20..(nil)
+        [0x30000, 0x3fffd,],  // (nil)                   ..(nil)
     ]
 );
 // @codeCoverageIgnoreEnd
