@@ -16,13 +16,3 @@ services:
       XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1 remote_autostart=off remote_port=9009"
       PHP_IDE_CONFIG: "serverName=Docker"
     command: keep-alive.sh
-    networks:
-      - internal
-
-networks:
-  internal:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.220.0/28
