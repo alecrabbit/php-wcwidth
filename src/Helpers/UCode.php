@@ -5,8 +5,8 @@ namespace AlecRabbit\Helpers;
 class UCode
 {
     /**
-     * @param string $subject
-     * @param null|int $n
+     * @param string $subject   Subject string
+     * @param null|int $n       Return width of n symbols or all if null
      * @return int
      */
     public static function wcswidth(string $subject, ?int $n = null): int

@@ -1,6 +1,6 @@
 <?php
 
-namespace AlecRabbit\Tests\Wcwidth;
+namespace AlecRabbit\Tests\Unit\Wcwidth;
 
 use PHPUnit\Framework\TestCase;
 use function AlecRabbit\Helpers\wcswidth;
@@ -28,8 +28,8 @@ class WcWidthTest extends TestCase
         $length_each = array_map('AlecRabbit\Helpers\wcwidth', $chrArray);
         $length_phrase = wcswidth($phrase, mb_strlen($phrase));
 
-        $this->assertSame($length_each, $expect_length_each);
-        $this->assertSame($length_phrase, $expect_length_phrase);
+        self::assertSame($length_each, $expect_length_each);
+        self::assertSame($length_phrase, $expect_length_phrase);
     }
 
     /** @test */
@@ -46,7 +46,7 @@ class WcWidthTest extends TestCase
     /** @test */
     public function nullString(): void
     {
-        $this->assertSame(0, wcswidth(null));
+        self::assertSame(0, wcswidth(null));
     }
 
     /** @test */
@@ -128,7 +128,7 @@ class WcWidthTest extends TestCase
     /** @test */
     public function wcswidthSubstr(): void
     {
-        //   Test wcswidth() optional 2nd parameter, `n`.
+        //  Test wcswidth() optional 2nd parameter, `n`.
         //  `n` determines at which position of the string
         //  to stop counting length.
 
@@ -137,6 +137,6 @@ class WcWidthTest extends TestCase
         $expect_length_phrase = array_sum($expect_length_each);
 
         $length_phrase = wcswidth($phrase, 7);
-        $this->assertSame($length_phrase, $expect_length_phrase);
+        self::assertSame($length_phrase, $expect_length_phrase);
     }
 }
