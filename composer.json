@@ -7,8 +7,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
-    "nunomaduro/collision": "^4.2",
-    "symfony/var-dumper": "^5.1"
+    "nunomaduro/collision": "*",
+    "symfony/var-dumper": "*"
   },
   "license": "MIT",
   "autoload": {
