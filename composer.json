@@ -3,7 +3,7 @@
   "description": "Calculate width of unicode strings rendered to a terminal",
   "type": "library",
   "require": {
-    "php": ">=8.2"
+    "php": ">=8.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^10.0",
