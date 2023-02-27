@@ -55,7 +55,7 @@ final class TablesBuilder
         }
     }
 
-    private function versionedUrl(string $url, string $version): string|array
+    private function versionedUrl(string $url, string $version): string
     {
         return str_replace(self::VERSION_PLACEHOLDER, $version, $url);
     }
