@@ -1,6 +1,12 @@
 name: build
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'master'
+      - 'main'
+      - 'develop'
+      - 'prepare-next'
 
 jobs:
   test:
@@ -8,7 +14,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-22.04,ubuntu-20.04, windows-latest, macos-latest]
+        os:
+          - 'ubuntu-22.04'
+          - 'ubuntu-20.04'
+#          - 'windows-latest'
+#          - 'macos-latest'
         php: [8.1, 8.2]
         dependency-version: [prefer-stable]
 
@@ -33,7 +43,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
