@@ -4,11 +4,31 @@ namespace AlecRabbit\Helpers;
 
 class UCode
 {
-    /**
-     * @param string $subject   Subject string
-     * @param null|int $n       Return width of n symbols or all if null
-     * @return int
-     */
+    // NOTE(jquast/wcwidth): created by hand, there isn't anything identifiable other than
+    // general Cf category code to identify these, and some characters in Cf
+    // category code are of non-zero width.
+    // Also includes some Cc, Mn, Zl, and Zp characters
+    private const ZERO_WIDTH_CF = [
+        0,       // Null (Cc)
+        0x034F,  // Combining grapheme joiner (Mn)
+        0x200B,  // Zero width space
+        0x200C,  // Zero width non-joiner
+        0x200D,  // Zero width joiner
+        0x200E,  // Left-to-right mark
+        0x200F,  // Right-to-left mark
+        0x2028,  // Line separator (Zl)
+        0x2029,  // Paragraph separator (Zp)
+        0x202A,  // Left-to-right embedding
+        0x202B,  // Right-to-left embedding
+        0x202C,  // Pop directional formatting
+        0x202D,  // Left-to-right override
+        0x202E,  // Right-to-left override
+        0x2060,  // Word joiner
+        0x2061,  // Function application
+        0x2062,  // Invisible times
+        0x2063,  // Invisible separator
+    ];
+
     public static function wcswidth(string $subject, ?int $n = null): int
     {
         $end = $n ?? mb_strlen($subject);
@@ -54,7 +74,6 @@ class UCode
     }
 
     /**
-     * @param string $subject
      * @return array<string>
      */
     protected static function split(string $subject): array
@@ -69,11 +88,6 @@ class UCode
         return $_split;
     }
 
-    /**
-     * @param int $ucs
-     * @param array<array<int>> $table
-     * @return int
-     */
     protected static function bisearch(int $ucs, array $table): int
     {
         $lbound = 0;
@@ -95,18 +109,9 @@ class UCode
         return 0;
     }
 
-    /**
-     * @param int $ucs
-     * @return bool
-     */
     protected static function isB(int $ucs): bool
     {
-        return $ucs === 0 ||
-            $ucs === 0x034F ||
-            (0x200B <= $ucs && $ucs <= 0x200F) ||
-            $ucs === 0x2028 ||
-            $ucs === 0x2029 ||
-            (0x202A <= $ucs && $ucs <= 0x202E) ||
-            (0x2060 <= $ucs && $ucs <= 0x2063);
+        return
+            in_array($ucs, self::ZERO_WIDTH_CF, true);
     }
 }
