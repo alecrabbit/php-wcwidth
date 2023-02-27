@@ -24,6 +24,9 @@
       "AlecRabbit\\Tests\\": "tests\\"
     }
   },
+  "suggest": {
+    "ext-mbstring": "For multibyte Unicode string functionality."
+  },
   "minimum-stability": "beta",
   "prefer-stable": true
 }

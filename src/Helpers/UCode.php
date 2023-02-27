@@ -9,24 +9,24 @@ class UCode
     // category code are of non-zero width.
     // Also includes some Cc, Mn, Zl, and Zp characters
     private const ZERO_WIDTH_CF = [
-        0,       // Null (Cc)
-        0x034F,  // Combining grapheme joiner (Mn)
-        0x200B,  // Zero width space
-        0x200C,  // Zero width non-joiner
-        0x200D,  // Zero width joiner
-        0x200E,  // Left-to-right mark
-        0x200F,  // Right-to-left mark
-        0x2028,  // Line separator (Zl)
-        0x2029,  // Paragraph separator (Zp)
-        0x202A,  // Left-to-right embedding
-        0x202B,  // Right-to-left embedding
-        0x202C,  // Pop directional formatting
-        0x202D,  // Left-to-right override
-        0x202E,  // Right-to-left override
-        0x2060,  // Word joiner
-        0x2061,  // Function application
-        0x2062,  // Invisible times
-        0x2063,  // Invisible separator
+        0 => true,       // Null (Cc)
+        0x034F => true,  // Combining grapheme joiner (Mn)
+        0x200B => true,  // Zero width space
+        0x200C => true,  // Zero width non-joiner
+        0x200D => true,  // Zero width joiner
+        0x200E => true,  // Left-to-right mark
+        0x200F => true,  // Right-to-left mark
+        0x2028 => true,  // Line separator (Zl)
+        0x2029 => true,  // Paragraph separator (Zp)
+        0x202A => true,  // Left-to-right embedding
+        0x202B => true,  // Right-to-left embedding
+        0x202C => true,  // Pop directional formatting
+        0x202D => true,  // Left-to-right override
+        0x202E => true,  // Right-to-left override
+        0x2060 => true,  // Word joiner
+        0x2061 => true,  // Function application
+        0x2062 => true,  // Invisible times
+        0x2063 => true,  // Invisible separator
     ];
 
     public static function wcswidth(string $subject, ?int $n = null): int
@@ -56,7 +56,7 @@ class UCode
     {
         $ucs = mb_ord($wc);
 
-        if (self::isB($ucs)) {
+        if (self::ZERO_WIDTH_CF[$ucs] ?? false) { // 0 width
             return 0;
         }
 
@@ -107,11 +107,5 @@ class UCode
             }
         }
         return 0;
-    }
-
-    protected static function isB(int $ucs): bool
-    {
-        return
-            in_array($ucs, self::ZERO_WIDTH_CF, true);
     }
 }
