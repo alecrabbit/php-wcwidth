@@ -19,3 +19,5 @@ This is kinda port of python's [jquast/wcwidth](https://github.com/jquast/wcwidt
 ```bash
 $ composer require alecrabbit/php-wcwidth
 ```
+
+> Version 1.0.0 is in the works. It will be ready with `php-console-spinner:1.0.0` 

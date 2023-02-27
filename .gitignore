@@ -1,9 +1,11 @@
 /.idea/
 /.eval/
-/tests/tmp/
 /vendor/
-/tests/report.html
-/.phpunit.result.cache
-/composer.lock
 .env
-/build/
+/.phive
+/.report/.build/*
+.ready
+.last_init_time
+.start_time
+docker-stack.yml
+.phpunit.result.cache
