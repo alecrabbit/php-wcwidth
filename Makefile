@@ -42,4 +42,7 @@ init: _initialize ## Initialize project and start docker hub
 chown: ## Change the owner(user) of the project
 	sudo chown -R ${USER_ID}:${GROUP_ID} .
 
-
+## —— Application 📦 —————————————————————————————————————————————————————————————
+update:
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";
+	@-${_DC_EXEC} ${APP_CONTAINER} php lib/update.php
