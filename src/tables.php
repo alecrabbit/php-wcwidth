@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\WCWidth\Helpers;
+namespace AlecRabbit\WCWidth;
 
 // @codeCoverageIgnoreStart
 

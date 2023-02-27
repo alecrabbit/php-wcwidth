@@ -2,6 +2,9 @@
 
 namespace AlecRabbit\WCWidth\Helpers;
 
+use const AlecRabbit\WCWidth\WIDE_EASTASIAN;
+use const AlecRabbit\WCWidth\ZERO_WIDTH;
+
 class UCode
 {
     // NOTE(jquast/wcwidth): created by hand, there isn't anything identifiable other than

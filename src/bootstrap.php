@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\WCWidth\Helpers;
+namespace AlecRabbit\Helpers;
+
+use AlecRabbit\WCWidth\Helpers\UCode;
 
 use function function_exists;
 
