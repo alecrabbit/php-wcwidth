@@ -38,7 +38,7 @@ final class CachingClient implements ICachingClient
     private function encodeKey(string $url): string
     {
         return
-            hash('sha256', $url);
+            hash('sha512', $url);
     }
 
     private function getContent(string $url): string
@@ -46,8 +46,6 @@ final class CachingClient implements ICachingClient
         $response = $this->httpClient->request('GET', $url);
 
         $this->assertResponse($response);
-
-        dump(sprintf('[%s] %s', __METHOD__, $url));
 
         return
             $response->getContent();
