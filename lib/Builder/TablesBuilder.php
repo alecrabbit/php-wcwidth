@@ -24,10 +24,10 @@ final class TablesBuilder
         $versions = $this->getVersions();
         foreach ($versions as $version) {
             $len1 = mb_strlen(
-                $this->client->get($this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version))
+                dump($this->client->get($this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)))
             );
             $len2 = mb_strlen(
-                $this->client->get($this->versionedUrl(self::URL_DERIVED_CATEGORY, $version))
+                dump($this->client->get($this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)))
             );
 
             dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
