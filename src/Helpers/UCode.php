@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Helpers;
+namespace AlecRabbit\WCWidth\Helpers;
 
 class UCode
 {

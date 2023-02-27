@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Helpers;
-
-require_once 'tables.php';
+namespace AlecRabbit\WCWidth\Helpers;
 
 use function function_exists;
 

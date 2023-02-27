@@ -8,14 +8,17 @@
   "require-dev": {
     "phpunit/phpunit": "^10",
     "nunomaduro/collision": "^7",
-    "symfony/var-dumper": "^6"
+    "symfony/var-dumper": "^6",
+    "symfony/http-client": "^6.2"
   },
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\Helpers\\": "src\\Helpers"
+      "AlecRabbit\\WCWidth\\Helpers\\": "src\\Helpers",
+      "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder"
     },
     "files": [
+      "src\\tables.php",
       "src\\bootstrap.php"
     ]
   },
