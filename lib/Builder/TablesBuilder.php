@@ -23,16 +23,14 @@ final class TablesBuilder
     {
         $versions = $this->getVersions();
         foreach ($versions as $version) {
-            dump(
-                mb_strlen(
-                    $this->client->get($this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version))
-                )
+            $len1 = mb_strlen(
+                $this->client->get($this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version))
             );
-            dump(
-                mb_strlen(
-                    $this->client->get($this->versionedUrl(self::URL_DERIVED_CATEGORY, $version))
-                )
+            $len2 = mb_strlen(
+                $this->client->get($this->versionedUrl(self::URL_DERIVED_CATEGORY, $version))
             );
+
+            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
     }
 
@@ -47,10 +45,14 @@ final class TablesBuilder
 
     private function parseVersions(string $content): iterable
     {
-        return [
-            '14.0.0',
-            '15.0.0'
-        ];
+        foreach (explode(PHP_EOL, $content) as $line) {
+            if (preg_match('/^#.*assigned in Unicode ([0-9.]+)/', $line, $matches)) {
+                $version = $matches[1];
+                if (!in_array($version, self::EXCLUDE_VERSIONS, true)) {
+                    yield $version;
+                }
+            }
+        }
     }
 
     private function versionedUrl(string $url, string $version): string|array
