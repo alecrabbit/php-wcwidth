@@ -1,1 +1,70 @@
-OCI runtime exec failed: exec failed: unable to start container process: exec: "/app/.tools/bin/phploc": stat /app/.tools/bin/phploc: no such file or directory: unknown
+phploc 7.0.2 by Sebastian Bergmann.
+
+Directories                                          1
+Files                                                3
+
+Size
+  Lines of Code (LOC)                              637
+  Comment Lines of Code (CLOC)                     517 (81.16%)
+  Non-Comment Lines of Code (NCLOC)                120 (18.84%)
+  Logical Lines of Code (LLOC)                      30 (4.71%)
+    Classes                                         24 (80.00%)
+      Average Class Length                          24
+        Minimum Class Length                        24
+        Maximum Class Length                        24
+      Average Method Length                          5
+        Minimum Method Length                        3
+        Maximum Method Length                        8
+      Average Methods Per Class                      4
+        Minimum Methods Per Class                    4
+        Maximum Methods Per Class                    4
+    Functions                                        3 (10.00%)
+      Average Function Length                        1
+    Not in classes or functions                      3 (10.00%)
+
+Cyclomatic Complexity
+  Average Complexity per LLOC                     0.63
+  Average Complexity per Class                   15.00
+    Minimum Class Complexity                     15.00
+    Maximum Class Complexity                     15.00
+  Average Complexity per Method                   4.50
+    Minimum Method Complexity                     2.00
+    Maximum Method Complexity                     6.00
+
+Dependencies
+  Global Accesses                                    0
+    Global Constants                                 0 (0.00%)
+    Global Variables                                 0 (0.00%)
+    Super-Global Variables                           0 (0.00%)
+  Attribute Accesses                                 0
+    Non-Static                                       0 (0.00%)
+    Static                                           0 (0.00%)
+  Method Calls                                       6
+    Non-Static                                       0 (0.00%)
+    Static                                           6 (100.00%)
+
+Structure
+  Namespaces                                         1
+  Interfaces                                         0
+  Traits                                             0
+  Classes                                            1
+    Abstract Classes                                 0 (0.00%)
+    Concrete Classes                                 1 (100.00%)
+      Final Classes                                  0 (0.00%)
+      Non-Final Classes                              1 (100.00%)
+  Methods                                            4
+    Scope
+      Non-Static Methods                             0 (0.00%)
+      Static Methods                                 4 (100.00%)
+    Visibility
+      Public Methods                                 2 (50.00%)
+      Protected Methods                              2 (50.00%)
+      Private Methods                                0 (0.00%)
+  Functions                                          2
+    Named Functions                                  2 (100.00%)
+    Anonymous Functions                              0 (0.00%)
+  Constants                                          3
+    Global Constants                                 2 (66.67%)
+    Class Constants                                  1 (33.33%)
+      Public Constants                               0 (0.00%)
+      Non-Public Constants                           1 (100.00%)
