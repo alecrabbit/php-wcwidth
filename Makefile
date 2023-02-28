@@ -4,7 +4,7 @@ include ./.make/project/project.Makefile
 include ./var.Makefile
 
 
-## ————————————————————————————— #️⃣  root.Makefile #️⃣  ———————————————————————————
+## ——————————————————————————————— #️⃣  Makefile #️⃣  ——————————————————————————————
 ##
 help: ## Outputs this help screen
 	@grep -h -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "${_C_GREEN}%-30s${_C_STOP} %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
@@ -36,13 +36,9 @@ stack: _docker_generate_stack time_current ## Create docker-compose stack file
 
 build: _docker_pull _docker_build time_current ## Build the docker images
 
+##
 ## —— Project 🚧 ———————————————————————————————————————————————————————————————
 init: _initialize ## Initialize project and start docker hub
 
 chown: ## Change the owner(user) of the project
 	sudo chown -R ${USER_ID}:${GROUP_ID} .
-
-## —— Application 📦 —————————————————————————————————————————————————————————————
-update:
-	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";
-	@-${_DC_EXEC} ${APP_CONTAINER} php lib/update.php
