@@ -74,7 +74,8 @@ final class TablesBuilder
             );
 //            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
-        dump($versions,);
+        $this->renderer->render('zero', $zero);
+        $this->renderer->render('wide', $wide);
     }
 
     private function getVersions(): iterable

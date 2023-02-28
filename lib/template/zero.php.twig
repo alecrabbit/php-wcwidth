@@ -6,6 +6,12 @@ namespace AlecRabbit\WCWidth;
 
 // @codeCoverageIgnoreStart
 const ZERO_WIDTH = [
-        {{name}}
+{% for version, d in data %}
+    '{{ version }}' => [
+    {% for entry in d %}
+            [{{ entry[0][0] }}, {{ entry[0][1] }}], // ;{{ entry[1] }} # {{ entry[2] }}
+    {% endfor %}
+    ],
+{% endfor %}
 ];
 // @codeCoverageIgnoreEnd
