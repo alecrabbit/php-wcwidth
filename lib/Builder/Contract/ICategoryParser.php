@@ -5,5 +5,5 @@ namespace AlecRabbit\WCWidth\Builder\Contract;
 
 interface ICategoryParser
 {
-    public function parseCategory(string $data, array $array);
+    public function parseCategory(string $data, array $categories);
 }

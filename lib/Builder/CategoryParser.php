@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 // 28.02.23
 namespace AlecRabbit\WCWidth\Builder;
 
 use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
-use AlecRabbit\WCWidth\Builder\Contract\ITableDefinition;
 
 final class CategoryParser implements ICategoryParser
 {
@@ -13,26 +13,33 @@ final class CategoryParser implements ICategoryParser
     {
     }
 
-    public function parseCategory(string $data, array $array): array
+    public function parseCategory(string $data, array $categories): array
     {
+        $result = [];
         foreach (explode(PHP_EOL, $data) as $line) {
+            $l = [];
             [$data, $_, $comment] = $this->partition($line, '#');
 //            dump(sprintf('Data:%s Comment:%s', $data, $comment));
             $data_fields = explode(';', $data);
-            dump($data_fields);
-//            $codepoints_str = \trim($data_fields[0] ?? '');
-//            $properties = \trim($data_fields[1] ?? '');
-
-//            [$start, $end] = explode('..', $codepoints_str);
-//            dump($properties, $comment);
-//            dump($start, $end, $properties, $comment);
-//            foreach ($categories as $category) {
-//                if (str_contains($line, $category . ' ')) {
-//                    dump($line);
-//                }
-//            }
+            if ($data_fields[1] ?? false) {
+                $codepoints_str = \trim($data_fields[0] ?? '');
+                $properties = \trim($data_fields[1] ?? '');
+                if(in_array($properties, $categories, true)) {
+                    if(str_contains($codepoints_str, '..')) {
+                        [$start, $end] = explode('..', $codepoints_str);
+                    } else {
+                        $start = $end = $codepoints_str;
+                    }
+                    $l[0] = [$start, $end];
+                    $l[1] = $properties;
+                }
+            }
+            if($l[0] ?? false) {
+                $l[2] = $comment;
+                $result[] = $l;
+            }
         }
-        return [];
+        return $result;
     }
 
     private function partition(string $line, string $separator): array

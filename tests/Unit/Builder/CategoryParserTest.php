@@ -14,26 +14,13 @@ class CategoryParserTest extends TestCase
 
     public static function parseCategoryData(): iterable
     {
-//        yield [
-//            [
-//                self::EXCEPTION => [
-//                    self::CLASS_ => \InvalidArgumentException::class,
-//                    self::MESSAGE => 'Invalid category name: a',
-//                ],
-//            ],
-//            [
-//                self::ARGUMENTS => [
-//                    'a',
-//                    [],
-//                ],
-//            ],
-//        ];
         yield [
             [
                 self::RESULT => [
                     [
                         // 1100..115F;W     # Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER
                         [0x01100, 0x0115f,],
+                        'W',
                         'Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER',
                     ],
                 ],
@@ -110,6 +97,20 @@ class CategoryParserTest extends TestCase
                 ],
             ],
         ];
+        //        yield [
+        //            [
+        //                self::EXCEPTION => [
+        //                    self::CLASS_ => \InvalidArgumentException::class,
+        //                    self::MESSAGE => 'Invalid category name: a',
+        //                ],
+        //            ],
+        //            [
+        //                self::ARGUMENTS => [
+        //                    'a',
+        //                    [],
+        //                ],
+        //            ],
+        //        ];
     }
 
     #[Test]
