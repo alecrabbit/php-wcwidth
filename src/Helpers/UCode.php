@@ -7,6 +7,8 @@ use const AlecRabbit\WCWidth\ZERO_WIDTH;
 
 class UCode
 {
+    private const UNICODE_VERSION = '15.0.0';
+
     // NOTE(jquast/wcwidth): created by hand, there isn't anything identifiable other than
     // general Cf category code to identify these, and some characters in Cf
     // category code are of non-zero width.
@@ -69,11 +71,11 @@ class UCode
         }
 
         # combining characters with zero width
-        if (static::bisearch($ucs, ZERO_WIDTH)) {
+        if (static::bisearch($ucs, ZERO_WIDTH[self::UNICODE_VERSION])) {
             return 0;
         }
 
-        return 1 + static::bisearch($ucs, WIDE_EASTASIAN);
+        return 1 + static::bisearch($ucs, WIDE_EASTASIAN[self::UNICODE_VERSION]);
     }
 
     /**
