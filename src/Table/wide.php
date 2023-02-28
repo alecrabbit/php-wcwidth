@@ -9,7 +9,8 @@ const WIDE_EASTASIAN = [
     '15.0.0' => [
         [0x01100, 0x0115f,],  // Hangul Choseong Kiyeok  ..Hangul Choseong Filler
         [0x0231a, 0x0231b,],  // Watch                   ..Hourglass
-        [0x02329, 0x0232a,],  // Left-pointing Angle Brac..Right-pointing Angle Bra
+        [0x02329, 0x02329,],  // Left-pointing Angle Brac
+        [0x0232a, 0x0232a,],  // Right-pointing Angle Bra
         [0x023e9, 0x023ec,],  // Black Right-pointing Dou..Black Down-pointing Doub
         [0x023f0, 0x023f0,],  // Alarm Clock
         [0x023f3, 0x023f3,],  // Hourglass With Flowing Sand

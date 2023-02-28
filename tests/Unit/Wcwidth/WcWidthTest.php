@@ -16,8 +16,8 @@ class WcWidthTest extends TestCase
         // 3 English-ASCII punctuation characters, totaling 11, this
         // phrase consumes 19 cells of a terminal emulator.
 
-        $phrase = 'コンニチハ, セカイ!';
-        $expect_length_each = [2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1];
+        $phrase = '〈コンニチハ, セカイ!〉';
+        $expect_length_each = [2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 2];
         $expect_length_phrase = array_sum($expect_length_each);
 
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
