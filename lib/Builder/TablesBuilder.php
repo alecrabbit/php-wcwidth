@@ -42,7 +42,8 @@ final class TablesBuilder
 
     public function __construct(
         protected ICachingClient $client = new CachingClient(),
-        protected ICategoryParser $categoryParser = new CategoryParser()
+        protected ICategoryParser $categoryParser = new CategoryParser(),
+        protected TemplateRenderer $renderer = new TemplateRenderer(),
     ) {
     }
 
@@ -73,7 +74,7 @@ final class TablesBuilder
             );
 //            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
-        dump($versions, $wide, $zero);
+        dump($versions,);
     }
 
     private function getVersions(): iterable
