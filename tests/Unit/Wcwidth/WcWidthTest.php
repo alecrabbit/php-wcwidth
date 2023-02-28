@@ -3,7 +3,8 @@
 namespace AlecRabbit\Tests\Unit\Wcwidth;
 
 use PHPUnit\Framework\TestCase;
-use function AlecRabbit\Helpers\wcswidth;
+use function AlecRabbit\WCWidth\wcswidth;
+use function AlecRabbit\WCWidth\wcwidth;
 
 class WcWidthTest extends TestCase
 {
@@ -25,7 +26,7 @@ class WcWidthTest extends TestCase
     protected function validate(array $expect_length_each, int $expect_length_phrase, string $phrase): void
     {
         $chrArray = preg_split('//u', $phrase, -1, PREG_SPLIT_NO_EMPTY);
-        $length_each = array_map('AlecRabbit\Helpers\wcwidth', $chrArray);
+        $length_each = array_map(wcwidth(...), $chrArray);
         $length_phrase = wcswidth($phrase, mb_strlen($phrase));
 
         self::assertSame($length_each, $expect_length_each);
