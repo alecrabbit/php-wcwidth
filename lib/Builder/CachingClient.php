@@ -31,8 +31,7 @@ final class CachingClient implements ICachingClient
         return
             $this->cache->get(
                 $this->encodeKey($url),
-                function (ItemInterface $item) use ($url) {
-//                    $item->expiresAfter(self::TTL);
+                function () use ($url) {
                     return $this->getContent($url);
                 }
             );

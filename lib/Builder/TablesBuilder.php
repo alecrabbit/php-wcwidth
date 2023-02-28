@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth\Builder;
 
 use AlecRabbit\WCWidth\Builder\Contract\ICachingClient;
+use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
 
 final class TablesBuilder
 {
@@ -41,35 +42,38 @@ final class TablesBuilder
 
     public function __construct(
         protected ICachingClient $client = new CachingClient(),
+        protected ICategoryParser $categoryParser = new CategoryParser()
     ) {
     }
 
     public function build(): void
     {
         $versions = [];
+        $zero = [];
+        $wide = [];
         foreach ($this->getVersions() as $version) {
             $versions[] = $version;
-            $len1 = mb_strlen(
-//                dump(
-                $this->client->get(
-                    dump(
-                        $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
-                    )
-//                    )
-                )
-            );
-            $len2 = mb_strlen(
-//                dump(
+            $wide[$version] =
+                $this->categoryParser->parseCategory(
+                    $this->client->get(
+                        dump(
+                            $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
+                        )
+                    ),
+                    ['W', 'F'],
+                );
+            $zero[$version] = $this->categoryParser->parseCategory(
                 $this->client->get(
                     dump(
                         $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
                     )
-//                    )
-                )
+                ),
+                ['Me', 'Mn',],
+
             );
 //            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
-        dump($versions);
+        dump($versions, $wide, $zero);
     }
 
     private function getVersions(): iterable
@@ -92,6 +96,16 @@ final class TablesBuilder
             }
         }
     }
+
+
+    // Partition the string into three parts using the given separator.
+    //
+    // This will search for the separator in the string.  If the separator is found,
+    // returns a 3-tuple containing the part before the separator, the separator
+    // itself, and the part after it.
+    //
+    // If the separator is not found, returns a 3-tuple containing the original string
+    // and two empty strings.
 
     private function versionedUrl(string $url, string $version): string
     {
