@@ -20,7 +20,10 @@ final class CachingClient implements ICachingClient
     public function __construct()
     {
         $this->httpClient = HttpClient::create();
-        $this->cache = new FilesystemAdapter();
+        $this->cache =
+            new FilesystemAdapter(
+                defaultLifetime: self::TTL,
+            );
     }
 
     public function get(string $url): string
@@ -29,7 +32,7 @@ final class CachingClient implements ICachingClient
             $this->cache->get(
                 $this->encodeKey($url),
                 function (ItemInterface $item) use ($url) {
-                    $item->expiresAfter(self::TTL);
+//                    $item->expiresAfter(self::TTL);
                     return $this->getContent($url);
                 }
             );
