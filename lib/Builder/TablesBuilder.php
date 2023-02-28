@@ -21,23 +21,6 @@ final class TablesBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
-            "4.1.0", // exclude
-            "5.0.0", // exclude
-            "5.1.0", // exclude
-            "5.2.0", // exclude
-            "6.0.0", // exclude
-            "6.1.0", // exclude
-            "6.2.0", // exclude
-            "6.3.0", // exclude
-            "7.0.0", // exclude
-            "8.0.0", // exclude
-            "9.0.0", // exclude
-            "10.0.0", // exclude
-            "11.0.0", // exclude
-            "12.0.0", // exclude
-            "12.1.0", // exclude
-            "13.0.0", // exclude
-            "14.0.0", // exclude
         ];
 
     public function __construct(

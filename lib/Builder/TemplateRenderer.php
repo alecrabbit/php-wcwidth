@@ -29,6 +29,9 @@ final class TemplateRenderer implements ITemplateRenderer
     public function render(string $type, array $data): void
     {
         $template = $type === 'zero' ? 'zero.php.twig' : 'wide.php.twig';
-        echo $this->twig->render($template, ['data' => $data]);
+        $filename = $type === 'zero' ? 'zero.php' : 'wide.php';
+        // write to file
+        file_put_contents(__DIR__ . '/../' . $filename, $this->twig->render($template, ['data' => $data]));
+//        echo $this->twig->render($template, ['data' => $data]);
     }
 }
