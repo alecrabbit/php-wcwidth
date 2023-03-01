@@ -77,9 +77,9 @@ final class TableBuilder
 
             );
         }
-//        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
-//        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
-//        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
+        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
+        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
+        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
     }
 
     private function getVersions(): iterable

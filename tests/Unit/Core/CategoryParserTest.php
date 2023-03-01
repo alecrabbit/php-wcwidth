@@ -25,6 +25,7 @@ class CategoryParserTest extends TestCase
                         comment: "Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER",
                         start: 4352,
                         end: 4447,
+                        properties: 'W',
                     ),
                     new TableEntry(
                         line: "231A..231B;W     # So     [2] WATCH..HOURGLASS",
@@ -32,6 +33,7 @@ class CategoryParserTest extends TestCase
                         comment: "So     [2] WATCH..HOURGLASS",
                         start: 8986,
                         end: 8987,
+                        properties: 'W',
                     ),
                     new TableEntry(
                         line: "2329;W           # Ps         LEFT-POINTING ANGLE BRACKET",
@@ -39,6 +41,7 @@ class CategoryParserTest extends TestCase
                         comment: "Ps         LEFT-POINTING ANGLE BRACKET",
                         start: 9001,
                         end: 9001,
+                        properties: 'W',
                     ),
                     new TableEntry(
                         line: "232A;W           # Pe         RIGHT-POINTING ANGLE BRACKET",
@@ -46,6 +49,7 @@ class CategoryParserTest extends TestCase
                         comment: "Pe         RIGHT-POINTING ANGLE BRACKET",
                         start: 9002,
                         end: 9002,
+                        properties: 'W',
                     ),
                 ],
             ],
@@ -131,6 +135,7 @@ class CategoryParserTest extends TestCase
                         comment: "[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X",
                         start: 768,
                         end: 879,
+                        properties: 'Mn',
                     ),
                     new TableEntry(
                         line: "0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE",
@@ -138,6 +143,7 @@ class CategoryParserTest extends TestCase
                         comment: "[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE",
                         start: 1155,
                         end: 1159,
+                        properties: 'Mn',
                     ),
                     new TableEntry(
                         line: "0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG",
@@ -145,6 +151,7 @@ class CategoryParserTest extends TestCase
                         comment: "[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG",
                         start: 1425,
                         end: 1469,
+                        properties: 'Mn',
                     ),
                     new TableEntry(
                         line: "1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA",
@@ -152,6 +159,7 @@ class CategoryParserTest extends TestCase
                         comment: "[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA",
                         start: 125252,
                         end: 125258,
+                        properties: 'Mn',
                     ),
                     new TableEntry(
                         line: "E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256",
@@ -159,6 +167,7 @@ class CategoryParserTest extends TestCase
                         comment: "[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256",
                         start: 917760,
                         end: 917999,
+                        properties: 'Mn',
                     ),
                     new TableEntry(
                         line: "0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN",
@@ -166,6 +175,7 @@ class CategoryParserTest extends TestCase
                         comment: "[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN",
                         start: 1160,
                         end: 1161,
+                        properties: 'Me',
                     ),
                     new TableEntry(
                         line: "1ABE          ; Me #       COMBINING PARENTHESES OVERLAY",
@@ -173,6 +183,7 @@ class CategoryParserTest extends TestCase
                         comment: "COMBINING PARENTHESES OVERLAY",
                         start: 6846,
                         end: 6846,
+                        properties: 'Me',
                     ),
                     new TableEntry(
                         line: "20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH",
@@ -180,6 +191,7 @@ class CategoryParserTest extends TestCase
                         comment: "[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH",
                         start: 8413,
                         end: 8416,
+                        properties: 'Me',
                     ),
                     new TableEntry(
                         line: "20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE",
@@ -187,6 +199,7 @@ class CategoryParserTest extends TestCase
                         comment: "[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE",
                         start: 8418,
                         end: 8420,
+                        properties: 'Me',
                     ),
                     new TableEntry(
                         line: "A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN",
@@ -194,68 +207,8 @@ class CategoryParserTest extends TestCase
                         comment: "[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN",
                         start: 42608,
                         end: 42610,
+                        properties: 'Me',
                     ),
-
-//                    [
-//                        //  0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
-//                        ['0x00300', '0x0036f',],
-//                        'Mn',
-//                        '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
-//                    ],
-//                    [
-//                        // 0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
-//                        ['0x00483', '0x00487',],
-//                        'Mn',
-//                        '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
-//                    ],
-//                    [
-//                        // 0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
-//                        ['0x00591', '0x005bd',],
-//                        'Mn',
-//                        '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
-//                    ],
-//                    [
-//                        // 1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
-//                        ['0x1e944', '0x1e94a',],
-//                        'Mn',
-//                        '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
-//                    ],
-//                    [
-//                        // E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-//                        ['0xe0100', '0xe01ef',],
-//                        'Mn',
-//                        '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
-//                    ],
-//                    [
-//                        // 0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-//                        ['0x00488', '0x00489',],
-//                        'Me',
-//                        '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-//                    ],
-//                    [
-//                        // 1ABE          ; Me #       COMBINING PARENTHESES OVERLAY
-//                        ['0x01abe', '0x01abe',],
-//                        'Me',
-//                        'COMBINING PARENTHESES OVERLAY',
-//                    ],
-//                    [
-//                        // 20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
-//                        ['0x020dd', '0x020e0',],
-//                        'Me',
-//                        '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
-//                    ],
-//                    [
-//                        // 20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
-//                        ['0x020e2', '0x020e4',],
-//                        'Me',
-//                        '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
-//                    ],
-//                    [
-//                        // A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-//                        ['0x0a670', '0x0a672',],
-//                        'Me',
-//                        '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
-//                    ],
                 ],
             ],
             [
@@ -367,10 +320,8 @@ class CategoryParserTest extends TestCase
         $args = $incoming[self::ARGUMENTS];
         self::assertEquals(
             $expected[self::RESULT],
-            dump(
-                iterator_to_array(
-                    $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
-                )
+            iterator_to_array(
+                $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
             ),
         );
     }

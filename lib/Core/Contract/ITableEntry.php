@@ -5,5 +5,7 @@ namespace AlecRabbit\WCWidth\Core\Contract;
 
 interface ITableEntry
 {
+    public function normalizedStart():string;
 
+    public function normalizedEnd():string;
 }

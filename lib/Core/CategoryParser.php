@@ -33,6 +33,7 @@ final class CategoryParser implements ICategoryParser
                         comment: $comment,
                         start: hexdec($start),
                         end: hexdec($end),
+                        properties: $properties,
                     );
 //                    $row[0] = [$this->normalizeValue($start), $this->normalizeValue($end)];
 //                    $row[1] = $properties;

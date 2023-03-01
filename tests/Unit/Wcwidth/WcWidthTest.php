@@ -2,13 +2,14 @@
 
 namespace AlecRabbit\Tests\Unit\Wcwidth;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use function AlecRabbit\WCWidth\wcswidth;
 use function AlecRabbit\WCWidth\wcwidth;
 
 class WcWidthTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function helloJp(): void
     {
         // Width of Japanese phrase: コンニチハ, セカイ!
@@ -33,7 +34,7 @@ class WcWidthTest extends TestCase
         self::assertSame($expect_length_phrase, $length_phrase);
     }
 
-    /** @test */
+    #[Test]
     public function nullWidthZero(): void
     {
         // NULL (0) reports width 0.
@@ -44,13 +45,13 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function nullString(): void
     {
         self::assertSame(0, wcswidth(null));
     }
 
-    /** @test */
+    #[Test]
     public function mbMessage(): void
     {
         $phrase = 'mᚹä漢d字';
@@ -60,7 +61,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function csiWithNegative(): void
     {
         // CSI (Control sequence initiate) reports width -1.
@@ -71,7 +72,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function combiningWidthNegative(): void
     {
         // Simple test combining reports total width of 4.
@@ -82,7 +83,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function combiningWidthAcute(): void
     {
         // Phrase cafe + COMBINING ACUTE ACCENT is café of length 4.
@@ -93,7 +94,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function clockStringWidth(): void
     {
         // String containing clock symbols
@@ -104,7 +105,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function combiningEnclosing(): void
     {
         // CYRILLIC CAPITAL LETTER A + COMBINING CYRILLIC HUNDRED THOUSANDS SIGN is А҈ of length 1.
@@ -115,7 +116,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function combiningSpacing(): void
     {
         // Balinese kapal (ship) is ᬓᬨᬮ᭄ of length 4.
@@ -126,7 +127,7 @@ class WcWidthTest extends TestCase
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
 
-    /** @test */
+    #[Test]
     public function wcswidthSubstr(): void
     {
         //  Test wcswidth() optional 2nd parameter, `n`.
@@ -139,5 +140,13 @@ class WcWidthTest extends TestCase
 
         $length_phrase = wcswidth($phrase, 7);
         self::assertSame($length_phrase, $expect_length_phrase);
+    }
+
+    #[Test]
+    public function wcwidthUnknownVersion(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown Unicode version: 0');
+        wcwidth('a', '0');
     }
 }
