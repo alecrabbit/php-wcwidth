@@ -399,8 +399,10 @@ class TableProcessorTest extends TestCase
 //        }
         self::assertEquals(
             $expected[self::RESULT],
-            iterator_to_array(
-                $this->tableProcessor->process($args[self::DATA])
+            dump(
+                iterator_to_array(
+                    $this->tableProcessor->process($args[self::DATA])
+                )
             ),
         );
     }
