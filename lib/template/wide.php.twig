@@ -10,9 +10,9 @@ const WIDE_EASTASIAN = [
     '{{ version }}' => [
 {% for row in d %}
 {% for entry in row.derivedFrom %}
-    // {{ entry.line }}
+        // {{ entry.line | raw }}
 {% endfor %}
-    {{ row.codepoints }},
+        {{ row.codepoints }},
 {% endfor %}
     ],
 {% endfor %}
