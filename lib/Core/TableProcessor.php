@@ -9,11 +9,9 @@ final class TableProcessor implements Contract\ITableProcessor
 {
     public function process(iterable $data): iterable
     {
-        $result = [];
         $previous = null;
         $derivedFrom = [];
         foreach ($data as $entry) {
-            dump($previous, $entry);
             if ($previous === null) {
                 $previous = $entry;
                 continue;
@@ -25,21 +23,23 @@ final class TableProcessor implements Contract\ITableProcessor
             }
 
             {
-                $result[] = new TableRow(
-                    derivedFrom: $derivedFrom,
-                    codepoints: sprintf('[0x%05x, 0x%05x,]', $derivedFrom[0]->start, $previous->end),
-                );
+                yield $this->createRow($derivedFrom, $previous);
                 $previous = $entry;
                 $derivedFrom = [];
             }
         }
         if ($previous !== null) {
             $derivedFrom[] = $previous;
-            $result[] = new TableRow(
-                derivedFrom: $derivedFrom,
-                codepoints: sprintf('[0x%05x, 0x%05x,]', $derivedFrom[0]->start, $previous->end),
-            );
+            yield $this->createRow($derivedFrom, $previous);
         }
-        return $result;
+    }
+
+    private function createRow(array $derivedFrom, TableEntry $previous): TableRow
+    {
+        return new TableRow(
+            derivedFrom: $derivedFrom,
+            codepoints: sprintf('[%s, %s,]', $derivedFrom[0]->normalizedStart(), $previous->normalizedEnd()),
+//            codepoints: sprintf('[0x%05x, 0x%05x,]', $derivedFrom[0]->start, $previous->end),
+        );
     }
 }

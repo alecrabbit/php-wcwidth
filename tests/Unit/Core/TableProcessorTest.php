@@ -388,21 +388,11 @@ class TableProcessorTest extends TestCase
     {
         $this->setExpectException($expected);
         $args = $incoming[self::ARGUMENTS];
-//        $expectedRows = $expected[self::RESULT];
-//        $actualRows = $this->tableProcessor->process($args[self::DATA]);
-//        /** @var TableRow $expectedRow */
-//        foreach ($expectedRows as $expectedRow) {
-//            $current = $actualRows->current();
-//            self::assertEquals($expectedRow->codepoints, $current->codepoints);
-//            self::assertEquals($expectedRow->derivedFrom, iterator_to_array($current->derivedFrom));
-//            $actualRows->next();
-//        }
+
         self::assertEquals(
             $expected[self::RESULT],
-            dump(
-                iterator_to_array(
-                    $this->tableProcessor->process($args[self::DATA])
-                )
+            iterator_to_array(
+                $this->tableProcessor->process($args[self::DATA])
             ),
         );
     }
