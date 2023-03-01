@@ -28,13 +28,13 @@ _update_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";
 
 _mv_tables:
-	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Moving tables...${_C_STOP}\n";
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Copying files...${_C_STOP}\n";
 	@${_ECHO_DISABLED};
-	@#-${_DC_EXEC} ${APP_CONTAINER} mv -f /var/www/html/data/tables/* /var/www/html/data/tables/backup/
+	@#-${_DC_EXEC} ${APP_CONTAINER} cp -f /app/lib/.rendered/* /app/src/Files
 
 _generate_tables:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Generating tables...${_C_STOP}\n";
-	@-${_DC_EXEC} ${APP_CONTAINER} php lib/update.php
+	@-${_DC_EXEC} ${APP_CONTAINER} php bin/console generate:tables
 
 # End of file
 ##
