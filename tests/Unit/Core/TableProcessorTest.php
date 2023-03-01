@@ -218,8 +218,16 @@ class TableProcessorTest extends TestCase
                                 end: 1159,
                                 properties: 'Mn',
                             ),
+                            new TableEntry(
+                                line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                                codepoints: '0488..0489',
+                                comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                                start: 1160,
+                                end: 1161,
+                                properties: 'Me',
+                            ),
                         ],
-                        codepoints: '[0x00483, 0x00487,]',
+                        codepoints: '[0x00483, 0x00489,]',
                     ),
                     new TableRow(
                         derivedFrom: [
@@ -259,19 +267,6 @@ class TableProcessorTest extends TestCase
                             ),
                         ],
                         codepoints: '[0xe0100, 0xe01ef,]',
-                    ),
-                    new TableRow(
-                        derivedFrom: [
-                            new TableEntry(
-                                line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-                                codepoints: '0488..0489',
-                                comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-                                start: 1160,
-                                end: 1161,
-                                properties: 'Me',
-                            ),
-                        ],
-                        codepoints: '[0x00488, 0x00489,]',
                     ),
                     new TableRow(
                         derivedFrom: [
@@ -347,6 +342,14 @@ class TableProcessorTest extends TestCase
                             properties: 'Mn',
                         ),
                         new TableEntry(
+                            line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                            codepoints: '0488..0489',
+                            comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                            start: 1160,
+                            end: 1161,
+                            properties: 'Me',
+                        ),
+                        new TableEntry(
                             line: '0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
                             codepoints: '0591..05BD',
                             comment: '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
@@ -370,14 +373,7 @@ class TableProcessorTest extends TestCase
                             end: 917999,
                             properties: 'Mn',
                         ),
-                        new TableEntry(
-                            line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-                            codepoints: '0488..0489',
-                            comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-                            start: 1160,
-                            end: 1161,
-                            properties: 'Me',
-                        ),
+
                         new TableEntry(
                             line: '1ABE          ; Me #       COMBINING PARENTHESES OVERLAY',
                             codepoints: '1ABE',
