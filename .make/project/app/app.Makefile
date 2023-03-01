@@ -13,16 +13,18 @@ _run_phploc:
 
 test:
 	@$(eval c ?=)
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Default tests...${_C_STOP}\n";
 	-${_DC_EXEC} -e XDEBUG_MODE=coverage ${APP_CONTAINER} vendor/bin/phpunit $(c)
 
 test_coverage:
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Coverage tests...${_C_STOP}\n";
 	-${_DC_EXEC} -e XDEBUG_MODE=coverage ${APP_CONTAINER} vendor/bin/phpunit --configuration phpunit.coverage.xml --coverage-text
 
 test_full: test_coverage test
 
 ##
 ## —— Application 📦 ———————————————————————————————————————————————————————————
-update: _update_message _generate_tables _cp_files ## Update tables
+update: _update_message _generate_tables _cp_files _test_message test_full ## Update tables
 
 _update_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";
@@ -34,6 +36,9 @@ _generate_tables:
 _cp_files:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Copying files...${_C_STOP}\n";
 	@-${_DC_EXEC} ${APP_CONTAINER} bash -c "cp -f /app/lib/.rendered/* /app/src/File"
+
+_test_message:
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Testing...${_C_STOP}\n";
 
 # End of file
 ##
