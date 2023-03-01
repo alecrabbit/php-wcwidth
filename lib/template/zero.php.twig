@@ -8,10 +8,10 @@ namespace AlecRabbit\WCWidth;
 const ZERO_WIDTH = [
 {% for version, d in data %}
     '{{ version }}' => [
-{% for entry in d %}
-        [{{ entry.normalizedStart }}, {{ entry.normalizedEnd }},],     // ; {{ entry.properties }}     # {{ entry.comment }}
+{% for row in d %}
+        {{ row.codepoints }},
 {% endfor %}
-],
+    ],
 {% endfor %}
 ];
 // @codeCoverageIgnoreEnd

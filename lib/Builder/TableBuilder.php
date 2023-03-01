@@ -75,13 +75,14 @@ final class TableBuilder
                     )
                 );
             $zero[$version] =
-                $this->categoryParser->parse(
-                $this->client->get(
-                    $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
-                ),
-                $this->getZeroCategories(),
-
-            );
+                $this->tableProcessor->process(
+                    $this->categoryParser->parse(
+                        $this->client->get(
+                            $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
+                        ),
+                        $this->getZeroCategories(),
+                    )
+                );
         }
         $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
