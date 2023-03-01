@@ -31,6 +31,7 @@ final class CachingClient implements ICachingClient
             $this->cache->get(
                 $this->encodeKey($url),
                 function () use ($url) {
+                    Logger::debug(sprintf('Cache miss. Fetching content from: %s', $url));
                     return $this->getContent($url);
                 }
             );
@@ -56,6 +57,7 @@ final class CachingClient implements ICachingClient
     {
         // simple asserts
         $statusCode = $response->getStatusCode();
+        Logger::debug(sprintf('Status code: %s', $statusCode));
         if (200 !== $statusCode) {
             throw new \Exception('Error: Status code "' . $statusCode . '". Url: "' . $response->getInfo('url') . '"');
         }

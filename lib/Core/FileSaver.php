@@ -11,9 +11,10 @@ final class FileSaver implements IFileSaver
 
     public function save(string $filename, string $content): void
     {
-        // write to file
+        $file = $this->getDir() . $filename;
+        Logger::debug(sprintf('Saving file: %s', $file));
         file_put_contents(
-            $this->getDir() . $filename,
+            $file,
             $content
         );
     }

@@ -15,6 +15,7 @@ final class CategoryParser implements ICategoryParser
 
     public function parse(string $data, array $categories): iterable
     {
+        Logger::debug('Parsing data...');
         $result = [];
         foreach (explode(PHP_EOL, $data) as $line) {
             [$data, $comment] = $this->split($line);

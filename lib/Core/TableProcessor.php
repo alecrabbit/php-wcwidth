@@ -9,6 +9,7 @@ final class TableProcessor implements Contract\ITableProcessor
 {
     public function process(iterable $data): iterable
     {
+        Logger::debug('Processing data...');
         $previous = null;
         $derivedFrom = [];
         foreach ($data as $entry) {
