@@ -24,18 +24,12 @@ final class TemplateRenderer implements ITemplateRenderer
         $this->twig->addExtension(new DebugExtension());
     }
 
-    public function render(string $type, array $data): void
+    public function render(string $type, array $data): string
     {
-        $rendered =
+        return
             $this->twig->render(
                 $type === 'zero' ? 'zero.php.twig' : 'wide.php.twig',
                 ['data' => $data]
             );
-        $filename = $type === 'zero' ? 'zero.php' : 'wide.php';
-        // write to file
-        file_put_contents(
-            __DIR__ . '/../' . $filename,
-            $rendered
-        );
     }
 }

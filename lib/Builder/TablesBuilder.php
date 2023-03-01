@@ -4,8 +4,11 @@ declare(strict_types=1);
 // 27.02.23
 namespace AlecRabbit\WCWidth\Builder;
 
+use AlecRabbit\WCWidth\Builder\Contract\FileSaver;
 use AlecRabbit\WCWidth\Builder\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
+use AlecRabbit\WCWidth\Builder\Contract\IFileSaver;
+use AlecRabbit\WCWidth\Builder\Contract\ITemplateRenderer;
 
 final class TablesBuilder
 {
@@ -26,7 +29,8 @@ final class TablesBuilder
     public function __construct(
         protected ICachingClient $client = new CachingClient(),
         protected ICategoryParser $categoryParser = new CategoryParser(),
-        protected TemplateRenderer $renderer = new TemplateRenderer(),
+        protected ITemplateRenderer $renderer = new TemplateRenderer(),
+        protected IFileSaver $saver = new FileSaver(),
     ) {
     }
 
@@ -57,8 +61,8 @@ final class TablesBuilder
             );
 //            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
-        $this->renderer->render('zero', $zero);
-        $this->renderer->render('wide', $wide);
+        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
+        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
     }
 
     private function getVersions(): iterable

@@ -3,7 +3,7 @@ declare(strict_types=1);
 // 28.02.23
 namespace AlecRabbit\WCWidth\Builder\Contract;
 
-interface ITemplateRenderer
+interface IFileSaver
 {
-    public function render(string $type, array $data): string;
+    public function save(string $filename, string $content): void;
 }
