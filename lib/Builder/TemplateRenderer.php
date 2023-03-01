@@ -28,8 +28,19 @@ final class TemplateRenderer implements ITemplateRenderer
     {
         return
             $this->twig->render(
-                $type === 'zero' ? 'zero.php.twig' : 'wide.php.twig',
+                $this->getTemplate($type),
                 ['data' => $data]
             );
+    }
+
+    private function getTemplate(string $type): string
+    {
+        return
+            match ($type) {
+                'versions' => 'versions.php.twig',
+                'zero' => 'zero.php.twig',
+                'wide' => 'wide.php.twig',
+                default => throw new \InvalidArgumentException(sprintf('Unknown template type: "%s".', $type)),
+            };
     }
 }

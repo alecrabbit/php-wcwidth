@@ -44,23 +44,20 @@ final class TablesBuilder
             $wide[$version] =
                 $this->categoryParser->parseCategory(
                     $this->client->get(
-                        dump(
-                            $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
-                        )
+                        $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
                     ),
-                    ['W', 'F'],
+                    $this->getWideCategories(),
                 );
             $zero[$version] = $this->categoryParser->parseCategory(
                 $this->client->get(
-                    dump(
-                        $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
-                    )
+                    $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
                 ),
-                ['Me', 'Mn',],
+                $this->getZeroCategories(),
 
             );
 //            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
+        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
         $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
     }
@@ -86,18 +83,18 @@ final class TablesBuilder
         }
     }
 
-
-    // Partition the string into three parts using the given separator.
-    //
-    // This will search for the separator in the string.  If the separator is found,
-    // returns a 3-tuple containing the part before the separator, the separator
-    // itself, and the part after it.
-    //
-    // If the separator is not found, returns a 3-tuple containing the original string
-    // and two empty strings.
-
     private function versionedUrl(string $url, string $version): string
     {
         return str_replace(self::VERSION_PLACEHOLDER, $version, $url);
+    }
+
+    private function getWideCategories(): array
+    {
+        return ['W', 'F'];
+    }
+
+    private function getZeroCategories(): array
+    {
+        return ['Me', 'Mn',];
     }
 }
