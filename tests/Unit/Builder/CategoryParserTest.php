@@ -289,7 +289,9 @@ class CategoryParserTest extends TestCase
         $args = $incoming[self::ARGUMENTS];
         self::assertEquals(
             $expected[self::RESULT],
-            $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
+            iterator_to_array(
+                $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
+            ),
         );
     }
 

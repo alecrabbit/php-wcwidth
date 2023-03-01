@@ -13,11 +13,10 @@ final class CategoryParser implements ICategoryParser
     {
     }
 
-    public function parse(string $data, array $categories): array
+    public function parse(string $data, array $categories): iterable
     {
-        $result = [];
         foreach (explode(PHP_EOL, $data) as $line) {
-            $l = [];
+            $row = [];
             [$data, $comment] = $this->split($line);
             $data_fields = explode(';', $data);
             if ($data_fields[1] ?? false) {
@@ -29,16 +28,15 @@ final class CategoryParser implements ICategoryParser
                     } else {
                         $start = $end = $codepoints_str;
                     }
-                    $l[0] = [$this->normalizeValue($start), $this->normalizeValue($end)];
-                    $l[1] = $properties;
+                    $row[0] = [$this->normalizeValue($start), $this->normalizeValue($end)];
+                    $row[1] = $properties;
                 }
             }
-            if ($l[0] ?? false) {
-                $l[2] = $comment;
-                $result[] = $l;
+            if ($row[0] ?? false) {
+                $row[2] = $comment;
+                yield $row;
             }
         }
-        return $result;
     }
 
     private function split(string $line): array
@@ -53,12 +51,12 @@ final class CategoryParser implements ICategoryParser
         ];
     }
 
-    private function normalizeValue(string $start): string
+    private function normalizeValue(string $value): string
     {
         return
             '0x' .
             str_pad(
-                dechex(hexdec($start)),
+                dechex(hexdec($value)),
                 5,
                 '0',
                 STR_PAD_LEFT

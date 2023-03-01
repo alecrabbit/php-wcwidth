@@ -9,7 +9,7 @@ use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
 use AlecRabbit\WCWidth\Builder\Contract\IFileSaver;
 use AlecRabbit\WCWidth\Builder\Contract\ITemplateRenderer;
 
-final class TablesBuilder
+final class TableBuilder
 {
     private const VERSION_PLACEHOLDER = '{%version%}';
     private const URL_UNICODE_DERIVED_AGE = 'https://www.unicode.org/Public/UCD/latest/ucd/DerivedAge.txt';
@@ -23,7 +23,7 @@ final class TablesBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
-            //
+            // ----
             '4.1.0',
             '5.0.0',
             '5.1.0',
@@ -72,11 +72,10 @@ final class TablesBuilder
                 $this->getZeroCategories(),
 
             );
-//            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
-        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
-        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
-        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
+//        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
+//        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
+//        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
     }
 
     private function getVersions(): iterable
