@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 // 28.02.23
-namespace AlecRabbit\WCWidth\Builder;
+namespace AlecRabbit\WCWidth\Core;
 
-use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
+use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 
 final class CategoryParser implements ICategoryParser
 {
@@ -13,32 +13,33 @@ final class CategoryParser implements ICategoryParser
     {
     }
 
-    public function parse(string $data, array $categories): array
+    public function parse(string $data, array $categories): iterable
     {
-        $result = [];
         foreach (explode(PHP_EOL, $data) as $line) {
-            $l = [];
             [$data, $comment] = $this->split($line);
             $data_fields = explode(';', $data);
             if ($data_fields[1] ?? false) {
-                $codepoints_str = \trim($data_fields[0] ?? '');
+                $codepoints = \trim($data_fields[0] ?? '');
                 $properties = \trim($data_fields[1] ?? '');
                 if (in_array($properties, $categories, true)) {
-                    if (str_contains($codepoints_str, '..')) {
-                        [$start, $end] = explode('..', $codepoints_str);
+                    if (str_contains($codepoints, '..')) {
+                        [$start, $end] = explode('..', $codepoints);
                     } else {
-                        $start = $end = $codepoints_str;
+                        $start = $end = $codepoints;
                     }
-                    $l[0] = [$this->normalizeValue($start), $this->normalizeValue($end)];
-                    $l[1] = $properties;
+                    yield new TableEntry(
+                        line: $line,
+                        codepoints: $codepoints,
+                        comment: $comment,
+                        start: hexdec($start),
+                        end: hexdec($end),
+                        properties: $properties,
+                    );
+//                    $row[0] = [$this->normalizeValue($start), $this->normalizeValue($end)];
+//                    $row[1] = $properties;
                 }
             }
-            if ($l[0] ?? false) {
-                $l[2] = $comment;
-                $result[] = $l;
-            }
         }
-        return $result;
     }
 
     private function split(string $line): array
@@ -53,12 +54,12 @@ final class CategoryParser implements ICategoryParser
         ];
     }
 
-    private function normalizeValue(string $start): string
+    private function normalizeValue(string $value): string
     {
         return
             '0x' .
             str_pad(
-                dechex(hexdec($start)),
+                dechex(hexdec($value)),
                 5,
                 '0',
                 STR_PAD_LEFT

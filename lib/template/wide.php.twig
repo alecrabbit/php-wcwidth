@@ -9,7 +9,7 @@ const WIDE_EASTASIAN = [
 {% for version, d in data %}
     '{{ version }}' => [
 {% for entry in d %}
-        [{{ entry[0][0] }}, {{ entry[0][1] }},],     // ; {{ entry[1] }} # {{ entry[2] }}
+        [{{ entry.normalizedStart }}, {{ entry.normalizedEnd }},],     // ; {{ entry.properties }}     # {{ entry.comment }}
 {% endfor %}
     ],
 {% endfor %}

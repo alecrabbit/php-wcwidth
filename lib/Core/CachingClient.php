@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 // 27.02.23
-namespace AlecRabbit\WCWidth\Builder;
+namespace AlecRabbit\WCWidth\Core;
 
-use AlecRabbit\WCWidth\Builder\Contract\ICachingClient;
+use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 

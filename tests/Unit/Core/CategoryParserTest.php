@@ -1,9 +1,10 @@
 <?php
 
-namespace AlecRabbit\Tests\Unit\Builder;
+namespace AlecRabbit\Tests\Unit\Core;
 
 use AlecRabbit\Tests\TestCase\TestCase;
-use AlecRabbit\WCWidth\Builder\CategoryParser;
+use AlecRabbit\WCWidth\Core\CategoryParser;
+use AlecRabbit\WCWidth\Core\TableEntry;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -18,30 +19,38 @@ class CategoryParserTest extends TestCase
         yield [
             [
                 self::RESULT => [
-                    [
-                        // 1100..115F;W     # Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER
-                        ['0x01100', '0x0115f',],
-                        'W',
-                        'Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER',
-                    ],
-                    [
-                        // 231A..231B;W     # So     [2] WATCH..HOURGLASS
-                        ['0x0231a', '0x0231b',],
-                        'W',
-                        'So     [2] WATCH..HOURGLASS',
-                    ],
-                    [
-                        // 2329;W           # Ps         LEFT-POINTING ANGLE BRACKET
-                        ['0x02329', '0x02329',],
-                        'W',
-                        'Ps         LEFT-POINTING ANGLE BRACKET',
-                    ],
-                    [
-                        // 232A;W           # Pe         RIGHT-POINTING ANGLE BRACKET
-                        ['0x0232a', '0x0232a',],
-                        'W',
-                        'Pe         RIGHT-POINTING ANGLE BRACKET',
-                    ],
+                    new TableEntry(
+                        line: "1100..115F;W     # Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER",
+                        codepoints: "1100..115F",
+                        comment: "Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER",
+                        start: 4352,
+                        end: 4447,
+                        properties: 'W',
+                    ),
+                    new TableEntry(
+                        line: "231A..231B;W     # So     [2] WATCH..HOURGLASS",
+                        codepoints: "231A..231B",
+                        comment: "So     [2] WATCH..HOURGLASS",
+                        start: 8986,
+                        end: 8987,
+                        properties: 'W',
+                    ),
+                    new TableEntry(
+                        line: "2329;W           # Ps         LEFT-POINTING ANGLE BRACKET",
+                        codepoints: "2329",
+                        comment: "Ps         LEFT-POINTING ANGLE BRACKET",
+                        start: 9001,
+                        end: 9001,
+                        properties: 'W',
+                    ),
+                    new TableEntry(
+                        line: "232A;W           # Pe         RIGHT-POINTING ANGLE BRACKET",
+                        codepoints: "232A",
+                        comment: "Pe         RIGHT-POINTING ANGLE BRACKET",
+                        start: 9002,
+                        end: 9002,
+                        properties: 'W',
+                    ),
                 ],
             ],
             [
@@ -120,66 +129,86 @@ class CategoryParserTest extends TestCase
         yield [
             [
                 self::RESULT => [
-                    [
-                        //  0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
-                        ['0x00300', '0x0036f',],
-                        'Mn',
-                        '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
-                    ],
-                    [
-                        // 0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
-                        ['0x00483', '0x00487',],
-                        'Mn',
-                        '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
-                    ],
-                    [
-                        // 0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
-                        ['0x00591', '0x005bd',],
-                        'Mn',
-                        '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
-                    ],
-                    [
-                        // 1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
-                        ['0x1e944', '0x1e94a',],
-                        'Mn',
-                        '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
-                    ],
-                    [
-                        // E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-                        ['0xe0100', '0xe01ef',],
-                        'Mn',
-                        '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
-                    ],
-                    [
-                        // 0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-                        ['0x00488', '0x00489',],
-                        'Me',
-                        '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-                    ],
-                    [
-                        // 1ABE          ; Me #       COMBINING PARENTHESES OVERLAY
-                        ['0x01abe', '0x01abe',],
-                        'Me',
-                        'COMBINING PARENTHESES OVERLAY',
-                    ],
-                    [
-                        // 20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
-                        ['0x020dd', '0x020e0',],
-                        'Me',
-                        '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
-                    ],
-                    [
-                        // 20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
-                        ['0x020e2', '0x020e4',],
-                        'Me',
-                        '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
-                    ],
-                    [
-                        // A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-                        ['0x0a670', '0x0a672',],
-                        'Me',
-                        '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
-                    ],
+                    new TableEntry(
+                        line: "0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X",
+                        codepoints: "0300..036F",
+                        comment: "[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X",
+                        start: 768,
+                        end: 879,
+                        properties: 'Mn',
+                    ),
+                    new TableEntry(
+                        line: "0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE",
+                        codepoints: "0483..0487",
+                        comment: "[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE",
+                        start: 1155,
+                        end: 1159,
+                        properties: 'Mn',
+                    ),
+                    new TableEntry(
+                        line: "0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG",
+                        codepoints: "0591..05BD",
+                        comment: "[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG",
+                        start: 1425,
+                        end: 1469,
+                        properties: 'Mn',
+                    ),
+                    new TableEntry(
+                        line: "1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA",
+                        codepoints: "1E944..1E94A",
+                        comment: "[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA",
+                        start: 125252,
+                        end: 125258,
+                        properties: 'Mn',
+                    ),
+                    new TableEntry(
+                        line: "E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256",
+                        codepoints: "E0100..E01EF",
+                        comment: "[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256",
+                        start: 917760,
+                        end: 917999,
+                        properties: 'Mn',
+                    ),
+                    new TableEntry(
+                        line: "0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN",
+                        codepoints: "0488..0489",
+                        comment: "[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN",
+                        start: 1160,
+                        end: 1161,
+                        properties: 'Me',
+                    ),
+                    new TableEntry(
+                        line: "1ABE          ; Me #       COMBINING PARENTHESES OVERLAY",
+                        codepoints: "1ABE",
+                        comment: "COMBINING PARENTHESES OVERLAY",
+                        start: 6846,
+                        end: 6846,
+                        properties: 'Me',
+                    ),
+                    new TableEntry(
+                        line: "20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH",
+                        codepoints: "20DD..20E0",
+                        comment: "[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH",
+                        start: 8413,
+                        end: 8416,
+                        properties: 'Me',
+                    ),
+                    new TableEntry(
+                        line: "20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE",
+                        codepoints: "20E2..20E4",
+                        comment: "[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE",
+                        start: 8418,
+                        end: 8420,
+                        properties: 'Me',
+                    ),
+                    new TableEntry(
+                        line: "A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN",
+                        codepoints: "A670..A672",
+                        comment: "[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN",
+                        start: 42608,
+                        end: 42610,
+                        properties: 'Me',
+                    ),
                 ],
             ],
             [
@@ -194,15 +223,15 @@ class CategoryParserTest extends TestCase
                         #
                         # Unicode Character Database
                         #   For documentation, see http://www.unicode.org/reports/tr44/
-                        
+
                         # ================================================
-                        
+
                         # Property:	General_Category
-                        
+
                         # ================================================
-                        
+
                         # General_Category=Unassigned
-                        
+
                         0378..0379    ; Cn #   [2] <reserved-0378>..<reserved-0379>
                         0380..0383    ; Cn #   [4] <reserved-0380>..<reserved-0383>
                         038B          ; Cn #       <reserved-038B>
@@ -210,13 +239,13 @@ class CategoryParserTest extends TestCase
                         E01F0..EFFFF  ; Cn # [65040] <reserved-E01F0>..<noncharacter-EFFFF>
                         FFFFE..FFFFF  ; Cn #   [2] <noncharacter-FFFFE>..<noncharacter-FFFFF>
                         10FFFE..10FFFF; Cn #   [2] <noncharacter-10FFFE>..<noncharacter-10FFFF>
-                        
+
                         # Total code points: 829834
-                        
+
                         # ================================================
-                        
+
                         # General_Category=Uppercase_Letter
-                        
+
                         0041..005A    ; Lu #  [26] LATIN CAPITAL LETTER A..LATIN CAPITAL LETTER Z
                         00C0..00D6    ; Lu #  [23] LATIN CAPITAL LETTER A WITH GRAVE..LATIN CAPITAL LETTER O WITH DIAERESIS
                         00D8..00DE    ; Lu #   [7] LATIN CAPITAL LETTER O WITH STROKE..LATIN CAPITAL LETTER THORN
@@ -225,37 +254,37 @@ class CategoryParserTest extends TestCase
                         0104          ; Lu #       LATIN CAPITAL LETTER A WITH OGONEK
                         2F800..2FA1D  ; Lo # [542] CJK COMPATIBILITY IDEOGRAPH-2F800..CJK COMPATIBILITY IDEOGRAPH-2FA1D
                         30000..3134A  ; Lo # [4939] CJK UNIFIED IDEOGRAPH-30000..CJK UNIFIED IDEOGRAPH-3134A
-                        
+
                         # Total code points: 127333
-                        
+
                         # ================================================
-                        
+
                         # General_Category=Nonspacing_Mark
-                        
+
                         0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
                         0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
                         0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
                         1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
                         E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-                        
+
                         # Total code points: 1950
-                        
+
                         # ================================================
-                        
+
                         # General_Category=Enclosing_Mark
-                        
+
                         0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
                         1ABE          ; Me #       COMBINING PARENTHESES OVERLAY
                         20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
                         20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
                         A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-                        
+
                         # Total code points: 13
-                        
+
                         # ================================================
-                        
+
                         # General_Category=Spacing_Mark
-                        
+
                         0903          ; Mc #       DEVANAGARI SIGN VISARGA
                         093B          ; Mc #       DEVANAGARI VOWEL SIGN OOE
                         093E..0940    ; Mc #   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
@@ -265,6 +294,8 @@ class CategoryParserTest extends TestCase
                 ],
             ],
         ];
+
+
         //        yield [
         //            [
         //                self::EXCEPTION => [
@@ -289,7 +320,9 @@ class CategoryParserTest extends TestCase
         $args = $incoming[self::ARGUMENTS];
         self::assertEquals(
             $expected[self::RESULT],
-            $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
+            iterator_to_array(
+                $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
+            ),
         );
     }
 

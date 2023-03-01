@@ -4,12 +4,16 @@ declare(strict_types=1);
 // 27.02.23
 namespace AlecRabbit\WCWidth\Builder;
 
-use AlecRabbit\WCWidth\Builder\Contract\ICachingClient;
-use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
-use AlecRabbit\WCWidth\Builder\Contract\IFileSaver;
-use AlecRabbit\WCWidth\Builder\Contract\ITemplateRenderer;
+use AlecRabbit\WCWidth\Core\CachingClient;
+use AlecRabbit\WCWidth\Core\CategoryParser;
+use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
+use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
+use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
+use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
+use AlecRabbit\WCWidth\Core\FileSaver;
+use AlecRabbit\WCWidth\Core\TemplateRenderer;
 
-final class TablesBuilder
+final class TableBuilder
 {
     private const VERSION_PLACEHOLDER = '{%version%}';
     private const URL_UNICODE_DERIVED_AGE = 'https://www.unicode.org/Public/UCD/latest/ucd/DerivedAge.txt';
@@ -23,7 +27,7 @@ final class TablesBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
-            //
+            // ----
             '4.1.0',
             '5.0.0',
             '5.1.0',
@@ -72,7 +76,6 @@ final class TablesBuilder
                 $this->getZeroCategories(),
 
             );
-//            dump(sprintf('Version:%s EA:%s DGC:%s', $version, $len1, $len2));
         }
         $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
