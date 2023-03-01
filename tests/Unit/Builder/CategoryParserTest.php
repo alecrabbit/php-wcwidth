@@ -20,25 +20,25 @@ class CategoryParserTest extends TestCase
                 self::RESULT => [
                     [
                         // 1100..115F;W     # Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER
-                        [0x01100, 0x0115f,],
+                        ['0x01100', '0x0115f',],
                         'W',
                         'Lo    [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER',
                     ],
                     [
                         // 231A..231B;W     # So     [2] WATCH..HOURGLASS
-                        [0x0231a, 0x0231b,],
+                        ['0x0231a', '0x0231b',],
                         'W',
                         'So     [2] WATCH..HOURGLASS',
                     ],
                     [
                         // 2329;W           # Ps         LEFT-POINTING ANGLE BRACKET
-                        [0x02329, 0x02329,],
+                        ['0x02329', '0x02329',],
                         'W',
                         'Ps         LEFT-POINTING ANGLE BRACKET',
                     ],
                     [
                         // 232A;W           # Pe         RIGHT-POINTING ANGLE BRACKET
-                        [0x0232a, 0x0232a,],
+                        ['0x0232a', '0x0232a',],
                         'W',
                         'Pe         RIGHT-POINTING ANGLE BRACKET',
                     ],
@@ -122,61 +122,61 @@ class CategoryParserTest extends TestCase
                 self::RESULT => [
                     [
                         //  0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
-                        [0x0300, 0x036F,],
+                        ['0x00300', '0x0036f',],
                         'Mn',
                         '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
                     ],
                     [
                         // 0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
-                        [0x0483, 0x0487,],
+                        ['0x00483', '0x00487',],
                         'Mn',
                         '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
                     ],
                     [
                         // 0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
-                        [0x0591, 0x05BD,],
+                        ['0x00591', '0x005bd',],
                         'Mn',
                         '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
                     ],
                     [
                         // 1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
-                        [0x1E944, 0x1E94A,],
+                        ['0x1e944', '0x1e94a',],
                         'Mn',
                         '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
                     ],
                     [
                         // E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-                        [0xE0100, 0xE01EF,],
+                        ['0xe0100', '0xe01ef',],
                         'Mn',
                         '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
                     ],
                     [
                         // 0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-                        [0x0488, 0x0489,],
+                        ['0x00488', '0x00489',],
                         'Me',
                         '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
                     ],
                     [
                         // 1ABE          ; Me #       COMBINING PARENTHESES OVERLAY
-                        [0x1ABE, 0x1ABE,],
+                        ['0x01abe', '0x01abe',],
                         'Me',
                         'COMBINING PARENTHESES OVERLAY',
                     ],
                     [
                         // 20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
-                        [0x20DD, 0x20E0,],
+                        ['0x020dd', '0x020e0',],
                         'Me',
                         '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
                     ],
                     [
                         // 20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
-                        [0x20E2, 0x20E4,],
+                        ['0x020e2', '0x020e4',],
                         'Me',
                         '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
                     ],
                     [
                         // A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-                        [0xA670, 0xA672,],
+                        ['0x0a670', '0x0a672',],
                         'Me',
                         '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
                     ],
