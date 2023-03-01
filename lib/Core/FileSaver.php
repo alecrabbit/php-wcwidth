@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 // 01.03.23
-namespace AlecRabbit\WCWidth\Builder;
+namespace AlecRabbit\WCWidth\Core;
 
-use AlecRabbit\WCWidth\Builder\Contract\IFileSaver;
+use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
 
 final class FileSaver implements IFileSaver
 {

@@ -4,10 +4,14 @@ declare(strict_types=1);
 // 27.02.23
 namespace AlecRabbit\WCWidth\Builder;
 
-use AlecRabbit\WCWidth\Builder\Contract\ICachingClient;
-use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
-use AlecRabbit\WCWidth\Builder\Contract\IFileSaver;
-use AlecRabbit\WCWidth\Builder\Contract\ITemplateRenderer;
+use AlecRabbit\WCWidth\Core\CachingClient;
+use AlecRabbit\WCWidth\Core\CategoryParser;
+use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
+use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
+use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
+use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
+use AlecRabbit\WCWidth\Core\FileSaver;
+use AlecRabbit\WCWidth\Core\TemplateRenderer;
 
 final class TableBuilder
 {

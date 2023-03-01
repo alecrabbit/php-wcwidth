@@ -25,7 +25,8 @@
   "autoload": {
     "psr-4": {
       "AlecRabbit\\WCWidth\\Helpers\\": "src\\Helpers",
-      "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder"
+      "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder",
+      "AlecRabbit\\WCWidth\\Core\\": "lib\\Core"
     },
     "files": [
       "src\\Table\\zero.php",

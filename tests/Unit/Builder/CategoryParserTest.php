@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests\Unit\Builder;
 
 use AlecRabbit\Tests\TestCase\TestCase;
-use AlecRabbit\WCWidth\Builder\CategoryParser;
+use AlecRabbit\WCWidth\Core\CategoryParser;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 

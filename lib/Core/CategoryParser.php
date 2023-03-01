@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 // 28.02.23
-namespace AlecRabbit\WCWidth\Builder;
+namespace AlecRabbit\WCWidth\Core;
 
-use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
+use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 
 final class CategoryParser implements ICategoryParser
 {
