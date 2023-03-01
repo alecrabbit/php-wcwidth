@@ -26,7 +26,8 @@
     "psr-4": {
       "AlecRabbit\\WCWidth\\Helpers\\": "src\\Helpers",
       "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder",
-      "AlecRabbit\\WCWidth\\Core\\": "lib\\Core"
+      "AlecRabbit\\WCWidth\\Core\\": "lib\\Core",
+      "AlecRabbit\\WCWidth\\Command\\": "lib\\Command"
     },
     "files": [
       "src\\File\\versions.php",
