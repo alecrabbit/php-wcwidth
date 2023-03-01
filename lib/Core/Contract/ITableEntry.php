@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-// 28.02.23
+// 01.03.23
 namespace AlecRabbit\WCWidth\Core\Contract;
 
-interface ITableDefinition
+interface ITableEntry
 {
 
 }
