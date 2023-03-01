@@ -15,6 +15,7 @@ final class CategoryParser implements ICategoryParser
 
     public function parse(string $data, array $categories): iterable
     {
+        $result = [];
         foreach (explode(PHP_EOL, $data) as $line) {
             [$data, $comment] = $this->split($line);
             $data_fields = explode(';', $data);
@@ -27,7 +28,7 @@ final class CategoryParser implements ICategoryParser
                     } else {
                         $start = $end = $codepoints;
                     }
-                    yield new TableEntry(
+                    $result[] = new TableEntry(
                         line: $line,
                         codepoints: $codepoints,
                         comment: $comment,
@@ -35,11 +36,11 @@ final class CategoryParser implements ICategoryParser
                         end: hexdec($end),
                         properties: $properties,
                     );
-//                    $row[0] = [$this->normalizeValue($start), $this->normalizeValue($end)];
-//                    $row[1] = $properties;
                 }
             }
         }
+        usort($result, $this->getSorter());
+        return $result;
     }
 
     private function split(string $line): array
@@ -64,5 +65,13 @@ final class CategoryParser implements ICategoryParser
                 '0',
                 STR_PAD_LEFT
             );
+    }
+
+    private function getSorter(): callable
+    {
+        return
+            static function (TableEntry $a, TableEntry $b): int {
+                return $a->start <=> $b->start;
+            };
     }
 }
