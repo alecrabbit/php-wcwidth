@@ -52,9 +52,17 @@ final class TableBuilder
             $this->output->writeln("Processing version: {$version}");
             $versions[] = $version;
             $wide[$version] =
-                $this->getTableData(self::URL_EASTASIAN_WIDTH, $version);
+                $this->getTableData(
+                    self::URL_EASTASIAN_WIDTH,
+                    $version,
+                    $this->getWideCategories(),
+                );
             $zero[$version] =
-                $this->getTableData(self::URL_DERIVED_CATEGORY, $version);
+                $this->getTableData(
+                    self::URL_DERIVED_CATEGORY,
+                    $version,
+                    $this->getZeroCategories()
+                );
         }
         $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
@@ -82,7 +90,7 @@ final class TableBuilder
         }
     }
 
-    private function getTableData(string $url, string $version): iterable
+    private function getTableData(string $url, string $version, array $categories): iterable
     {
         return
             $this->tableProcessor->process(
@@ -90,7 +98,7 @@ final class TableBuilder
                     $this->client->get(
                         $this->versionedUrl($url, $version)
                     ),
-                    $this->getWideCategories(),
+                    $categories,
                 )
             );
     }
