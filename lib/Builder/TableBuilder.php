@@ -9,8 +9,10 @@ use AlecRabbit\WCWidth\Core\CategoryParser;
 use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
+use AlecRabbit\WCWidth\Core\Contract\ITableProcessor;
 use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
 use AlecRabbit\WCWidth\Core\FileSaver;
+use AlecRabbit\WCWidth\Core\TableProcessor;
 use AlecRabbit\WCWidth\Core\TemplateRenderer;
 
 final class TableBuilder
@@ -50,6 +52,7 @@ final class TableBuilder
     public function __construct(
         protected ICachingClient $client = new CachingClient(),
         protected ICategoryParser $categoryParser = new CategoryParser(),
+        protected ITableProcessor $tableProcessor = new TableProcessor(),
         protected ITemplateRenderer $renderer = new TemplateRenderer(),
         protected IFileSaver $saver = new FileSaver(),
     ) {
@@ -63,13 +66,16 @@ final class TableBuilder
         foreach ($this->getVersions() as $version) {
             $versions[] = $version;
             $wide[$version] =
-                $this->categoryParser->parse(
-                    $this->client->get(
-                        $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
-                    ),
-                    $this->getWideCategories(),
+                $this->tableProcessor->process(
+                    $this->categoryParser->parse(
+                        $this->client->get(
+                            $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
+                        ),
+                        $this->getWideCategories(),
+                    )
                 );
-            $zero[$version] = $this->categoryParser->parse(
+            $zero[$version] =
+                $this->categoryParser->parse(
                 $this->client->get(
                     $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
                 ),
