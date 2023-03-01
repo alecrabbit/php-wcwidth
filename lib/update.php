@@ -7,7 +7,6 @@ require_once __DIR__ . '/../tests/bootstrap.php';
 (new AlecRabbit\WCWidth\Builder\TableBuilder())
     ->build();
 
-// memory stats
 echo memoryReport() . PHP_EOL;
 
 function memoryReport(): string

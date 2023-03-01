@@ -29,8 +29,8 @@
       "AlecRabbit\\WCWidth\\Core\\": "lib\\Core"
     },
     "files": [
-      "src\\Table\\zero.php",
-      "src\\Table\\wide.php",
+      "src\\File\\zero.php",
+      "src\\File\\wide.php",
       "src\\bootstrap.php"
     ]
   },
