@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-// 28.02.23
+
 namespace AlecRabbit\WCWidth;
 
 // @codeCoverageIgnoreStart
@@ -350,6 +350,6 @@ const ZERO_WIDTH = [
         [0x1e8d0, 0x1e8d6,],
         [0x1e944, 0x1e94a,],
         [0xe0100, 0xe01ef,],
-    ]
+    ],
 ];
 // @codeCoverageIgnoreEnd

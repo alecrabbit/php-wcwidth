@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-// 28.02.23
+
 namespace AlecRabbit\WCWidth;
 
 // @codeCoverageIgnoreStart
@@ -129,6 +129,6 @@ const WIDE_EASTASIAN = [
         [0x1faf0, 0x1faf8,],
         [0x20000, 0x2fffd,],
         [0x30000, 0x3fffd,],
-    ]
+    ],
 ];
 // @codeCoverageIgnoreEnd
