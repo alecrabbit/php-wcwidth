@@ -51,7 +51,7 @@ final class TableBuilder
         $zero = [];
         $wide = [];
         foreach ($this->getVersions() as $version) {
-            Logger::debug("Processing version: {$version}");
+            Logger::comment("Processing version: {$version}");
             $versions[] = $version;
             $wide[$version] =
                 $this->getTableData(
@@ -73,6 +73,7 @@ final class TableBuilder
 
     private function getVersions(): iterable
     {
+        Logger::comment('Getting versions...');
         yield from $this->parseVersions(
             $this->client->get(
                 self::URL_UNICODE_DERIVED_AGE

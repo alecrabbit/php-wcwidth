@@ -39,9 +39,16 @@ final class TemplateRenderer implements ITemplateRenderer
     public function render(string $type, array $data, ?array $options = null): string
     {
         $options ??= $this->options;
+        $template = $this->getTemplate($type);
+        Logger::debug(
+            sprintf(
+                'Rendering template: "%s".',
+                $template
+            )
+        );
         return
             $this->twig->render(
-                $this->getTemplate($type),
+                $template,
                 [
                     'data' => $data,
                     'options' => $options,
