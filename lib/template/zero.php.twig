@@ -9,12 +9,14 @@ const ZERO_WIDTH = [
 {% for version, d in data %}
     '{{ version }}' => [
 {% for row in d %}
-{% for entry in row.derivedFrom %}
-        // {{ entry.line | raw }}
+    {% if options.comments %}
+        {% for entry in row.derivedFrom %}
+            // {{ entry.line | raw }}
+        {% endfor %}
+    {% endif %}
+    {{ row.codepoints }},
 {% endfor %}
-        {{ row.codepoints }},
-{% endfor %}
-    ],
+],
 {% endfor %}
 ];
 // @codeCoverageIgnoreEnd

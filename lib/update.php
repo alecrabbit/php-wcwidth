@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../tests/bootstrap.php';
 
-(new AlecRabbit\WCWidth\Builder\TableBuilder())
-    ->build();
+$tableBuilder =
+    new AlecRabbit\WCWidth\Builder\TableBuilder(
+        templateRenderer: new AlecRabbit\WCWidth\Core\TemplateRenderer([]),
+    );
+
+$tableBuilder->build();
 
 echo memoryReport() . PHP_EOL;
 

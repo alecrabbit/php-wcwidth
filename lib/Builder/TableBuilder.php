@@ -35,7 +35,7 @@ final class TableBuilder
         protected ICachingClient $client = new CachingClient(),
         protected ICategoryParser $categoryParser = new CategoryParser(),
         protected ITableProcessor $tableProcessor = new TableProcessor(),
-        protected ITemplateRenderer $renderer = new TemplateRenderer(),
+        protected ITemplateRenderer $templateRenderer = new TemplateRenderer(),
         protected IFileSaver $saver = new FileSaver(),
     ) {
     }
@@ -66,9 +66,9 @@ final class TableBuilder
                     )
                 );
         }
-        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
-        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
-        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
+        $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
+        $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
+        $this->saver->save('wide.php', $this->templateRenderer->render('wide', $wide));
     }
 
     private function getVersions(): iterable
