@@ -1,0 +1,14 @@
+[
+{% for version, d in data %}
+    '{{ version }}' => [
+{% for row in d %}
+{% if options.comments %}
+{% for entry in row.derivedFrom %}
+        // {{ entry.line | raw }}
+{% endfor %}
+{% endif %}
+        {{ row.codepoints }},
+{% endfor %}
+    ],
+{% endfor %}
+];

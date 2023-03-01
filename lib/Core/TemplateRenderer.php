@@ -11,25 +11,41 @@ use Twig\Loader\FilesystemLoader;
 
 final class TemplateRenderer implements ITemplateRenderer
 {
+    private const DEBUG_OPTIONS = [
+        'debug' => true,
+        'comments' => true,
+    ];
+
     private Environment $twig;
 
-    public function __construct()
-    {
+    public function __construct(
+        protected array $options = self::DEBUG_OPTIONS,
+    ) {
         $dir = __DIR__ . '/../template';
         $loader = new FilesystemLoader($dir);
+
+        $debug = $options['debug'] ?? false;
+
         $this->twig = new Environment($loader, [
             'cache' => $dir . '/.cache',
-            'debug' => true,
+            'debug' => $debug,
         ]);
-        $this->twig->addExtension(new DebugExtension());
+
+        if ($debug) {
+            $this->twig->addExtension(new DebugExtension());
+        }
     }
 
-    public function render(string $type, array $data): string
+    public function render(string $type, array $data, ?array $options = null): string
     {
+        $options ??= $this->options;
         return
             $this->twig->render(
                 $this->getTemplate($type),
-                ['data' => $data]
+                [
+                    'data' => $data,
+                    'options' => $options,
+                ]
             );
     }
 

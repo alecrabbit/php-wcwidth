@@ -5,16 +5,5 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth;
 
 // @codeCoverageIgnoreStart
-const ZERO_WIDTH = [
-{% for version, d in data %}
-    '{{ version }}' => [
-{% for row in d %}
-    {% for entry in row.derivedFrom %}
-        // {{ entry.line }}
-    {% endfor %}
-        {{ row.codepoints }},
-{% endfor %}
-    ],
-{% endfor %}
-];
+const ZERO_WIDTH = {% include 'table.twig' %}
 // @codeCoverageIgnoreEnd

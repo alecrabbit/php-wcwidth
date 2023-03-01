@@ -9,9 +9,11 @@ use AlecRabbit\WCWidth\Core\CategoryParser;
 use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
+use AlecRabbit\WCWidth\Core\Contract\IOutput;
 use AlecRabbit\WCWidth\Core\Contract\ITableProcessor;
 use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
 use AlecRabbit\WCWidth\Core\FileSaver;
+use AlecRabbit\WCWidth\Core\Output\NullOutput;
 use AlecRabbit\WCWidth\Core\TableProcessor;
 use AlecRabbit\WCWidth\Core\TemplateRenderer;
 
@@ -29,32 +31,15 @@ final class TableBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
-            // ----
-            '4.1.0',
-            '5.0.0',
-            '5.1.0',
-            '5.2.0',
-            '6.0.0',
-            '6.1.0',
-            '6.2.0',
-            '6.3.0',
-            '7.0.0',
-            '8.0.0',
-            '9.0.0',
-            '10.0.0',
-            '11.0.0',
-            '12.0.0',
-            '12.1.0',
-            '13.0.0',
-            '14.0.0',
         ];
 
     public function __construct(
         protected ICachingClient $client = new CachingClient(),
         protected ICategoryParser $categoryParser = new CategoryParser(),
         protected ITableProcessor $tableProcessor = new TableProcessor(),
-        protected ITemplateRenderer $renderer = new TemplateRenderer(),
+        protected ITemplateRenderer $templateRenderer = new TemplateRenderer(),
         protected IFileSaver $saver = new FileSaver(),
+        protected IOutput $output = new NullOutput(),
     ) {
     }
 
@@ -64,29 +49,16 @@ final class TableBuilder
         $zero = [];
         $wide = [];
         foreach ($this->getVersions() as $version) {
+            $this->output->writeln("Processing version: {$version}");
             $versions[] = $version;
             $wide[$version] =
-                $this->tableProcessor->process(
-                    $this->categoryParser->parse(
-                        $this->client->get(
-                            $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
-                        ),
-                        $this->getWideCategories(),
-                    )
-                );
+                $this->getTableData(self::URL_EASTASIAN_WIDTH, $version);
             $zero[$version] =
-                $this->tableProcessor->process(
-                    $this->categoryParser->parse(
-                        $this->client->get(
-                            $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
-                        ),
-                        $this->getZeroCategories(),
-                    )
-                );
+                $this->getTableData(self::URL_DERIVED_CATEGORY, $version);
         }
-        $this->saver->save('versions.php', $this->renderer->render('versions', $versions));
-        $this->saver->save('zero.php', $this->renderer->render('zero', $zero));
-        $this->saver->save('wide.php', $this->renderer->render('wide', $wide));
+        $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
+        $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
+        $this->saver->save('wide.php', $this->templateRenderer->render('wide', $wide));
     }
 
     private function getVersions(): iterable
@@ -108,6 +80,19 @@ final class TableBuilder
                 }
             }
         }
+    }
+
+    private function getTableData(string $url, string $version): iterable
+    {
+        return
+            $this->tableProcessor->process(
+                $this->categoryParser->parse(
+                    $this->client->get(
+                        $this->versionedUrl($url, $version)
+                    ),
+                    $this->getWideCategories(),
+                )
+            );
     }
 
     private function versionedUrl(string $url, string $version): string

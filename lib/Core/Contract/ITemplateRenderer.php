@@ -5,5 +5,5 @@ namespace AlecRabbit\WCWidth\Core\Contract;
 
 interface ITemplateRenderer
 {
-    public function render(string $type, array $data): string;
+    public function render(string $type, array $data, ?array $options = null): string;
 }
