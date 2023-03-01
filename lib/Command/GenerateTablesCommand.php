@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth\Command;
 
 use AlecRabbit\WCWidth\Builder\TableBuilder;
+use AlecRabbit\WCWidth\Core\Output\OutputAdapter;
 use AlecRabbit\WCWidth\Core\TemplateRenderer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,6 +24,7 @@ final class GenerateTablesCommand extends Command
             $tableBuilder =
                 new TableBuilder(
                     templateRenderer: new TemplateRenderer([]),
+                    output: new OutputAdapter($output),
                 );
 
             $tableBuilder->build();
@@ -39,7 +41,8 @@ final class GenerateTablesCommand extends Command
     protected function memoryReport(): string
     {
         return sprintf(
-            'Memory Real: %sK Peak: %sK',
+            '%sMemory Real: %sK Peak: %sK',
+            PHP_EOL,
             number_format(memory_get_usage(true) / 1024),
             number_format(memory_get_peak_usage(true) / 1024),
         );

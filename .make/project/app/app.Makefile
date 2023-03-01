@@ -29,7 +29,7 @@ _update_message:
 
 _generate_tables:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Generating tables...${_C_STOP}\n";
-	@-${_DC_EXEC} ${APP_CONTAINER} php bin/console generate:tables
+	@-${_DC_EXEC} ${APP_CONTAINER} php bin/console generate:tables -vvv
 
 _cp_files:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Copying files...${_C_STOP}\n";
