@@ -66,6 +66,7 @@ final class TableBuilder
                     $this->getZeroCategories()
                 );
         }
+        Logger::comment('Saving files...');
         $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
         $this->saver->save('wide.php', $this->templateRenderer->render('wide', $wide));
