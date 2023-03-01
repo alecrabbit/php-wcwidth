@@ -29,8 +29,8 @@ class WcWidthTest extends TestCase
         $length_each = array_map(wcwidth(...), $chrArray);
         $length_phrase = wcswidth($phrase, mb_strlen($phrase));
 
-        self::assertSame($length_each, $expect_length_each);
-        self::assertSame($length_phrase, $expect_length_phrase);
+        self::assertSame($expect_length_each, $length_each);
+        self::assertSame($expect_length_phrase, $length_phrase);
     }
 
     /** @test */
@@ -75,9 +75,9 @@ class WcWidthTest extends TestCase
     public function combiningWidthNegative(): void
     {
         // Simple test combining reports total width of 4.
-        $phrase = "--\u{05bf}--";
-        $expect_length_each = [1, 1, 0, 1, 1];
-        $expect_length_phrase = 4;
+        $phrase = "- -\u{05bf}--";
+        $expect_length_each = [1, 1, 1, 0, 1, 1];
+        $expect_length_phrase = 5;
 
         $this->validate($expect_length_each, $expect_length_phrase, $phrase);
     }
