@@ -4,7 +4,6 @@ declare(strict_types=1);
 // 27.02.23
 namespace AlecRabbit\WCWidth\Builder;
 
-use AlecRabbit\WCWidth\Builder\Contract\FileSaver;
 use AlecRabbit\WCWidth\Builder\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Builder\Contract\ICategoryParser;
 use AlecRabbit\WCWidth\Builder\Contract\IFileSaver;
@@ -24,6 +23,24 @@ final class TablesBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
+            //
+            '4.1.0',
+            '5.0.0',
+            '5.1.0',
+            '5.2.0',
+            '6.0.0',
+            '6.1.0',
+            '6.2.0',
+            '6.3.0',
+            '7.0.0',
+            '8.0.0',
+            '9.0.0',
+            '10.0.0',
+            '11.0.0',
+            '12.0.0',
+            '12.1.0',
+            '13.0.0',
+            '14.0.0',
         ];
 
     public function __construct(
@@ -42,13 +59,13 @@ final class TablesBuilder
         foreach ($this->getVersions() as $version) {
             $versions[] = $version;
             $wide[$version] =
-                $this->categoryParser->parseCategory(
+                $this->categoryParser->parse(
                     $this->client->get(
                         $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version)
                     ),
                     $this->getWideCategories(),
                 );
-            $zero[$version] = $this->categoryParser->parseCategory(
+            $zero[$version] = $this->categoryParser->parse(
                 $this->client->get(
                     $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version)
                 ),

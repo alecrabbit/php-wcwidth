@@ -11,7 +11,7 @@ class CategoryParserTest extends TestCase
 {
     private const WIDE_CATEGORIES = ['W', 'F'];
     private const ZERO_CATEGORIES = ['Me', 'Mn'];
-    private CategoryParser $parser;
+    private CategoryParser $categoryParser;
 
     public static function parseCategoryData(): iterable
     {
@@ -289,12 +289,12 @@ class CategoryParserTest extends TestCase
         $args = $incoming[self::ARGUMENTS];
         self::assertEquals(
             $expected[self::RESULT],
-            $this->parser->parseCategory($args[self::DATA], $args[self::CATEGORIES])
+            $this->categoryParser->parse($args[self::DATA], $args[self::CATEGORIES])
         );
     }
 
     protected function setUp(): void
     {
-        $this->parser = new CategoryParser();
+        $this->categoryParser = new CategoryParser();
     }
 }
