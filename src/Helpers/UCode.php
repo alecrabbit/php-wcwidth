@@ -1,15 +1,42 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace AlecRabbit\Helpers;
+namespace AlecRabbit\WCWidth\Helpers;
+
+use const AlecRabbit\WCWidth\UNICODE_VERSIONS;
+use const AlecRabbit\WCWidth\WIDE_EASTASIAN;
+use const AlecRabbit\WCWidth\ZERO_WIDTH;
 
 class UCode
 {
-    /**
-     * @param string $subject   Subject string
-     * @param null|int $n       Return width of n symbols or all if null
-     * @return int
-     */
-    public static function wcswidth(string $subject, ?int $n = null): int
+    private const DEFAULT_UNICODE_VERSION = '15.0.0';
+
+    // NOTE(jquast/wcwidth): created by hand, there isn't anything identifiable other than
+    // general Cf category code to identify these, and some characters in Cf
+    // category code are of non-zero width.
+    // Also includes some Cc, Mn, Zl, and Zp characters
+    private const ZERO_WIDTH_CF = [
+        0 => true,       // Null (Cc)
+        0x034F => true,  // Combining grapheme joiner (Mn)
+        0x200B => true,  // Zero width space
+        0x200C => true,  // Zero width non-joiner
+        0x200D => true,  // Zero width joiner
+        0x200E => true,  // Left-to-right mark
+        0x200F => true,  // Right-to-left mark
+        0x2028 => true,  // Line separator (Zl)
+        0x2029 => true,  // Paragraph separator (Zp)
+        0x202A => true,  // Left-to-right embedding
+        0x202B => true,  // Right-to-left embedding
+        0x202C => true,  // Pop directional formatting
+        0x202D => true,  // Left-to-right override
+        0x202E => true,  // Right-to-left override
+        0x2060 => true,  // Word joiner
+        0x2061 => true,  // Function application
+        0x2062 => true,  // Invisible times
+        0x2063 => true,  // Invisible separator
+    ];
+
+    public static function wcswidth(string $subject, ?int $n = null, ?string $version = null): int
     {
         $end = $n ?? mb_strlen($subject);
         $chrArray = array_slice(
@@ -19,7 +46,7 @@ class UCode
         );
         $width = 0;
         foreach ($chrArray as $char) {
-            $wcw = static::wcwidth($char);
+            $wcw = static::wcwidth($char, $version);
             if ($wcw < 0) {
                 return -1;
             }
@@ -29,32 +56,6 @@ class UCode
     }
 
     /**
-     * @param string $wc
-     * @return int
-     */
-    public static function wcwidth(string $wc): int
-    {
-        $ucs = mb_ord($wc);
-
-        if (self::isB($ucs)) {
-            return 0;
-        }
-
-        # C0/C1 control characters
-        if ($ucs < 32 || (0x07F <= $ucs && $ucs < 0x0A0)) {
-            return -1;
-        }
-
-        # combining characters with zero width
-        if (static::bisearch($ucs, ZERO_WIDTH)) {
-            return 0;
-        }
-
-        return 1 + static::bisearch($ucs, WIDE_EASTASIAN);
-    }
-
-    /**
-     * @param string $subject
      * @return array<string>
      */
     protected static function split(string $subject): array
@@ -69,11 +70,27 @@ class UCode
         return $_split;
     }
 
-    /**
-     * @param int $ucs
-     * @param array<array<int>> $table
-     * @return int
-     */
+    public static function wcwidth(string $wc, ?string $version = null): int
+    {
+        $ucs = mb_ord($wc);
+
+        if (self::ZERO_WIDTH_CF[$ucs] ?? false) { // 0 width
+            return 0;
+        }
+
+        # C0/C1 control characters
+        if ($ucs < 32 || (0x07F <= $ucs && $ucs < 0x0A0)) {
+            return -1;
+        }
+
+        # combining characters with zero width
+        if (static::bisearch($ucs, ZERO_WIDTH[self::version($version)])) {
+            return 0;
+        }
+
+        return 1 + static::bisearch($ucs, WIDE_EASTASIAN[self::version($version)]);
+    }
+
     protected static function bisearch(int $ucs, array $table): int
     {
         $lbound = 0;
@@ -95,18 +112,22 @@ class UCode
         return 0;
     }
 
-    /**
-     * @param int $ucs
-     * @return bool
-     */
-    protected static function isB(int $ucs): bool
+    private static function version(?string $version): string
     {
-        return $ucs === 0 ||
-            $ucs === 0x034F ||
-            (0x200B <= $ucs && $ucs <= 0x200F) ||
-            $ucs === 0x2028 ||
-            $ucs === 0x2029 ||
-            (0x202A <= $ucs && $ucs <= 0x202E) ||
-            (0x2060 <= $ucs && $ucs <= 0x2063);
+        $version ??= self::DEFAULT_UNICODE_VERSION;
+        self::assertVersion($version);
+        return $version;
+    }
+
+    private static function assertVersion(string $version): void
+    {
+        if (!\in_array($version, UNICODE_VERSIONS, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Unknown Unicode version: %s',
+                    $version
+                )
+            );
+        }
     }
 }

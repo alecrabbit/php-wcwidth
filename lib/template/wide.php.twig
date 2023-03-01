@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace AlecRabbit\WCWidth;
+
+// @codeCoverageIgnoreStart
+const WIDE_EASTASIAN = [
+{% for version, d in data %}
+    '{{ version }}' => [
+{% for row in d %}
+{% for entry in row.derivedFrom %}
+    // {{ entry.line }}
+{% endfor %}
+    {{ row.codepoints }},
+{% endfor %}
+    ],
+{% endfor %}
+];
+// @codeCoverageIgnoreEnd

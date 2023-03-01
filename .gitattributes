@@ -28,3 +28,4 @@ psalm.xml export-ignore
 /.make export-ignore
 .phpunit.result.cache export-ignore
 .scrutinizer.yml export-ignore
+/lib export-ignore
