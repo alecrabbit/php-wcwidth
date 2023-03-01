@@ -9,27 +9,18 @@ use AlecRabbit\WCWidth\Helpers\UCode;
 use function function_exists;
 
 if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
-    /**
-     * @param string $wc
-     * @return int
-     */
-    function wcwidth(string $wc): int
+    function wcwidth(string $wc, ?string $version = null): int
     {
-        return UCode::wcwidth($wc);
+        return UCode::wcwidth($wc, $version);
     }
 }
 
 if (!function_exists(__NAMESPACE__ . '\wcswidth')) {
-    /**
-     * @param null|string $subject
-     * @param null|int $n
-     * @return int
-     */
-    function wcswidth(?string $subject, ?int $n = null): int
+    function wcswidth(?string $subject, ?int $n = null, ?string $version = null): int
     {
         if (null === $subject) {
             return 0;
         }
-        return UCode::wcswidth($subject, $n);
+        return UCode::wcswidth($subject, $n, $version);
     }
 }
