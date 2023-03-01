@@ -13,6 +13,7 @@ use AlecRabbit\WCWidth\Core\Contract\IOutput;
 use AlecRabbit\WCWidth\Core\Contract\ITableProcessor;
 use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
 use AlecRabbit\WCWidth\Core\FileSaver;
+use AlecRabbit\WCWidth\Core\Logger;
 use AlecRabbit\WCWidth\Core\Output\NullOutput;
 use AlecRabbit\WCWidth\Core\TableProcessor;
 use AlecRabbit\WCWidth\Core\TemplateRenderer;
@@ -41,6 +42,7 @@ final class TableBuilder
         protected IFileSaver $saver = new FileSaver(),
         protected IOutput $output = new NullOutput(),
     ) {
+        Logger::setOutput($this->output);
     }
 
     public function build(): void
@@ -49,7 +51,7 @@ final class TableBuilder
         $zero = [];
         $wide = [];
         foreach ($this->getVersions() as $version) {
-            $this->output->writeln("Processing version: {$version}");
+            Logger::debug("Processing version: {$version}");
             $versions[] = $version;
             $wide[$version] =
                 $this->getTableData(
