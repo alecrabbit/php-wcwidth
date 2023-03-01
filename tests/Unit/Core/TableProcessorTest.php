@@ -192,178 +192,228 @@ class TableProcessorTest extends TestCase
                 ],
             ]
         ];
-//        yield [
-//            [
-//                self::RESULT => [
-//                    new TableEntry(
-//                        line: '0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
-//                        codepoints: '0300..036F',
-//                        comment: '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
-//                        start: 768,
-//                        end: 879,
-//                        properties: 'Mn',
-//                    ),
-//                    new TableEntry(
-//                        line: '0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
-//                        codepoints: '0483..0487',
-//                        comment: '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
-//                        start: 1155,
-//                        end: 1159,
-//                        properties: 'Mn',
-//                    ),
-//                    new TableEntry(
-//                        line: '0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
-//                        codepoints: '0591..05BD',
-//                        comment: '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
-//                        start: 1425,
-//                        end: 1469,
-//                        properties: 'Mn',
-//                    ),
-//                    new TableEntry(
-//                        line: '1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
-//                        codepoints: '1E944..1E94A',
-//                        comment: '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
-//                        start: 125252,
-//                        end: 125258,
-//                        properties: 'Mn',
-//                    ),
-//                    new TableEntry(
-//                        line: 'E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
-//                        codepoints: 'E0100..E01EF',
-//                        comment: '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
-//                        start: 917760,
-//                        end: 917999,
-//                        properties: 'Mn',
-//                    ),
-//                    new TableEntry(
-//                        line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-//                        codepoints: '0488..0489',
-//                        comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-//                        start: 1160,
-//                        end: 1161,
-//                        properties: 'Me',
-//                    ),
-//                    new TableEntry(
-//                        line: '1ABE          ; Me #       COMBINING PARENTHESES OVERLAY',
-//                        codepoints: '1ABE',
-//                        comment: 'COMBINING PARENTHESES OVERLAY',
-//                        start: 6846,
-//                        end: 6846,
-//                        properties: 'Me',
-//                    ),
-//                    new TableEntry(
-//                        line: '20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
-//                        codepoints: '20DD..20E0',
-//                        comment: '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
-//                        start: 8413,
-//                        end: 8416,
-//                        properties: 'Me',
-//                    ),
-//                    new TableEntry(
-//                        line: '20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
-//                        codepoints: '20E2..20E4',
-//                        comment: '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
-//                        start: 8418,
-//                        end: 8420,
-//                        properties: 'Me',
-//                    ),
-//                    new TableEntry(
-//                        line: 'A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
-//                        codepoints: 'A670..A672',
-//                        comment: '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
-//                        start: 42608,
-//                        end: 42610,
-//                        properties: 'Me',
-//                    ),
-//                ],
-//            ],
-//            [
-//                self::ARGUMENTS => [
-//                    self::DATA => [
-//                        new TableEntry(
-//                            line: '0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
-//                            codepoints: '0300..036F',
-//                            comment: '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
-//                            start: 768,
-//                            end: 879,
-//                            properties: 'Mn',
-//                        ),
-//                        new TableEntry(
-//                            line: '0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
-//                            codepoints: '0483..0487',
-//                            comment: '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
-//                            start: 1155,
-//                            end: 1159,
-//                            properties: 'Mn',
-//                        ),
-//                        new TableEntry(
-//                            line: '0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
-//                            codepoints: '0591..05BD',
-//                            comment: '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
-//                            start: 1425,
-//                            end: 1469,
-//                            properties: 'Mn',
-//                        ),
-//                        new TableEntry(
-//                            line: '1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
-//                            codepoints: '1E944..1E94A',
-//                            comment: '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
-//                            start: 125252,
-//                            end: 125258,
-//                            properties: 'Mn',
-//                        ),
-//                        new TableEntry(
-//                            line: 'E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
-//                            codepoints: 'E0100..E01EF',
-//                            comment: '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
-//                            start: 917760,
-//                            end: 917999,
-//                            properties: 'Mn',
-//                        ),
-//                        new TableEntry(
-//                            line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-//                            codepoints: '0488..0489',
-//                            comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
-//                            start: 1160,
-//                            end: 1161,
-//                            properties: 'Me',
-//                        ),
-//                        new TableEntry(
-//                            line: '1ABE          ; Me #       COMBINING PARENTHESES OVERLAY',
-//                            codepoints: '1ABE',
-//                            comment: 'COMBINING PARENTHESES OVERLAY',
-//                            start: 6846,
-//                            end: 6846,
-//                            properties: 'Me',
-//                        ),
-//                        new TableEntry(
-//                            line: '20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
-//                            codepoints: '20DD..20E0',
-//                            comment: '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
-//                            start: 8413,
-//                            end: 8416,
-//                            properties: 'Me',
-//                        ),
-//                        new TableEntry(
-//                            line: '20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
-//                            codepoints: '20E2..20E4',
-//                            comment: '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
-//                            start: 8418,
-//                            end: 8420,
-//                            properties: 'Me',
-//                        ),
-//                        new TableEntry(
-//                            line: 'A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
-//                            codepoints: 'A670..A672',
-//                            comment: '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
-//                            start: 42608,
-//                            end: 42610,
-//                            properties: 'Me',
-//                        ),
-//                    ],
-//                ],
-//            ]
-//        ];
+        yield [
+            [
+                self::RESULT => [
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
+                                codepoints: '0300..036F',
+                                comment: '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
+                                start: 768,
+                                end: 879,
+                                properties: 'Mn',
+                            ),
+                        ],
+                        codepoints: '[0x00300, 0x0036f,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
+                                codepoints: '0483..0487',
+                                comment: '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
+                                start: 1155,
+                                end: 1159,
+                                properties: 'Mn',
+                            ),
+                        ],
+                        codepoints: '[0x00483, 0x00487,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
+                                codepoints: '0591..05BD',
+                                comment: '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
+                                start: 1425,
+                                end: 1469,
+                                properties: 'Mn',
+                            ),
+                        ],
+                        codepoints: '[0x00591, 0x005bd,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
+                                codepoints: '1E944..1E94A',
+                                comment: '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
+                                start: 125252,
+                                end: 125258,
+                                properties: 'Mn',
+                            ),
+                        ],
+                        codepoints: '[0x1e944, 0x1e94a,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: 'E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
+                                codepoints: 'E0100..E01EF',
+                                comment: '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
+                                start: 917760,
+                                end: 917999,
+                                properties: 'Mn',
+                            ),
+                        ],
+                        codepoints: '[0xe0100, 0xe01ef,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                                codepoints: '0488..0489',
+                                comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                                start: 1160,
+                                end: 1161,
+                                properties: 'Me',
+                            ),
+                        ],
+                        codepoints: '[0x00488, 0x00489,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '1ABE          ; Me #       COMBINING PARENTHESES OVERLAY',
+                                codepoints: '1ABE',
+                                comment: 'COMBINING PARENTHESES OVERLAY',
+                                start: 6846,
+                                end: 6846,
+                                properties: 'Me',
+                            ),
+                        ],
+                        codepoints: '[0x01abe, 0x01abe,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
+                                codepoints: '20DD..20E0',
+                                comment: '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
+                                start: 8413,
+                                end: 8416,
+                                properties: 'Me',
+                            ),
+                        ],
+                        codepoints: '[0x020dd, 0x020e0,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: '20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
+                                codepoints: '20E2..20E4',
+                                comment: '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
+                                start: 8418,
+                                end: 8420,
+                                properties: 'Me',
+                            ),
+                        ],
+                        codepoints: '[0x020e2, 0x020e4,]',
+                    ),
+                    new TableRow(
+                        derivedFrom: [
+                            new TableEntry(
+                                line: 'A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
+                                codepoints: 'A670..A672',
+                                comment: '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
+                                start: 42608,
+                                end: 42610,
+                                properties: 'Me',
+                            ),
+                        ],
+                        codepoints: '[0x0a670, 0x0a672,]',
+                    ),
+                ],
+            ],
+            [
+                self::ARGUMENTS => [
+                    self::DATA => [
+                        new TableEntry(
+                            line: '0300..036F    ; Mn # [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
+                            codepoints: '0300..036F',
+                            comment: '[112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X',
+                            start: 768,
+                            end: 879,
+                            properties: 'Mn',
+                        ),
+                        new TableEntry(
+                            line: '0483..0487    ; Mn #   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
+                            codepoints: '0483..0487',
+                            comment: '[5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE',
+                            start: 1155,
+                            end: 1159,
+                            properties: 'Mn',
+                        ),
+                        new TableEntry(
+                            line: '0591..05BD    ; Mn #  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
+                            codepoints: '0591..05BD',
+                            comment: '[45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG',
+                            start: 1425,
+                            end: 1469,
+                            properties: 'Mn',
+                        ),
+                        new TableEntry(
+                            line: '1E944..1E94A  ; Mn #   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
+                            codepoints: '1E944..1E94A',
+                            comment: '[7] ADLAM ALIF LENGTHENER..ADLAM NUKTA',
+                            start: 125252,
+                            end: 125258,
+                            properties: 'Mn',
+                        ),
+                        new TableEntry(
+                            line: 'E0100..E01EF  ; Mn # [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
+                            codepoints: 'E0100..E01EF',
+                            comment: '[240] VARIATION SELECTOR-17..VARIATION SELECTOR-256',
+                            start: 917760,
+                            end: 917999,
+                            properties: 'Mn',
+                        ),
+                        new TableEntry(
+                            line: '0488..0489    ; Me #   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                            codepoints: '0488..0489',
+                            comment: '[2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN',
+                            start: 1160,
+                            end: 1161,
+                            properties: 'Me',
+                        ),
+                        new TableEntry(
+                            line: '1ABE          ; Me #       COMBINING PARENTHESES OVERLAY',
+                            codepoints: '1ABE',
+                            comment: 'COMBINING PARENTHESES OVERLAY',
+                            start: 6846,
+                            end: 6846,
+                            properties: 'Me',
+                        ),
+                        new TableEntry(
+                            line: '20DD..20E0    ; Me #   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
+                            codepoints: '20DD..20E0',
+                            comment: '[4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH',
+                            start: 8413,
+                            end: 8416,
+                            properties: 'Me',
+                        ),
+                        new TableEntry(
+                            line: '20E2..20E4    ; Me #   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
+                            codepoints: '20E2..20E4',
+                            comment: '[3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE',
+                            start: 8418,
+                            end: 8420,
+                            properties: 'Me',
+                        ),
+                        new TableEntry(
+                            line: 'A670..A672    ; Me #   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
+                            codepoints: 'A670..A672',
+                            comment: '[3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN',
+                            start: 42608,
+                            end: 42610,
+                            properties: 'Me',
+                        ),
+                    ],
+                ],
+            ]
+        ];
 
 
         //        yield [
@@ -388,12 +438,14 @@ class TableProcessorTest extends TestCase
     {
         $this->setExpectException($expected);
         $args = $incoming[self::ARGUMENTS];
+        $iterator_to_array = iterator_to_array(
+            $this->tableProcessor->process($args[self::DATA])
+        );
+//        var_dump($iterator_to_array);
 
         self::assertEquals(
             $expected[self::RESULT],
-            iterator_to_array(
-                $this->tableProcessor->process($args[self::DATA])
-            ),
+            $iterator_to_array
         );
     }
 
