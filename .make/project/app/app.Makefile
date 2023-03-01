@@ -22,19 +22,18 @@ test_full: test_coverage test
 
 ##
 ## —— Application 📦 ———————————————————————————————————————————————————————————
-update: _update_message _generate_tables _mv_tables ## Update tables
+update: _update_message _generate_tables _cp_files ## Update tables
 
 _update_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";
 
-_mv_tables:
-	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Copying files...${_C_STOP}\n";
-	@${_ECHO_DISABLED};
-	@#-${_DC_EXEC} ${APP_CONTAINER} cp -f /app/lib/.rendered/* /app/src/Files
-
 _generate_tables:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Generating tables...${_C_STOP}\n";
 	@-${_DC_EXEC} ${APP_CONTAINER} php bin/console generate:tables
+
+_cp_files:
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Copying files...${_C_STOP}\n";
+	-${_DC_EXEC} ${APP_CONTAINER} bash -c "cp -f /app/lib/.rendered/* /app/src/File"
 
 # End of file
 ##
