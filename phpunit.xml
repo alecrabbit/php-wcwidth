@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
          bootstrap="tests/bootstrap.php"
-         printerClass="NunoMaduro\Collision\Adapters\Phpunit\Printer">
-    <coverage>
-        <include>
-            <directory suffix=".php">src/</directory>
-        </include>
-        <report>
-            <clover outputFile="build/logs/clover.xml"/>
-            <html outputDirectory="build/coverage/html"/>
-            <text outputFile="build/coverage/coverage.txt"/>
-        </report>
-    </coverage>
+         executionOrder="random"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         colors="true"
+         cacheDirectory=".tools/.phpunit.cache"
+         beStrictAboutCoverageMetadata="false"
+         testdox="true"
+>
     <testsuites>
-        <testsuite name="Common">
+        <testsuite name="default">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <logging>
-        <log type="testdox-html" target="./build/testdox/testdox.html"/>
-        <log type="testdox-text" target="./build/testdox/testdox.txt"/>
-    </logging>
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+
+    </coverage>
 </phpunit>

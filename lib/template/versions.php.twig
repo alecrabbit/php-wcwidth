@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace AlecRabbit\WCWidth;
+
+// @codeCoverageIgnoreStart
+const UNICODE_VERSIONS = [
+{% for version in data %}
+    '{{ version }}',
+{% endfor %}
+];
+// @codeCoverageIgnoreEnd

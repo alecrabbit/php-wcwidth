@@ -2,34 +2,44 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Helpers;
+namespace AlecRabbit\WCWidth;
 
-require_once 'tables.php';
+use AlecRabbit\WCWidth\Kernel\UCode;
 
 use function function_exists;
 
-if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
-    /**
-     * @param string $wc
-     * @return int
-     */
-    function wcwidth(string $wc): int
+if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
+    function ffiEnabled(): bool
     {
-        return UCode::wcwidth($wc);
+        $value = getenv('USE_FFI');
+        match ($value) {
+            '1', 'true', 'yes', 'on', true => $value = true,
+            default => $value = false,
+        };
+        return $value;
+    }
+}
+
+if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
+    if (extension_loaded('ffi') && ffiEnabled()) {
+        function wcwidth(string $wc, ?string $version = null): int
+        {
+            return UCode::ffi_wcwidth($wc, $version);
+        }
+    } else {
+        function wcwidth(string $wc, ?string $version = null): int
+        {
+            return UCode::wcwidth($wc, $version);
+        }
     }
 }
 
 if (!function_exists(__NAMESPACE__ . '\wcswidth')) {
-    /**
-     * @param null|string $subject
-     * @param null|int $n
-     * @return int
-     */
-    function wcswidth(?string $subject, ?int $n = null): int
+    function wcswidth(?string $subject, ?int $n = null, ?string $version = null): int
     {
         if (null === $subject) {
             return 0;
         }
-        return UCode::wcswidth($subject, $n);
+        return UCode::wcswidth($subject, $n, $version);
     }
 }
