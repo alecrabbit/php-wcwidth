@@ -4,24 +4,40 @@ declare(strict_types=1);
 // 02.03.23
 namespace AlecRabbit\WCWidth\Kernel;
 
+use AlecRabbit\WCWidth\Kernel\Contract\IUnicodeVersion;
+
 use const AlecRabbit\WCWidth\UNICODE_VERSIONS;
 
 /** @internal */
-final class UnicodeVersion
+final class UnicodeVersion implements IUnicodeVersion
 {
     private static ?string $useVersion = null;
 
+    // @codeCoverageIgnoreStart
+    private function __construct()
+    {
+        // no instances
+    }
+    // @codeCoverageIgnoreEnd
+
     public static function setVersion(string $version): void
     {
-        if ('latest' === $version) {
-            $version = self::latestVersion();
-        }
-        self::assertVersion($version);
-
-        self::$useVersion = $version;
+        self::$useVersion = self::doRefine($version);
     }
 
-    private static function latestVersion()
+    private static function doRefine(?string $version): string
+    {
+        if ('latest' === $version || null === $version) {
+            $version = self::latest();
+        }
+
+        self::assertVersion($version);
+
+        return
+            $version;
+    }
+
+    public static function latest(): string
     {
         return
             UNICODE_VERSIONS[array_key_last(UNICODE_VERSIONS)];
@@ -42,15 +58,23 @@ final class UnicodeVersion
         }
     }
 
+    public static function getVersion(): ?string
+    {
+        return self::$useVersion;
+    }
+
+    public static function reset(): void
+    {
+        self::$useVersion = null;
+    }
+
     public static function refine(?string $version): string
     {
         if (self::$useVersion) {
             return self::$useVersion;
         }
-        self::assertVersion($version);
 
-        return
-            $version ?? self::latestVersion();
+        return self::doRefine($version);
     }
 
 }
