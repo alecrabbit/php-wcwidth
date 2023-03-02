@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\WCWidth\Helpers;
+namespace AlecRabbit\WCWidth\Kernel;
+
+use function mb_ord;
+use function mb_strlen;
 
 use const AlecRabbit\WCWidth\UNICODE_VERSIONS;
 use const AlecRabbit\WCWidth\WIDE_EASTASIAN;
@@ -133,7 +136,7 @@ class UCode
         }
     }
 
-    public static function ffi_wcwidth(string $wc, ?string $version): int
+    public static function ffi_wcwidth(string $wc, ?string $version = null): int
     {
         // Note: $version is ignored
         if (null === self::$ffi) {

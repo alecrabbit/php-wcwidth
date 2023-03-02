@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace AlecRabbit\WCWidth;
 
-use AlecRabbit\WCWidth\Helpers\UCode;
+use AlecRabbit\WCWidth\Kernel\UCode;
 
 use function function_exists;
 
 if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
     function ffiEnabled(): bool
     {
-        return dump((bool)getenv('USE_FFI'));
+        $value = getenv('USE_FFI');
+        match ($value) {
+            '1', 'true', 'yes', 'on', true => $value = true,
+            default => $value = false,
+        };
+        return $value;
     }
 }
 
