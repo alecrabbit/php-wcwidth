@@ -39,6 +39,7 @@ class UCode
         0x2062 => true,  // Invisible times
         0x2063 => true,  // Invisible separator
     ];
+
     private static ?\FFI $ffi = null;
 
     public static function wcswidth(string $subject, ?int $n = null, ?string $version = null): int
