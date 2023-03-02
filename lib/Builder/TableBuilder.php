@@ -32,6 +32,24 @@ final class TableBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
+            //
+            '4.1.0',
+            '5.0.0',
+            '5.1.0',
+            '5.2.0',
+            '6.0.0',
+            '6.1.0',
+            '6.2.0',
+            '6.3.0',
+            '7.0.0',
+            '8.0.0',
+            '9.0.0',
+            '10.0.0',
+            '11.0.0',
+            '12.0.0',
+            '12.1.0',
+            '13.0.0',
+            '14.0.0',
         ];
 
     public function __construct(
@@ -50,6 +68,7 @@ final class TableBuilder
         $versions = [];
         $zero = [];
         $wide = [];
+        $headers = [];
         foreach ($this->getVersions() as $version) {
             Logger::comment("Processing version: {$version}");
             $versions[] = $version;
@@ -65,8 +84,10 @@ final class TableBuilder
                     $version,
                     $this->getZeroCategories()
                 );
+            $headers[$version] = $this->getHeaders($version);
         }
         Logger::comment('Saving files...');
+        dump($headers);
         $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
         $this->saver->save('wide.php', $this->templateRenderer->render('wide', $wide));
@@ -99,11 +120,17 @@ final class TableBuilder
         return
             $this->tableProcessor->process(
                 $this->categoryParser->parse(
-                    $this->client->get(
-                        $this->versionedUrl($url, $version)
-                    ),
+                    $this->getData($url, $version),
                     $categories,
                 )
+            );
+    }
+
+    private function getData(string $url, string $version): string
+    {
+        return
+            $this->client->get(
+                $this->versionedUrl($url, $version)
             );
     }
 
@@ -120,5 +147,34 @@ final class TableBuilder
     private function getZeroCategories(): array
     {
         return ['Me', 'Mn',];
+    }
+
+    private function getHeaders(string $version): array
+    {
+        return [
+            'east_asian_width' => $this->extractHeader(self::URL_EASTASIAN_WIDTH, $version),
+            'derived_category' => $this->extractHeader(self::URL_DERIVED_CATEGORY, $version),
+        ];
+    }
+
+    private function extractHeader(string $url, string $version): array
+    {
+        $data = $this->getData($url, $version);
+        $exploded = explode(PHP_EOL, $data);
+        foreach ($exploded as $line) {
+//            dump($line); ///EastAsianWidth-(.+)\.txt/
+            if (preg_match('/(DerivedGeneralCategory|EastAsianWidth)-(.+)\.txt/', $line, $matches)) {
+                dump($matches);
+                next($exploded);
+                return [
+                    'url' => $this->versionedUrl($url, $version),
+                    'name' => $matches[0],
+                    'date' => str_replace('# ', '', current($exploded)),
+                ];
+            }
+        }
+        return [
+            'url' => $this->versionedUrl($url, $version),
+        ];
     }
 }
