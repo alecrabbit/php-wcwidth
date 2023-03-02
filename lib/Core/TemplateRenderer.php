@@ -11,15 +11,15 @@ use Twig\Loader\FilesystemLoader;
 
 final class TemplateRenderer implements ITemplateRenderer
 {
-    private const DEBUG_OPTIONS = [
-        'debug' => true,
-        'comments' => true,
+    private const DEFAULT_OPTIONS = [
+        'debug' => false,
+        'comments' => false,
     ];
 
     private Environment $twig;
 
     public function __construct(
-        protected array $options = self::DEBUG_OPTIONS,
+        protected array $options = self::DEFAULT_OPTIONS,
     ) {
         $dir = __DIR__ . '/../template';
         $loader = new FilesystemLoader($dir);
