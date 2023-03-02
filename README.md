@@ -35,5 +35,5 @@ echo wcswidth('🐘🐘🐘'); // 6
 ### FFI extension
 > ‼️ Experimental feature. 
 
-If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`. See [docker-compose.yml](docker-compose.yml) for example.
+If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`'ish value. See [docker-compose.dev.yml](docker-compose.dev.yml) for example.
 
