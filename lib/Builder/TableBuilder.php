@@ -10,11 +10,13 @@ use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
 use AlecRabbit\WCWidth\Core\Contract\IOutput;
+use AlecRabbit\WCWidth\Core\Contract\ITableHeaderExtractor;
 use AlecRabbit\WCWidth\Core\Contract\ITableProcessor;
 use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
 use AlecRabbit\WCWidth\Core\FileSaver;
 use AlecRabbit\WCWidth\Core\Logger;
 use AlecRabbit\WCWidth\Core\Output\NullOutput;
+use AlecRabbit\WCWidth\Core\TableHeaderExtractor;
 use AlecRabbit\WCWidth\Core\TableProcessor;
 use AlecRabbit\WCWidth\Core\TemplateRenderer;
 
@@ -33,8 +35,10 @@ final class TableBuilder
             '3.2.0',
             '4.0.0',
         ];
+    protected ITableHeaderExtractor $tableHeaderExtractor;
 
     public function __construct(
+        ?ITableHeaderExtractor $tableHeaderExtractor = null,
         protected ICachingClient $client = new CachingClient(),
         protected ICategoryParser $categoryParser = new CategoryParser(),
         protected ITableProcessor $tableProcessor = new TableProcessor(),
@@ -43,6 +47,7 @@ final class TableBuilder
         protected IOutput $output = new NullOutput(),
     ) {
         Logger::setOutput($this->output);
+        $this->tableHeaderExtractor = $tableHeaderExtractor ?? new TableHeaderExtractor($this->client);
     }
 
     public function build(): void
@@ -50,6 +55,7 @@ final class TableBuilder
         $versions = [];
         $zero = [];
         $wide = [];
+        $headers = [];
         foreach ($this->getVersions() as $version) {
             Logger::comment("Processing version: {$version}");
             $versions[] = $version;
@@ -65,11 +71,13 @@ final class TableBuilder
                     $version,
                     $this->getZeroCategories()
                 );
+            $headers[$version] = $this->getHeaders($version);
         }
         Logger::comment('Saving files...');
         $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
         $this->saver->save('wide.php', $this->templateRenderer->render('wide', $wide));
+        $this->saver->save('versions.md', $this->templateRenderer->render('versions.md', $headers));
     }
 
     private function getVersions(): iterable
@@ -99,11 +107,17 @@ final class TableBuilder
         return
             $this->tableProcessor->process(
                 $this->categoryParser->parse(
-                    $this->client->get(
-                        $this->versionedUrl($url, $version)
-                    ),
+                    $this->getData($url, $version),
                     $categories,
                 )
+            );
+    }
+
+    private function getData(string $url, string $version): string
+    {
+        return
+            $this->client->get(
+                $this->versionedUrl($url, $version)
             );
     }
 
@@ -121,4 +135,20 @@ final class TableBuilder
     {
         return ['Me', 'Mn',];
     }
+
+    private function getHeaders(string $version): array
+    {
+        return [
+            'ea' =>
+                $this->tableHeaderExtractor->extractHeader(
+                    $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version),
+                ),
+            'dc' =>
+                $this->tableHeaderExtractor->extractHeader(
+                    $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version),
+                ),
+        ];
+    }
+
+
 }

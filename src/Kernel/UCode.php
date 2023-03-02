@@ -137,6 +137,7 @@ class UCode
         }
     }
 
+    // @codeCoverageIgnoreStart
     public static function ffi_wcwidth(string $wc, ?string $version = null): int
     {
         // Note: $version is ignored
@@ -150,4 +151,5 @@ class UCode
         }
         return self::$ffi->wcwidth(mb_ord($wc));
     }
+    // @codeCoverageIgnoreEnd
 }

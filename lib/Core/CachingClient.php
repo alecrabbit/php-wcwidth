@@ -62,6 +62,7 @@ final class CachingClient implements ICachingClient
             throw new \Exception('Error: Status code "' . $statusCode . '". Url: "' . $response->getInfo('url') . '"');
         }
         $contentType = $response->getHeaders()['content-type'][0];
+        Logger::debug(sprintf('Content type: %s', $contentType));
         if (!str_contains($contentType, 'text/plain')) {
             throw new \Exception('Error: Content type "' . $contentType . '"');
         }
