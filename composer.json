@@ -24,6 +24,7 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
+      "AlecRabbit\\WCWidth\\Kernel\\": "src\\Kernel",
       "AlecRabbit\\WCWidth\\Helpers\\": "src\\Helpers",
       "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder",
       "AlecRabbit\\WCWidth\\Core\\": "lib\\Core",
