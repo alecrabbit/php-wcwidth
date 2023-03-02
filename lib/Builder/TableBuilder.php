@@ -10,11 +10,13 @@ use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 use AlecRabbit\WCWidth\Core\Contract\IFileSaver;
 use AlecRabbit\WCWidth\Core\Contract\IOutput;
+use AlecRabbit\WCWidth\Core\Contract\ITableHeaderExtractor;
 use AlecRabbit\WCWidth\Core\Contract\ITableProcessor;
 use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
 use AlecRabbit\WCWidth\Core\FileSaver;
 use AlecRabbit\WCWidth\Core\Logger;
 use AlecRabbit\WCWidth\Core\Output\NullOutput;
+use AlecRabbit\WCWidth\Core\TableHeaderExtractor;
 use AlecRabbit\WCWidth\Core\TableProcessor;
 use AlecRabbit\WCWidth\Core\TemplateRenderer;
 
@@ -51,8 +53,10 @@ final class TableBuilder
             '13.0.0',
             '14.0.0',
         ];
+    protected ITableHeaderExtractor $tableHeaderExtractor;
 
     public function __construct(
+        ?ITableHeaderExtractor $tableHeaderExtractor = null,
         protected ICachingClient $client = new CachingClient(),
         protected ICategoryParser $categoryParser = new CategoryParser(),
         protected ITableProcessor $tableProcessor = new TableProcessor(),
@@ -61,6 +65,7 @@ final class TableBuilder
         protected IOutput $output = new NullOutput(),
     ) {
         Logger::setOutput($this->output);
+        $this->tableHeaderExtractor = $tableHeaderExtractor ?? new TableHeaderExtractor($this->client);
     }
 
     public function build(): void
@@ -152,29 +157,16 @@ final class TableBuilder
     private function getHeaders(string $version): array
     {
         return [
-            'east_asian_width' => $this->extractHeader(self::URL_EASTASIAN_WIDTH, $version),
-            'derived_category' => $this->extractHeader(self::URL_DERIVED_CATEGORY, $version),
+            'east_asian_width' =>
+                $this->tableHeaderExtractor->extractHeader(
+                    $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version),
+                ),
+            'derived_category' =>
+                $this->tableHeaderExtractor->extractHeader(
+                    $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version),
+                ),
         ];
     }
 
-    private function extractHeader(string $url, string $version): array
-    {
-        $data = $this->getData($url, $version);
-        $exploded = explode(PHP_EOL, $data);
-        foreach ($exploded as $line) {
-//            dump($line); ///EastAsianWidth-(.+)\.txt/
-            if (preg_match('/(DerivedGeneralCategory|EastAsianWidth)-(.+)\.txt/', $line, $matches)) {
-                dump($matches);
-                next($exploded);
-                return [
-                    'url' => $this->versionedUrl($url, $version),
-                    'name' => $matches[0],
-                    'date' => str_replace('# ', '', current($exploded)),
-                ];
-            }
-        }
-        return [
-            'url' => $this->versionedUrl($url, $version),
-        ];
-    }
+
 }
