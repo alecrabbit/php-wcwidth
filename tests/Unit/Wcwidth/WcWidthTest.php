@@ -2,6 +2,8 @@
 
 namespace AlecRabbit\Tests\Unit\Wcwidth;
 
+use AlecRabbit\Tests\Helper\PickLock;
+use AlecRabbit\WCWidth\Kernel\UnicodeVersion;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
@@ -147,6 +149,8 @@ class WcWidthTest extends TestCase
     #[Test]
     public function wcwidthUnknownVersion(): void
     {
+        $version =  PickLock::getValue(UnicodeVersion::class, 'useVersion');
+        PickLock::setValue(UnicodeVersion::class, 'useVersion', null);
         if (ffiEnabled()) {
             self::assertSame(1, wcwidth('a')); // version is ignored
         } else {
@@ -154,5 +158,6 @@ class WcWidthTest extends TestCase
             $this->expectExceptionMessage('Unknown Unicode version: 0');
             wcwidth('a', '0');
         }
+        PickLock::setValue(UnicodeVersion::class, 'useVersion', $version);
     }
 }

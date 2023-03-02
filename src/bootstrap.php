@@ -6,7 +6,18 @@ namespace AlecRabbit\WCWidth;
 
 use AlecRabbit\WCWidth\Kernel\UCode;
 
+use AlecRabbit\WCWidth\Kernel\UnicodeVersion;
+
 use function function_exists;
+
+if($version = getenv('UNICODE_VERSION')) {
+    try {
+        UnicodeVersion::setVersion($version);
+    } catch (\Throwable $_) {
+        // silently ignore
+        dump($_->getMessage()); // do not forget to remove this line!
+    }
+}
 
 if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
     function ffiEnabled(): bool
