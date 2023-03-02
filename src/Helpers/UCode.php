@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace AlecRabbit\WCWidth\Helpers;
@@ -35,6 +36,7 @@ class UCode
         0x2062 => true,  // Invisible times
         0x2063 => true,  // Invisible separator
     ];
+    private static ?\FFI $ffi = null;
 
     public static function wcswidth(string $subject, ?int $n = null, ?string $version = null): int
     {
@@ -129,5 +131,19 @@ class UCode
                 )
             );
         }
+    }
+
+    public static function ffi_wcwidth(string $wc, ?string $version): int
+    {
+        // Note: $version is ignored
+        if (null === self::$ffi) {
+            self::$ffi =
+                \FFI::cdef("
+                    typedef uint32_t wchar_t;
+                    int wcwidth(wchar_t wc);
+                    ",
+                );
+        }
+        return self::$ffi->wcwidth(mb_ord($wc));
     }
 }

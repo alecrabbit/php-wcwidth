@@ -8,10 +8,24 @@ use AlecRabbit\WCWidth\Helpers\UCode;
 
 use function function_exists;
 
-if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
-    function wcwidth(string $wc, ?string $version = null): int
+if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
+    function ffiEnabled(): bool
     {
-        return UCode::wcwidth($wc, $version);
+        return dump((bool)getenv('USE_FFI'));
+    }
+}
+
+if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
+    if (extension_loaded('ffi') && ffiEnabled()) {
+        function wcwidth(string $wc, ?string $version = null): int
+        {
+            return UCode::ffi_wcwidth($wc, $version);
+        }
+    } else {
+        function wcwidth(string $wc, ?string $version = null): int
+        {
+            return UCode::wcwidth($wc, $version);
+        }
     }
 }
 
