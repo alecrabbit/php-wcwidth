@@ -24,7 +24,17 @@ test_full: test test_coverage
 
 ##
 ## —— Application 📦 ———————————————————————————————————————————————————————————
-update: _update_message _generate_tables _cp_files _test_message test_full ## Update tables
+update: _update_message _generate_tables _cp_files _test_message test_full ## Update tables and run tests
+
+cleanse: _cleanse_message _do_cleanse ## Cleanse tmp files
+
+_cleanse_message:
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Cleansing...${_C_STOP}\n";
+
+_do_cleanse:
+	@-${_DC_EXEC} ${APP_CONTAINER} find /app/lib/.rendered -mindepth 1 -not -name '.gitignore' -delete
+	@-${_DC_EXEC} ${APP_CONTAINER} find /app/lib/template/.cache -mindepth 1 -not -name '.gitignore' -delete
+
 
 _update_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";
