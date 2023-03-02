@@ -1,4 +1,4 @@
-# PHP Wide Character Width
+# 🇼 PHP Wide Character Width
 
 [![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-wcwidth.svg)](https://php.net)
 [![Build Status](https://github.com/alecrabbit/php-wcwidth/workflows/build/badge.svg)](https://github.com/alecrabbit/php-wcwidth/actions)
@@ -10,7 +10,9 @@
 [![License](https://poser.pugx.org/alecrabbit/php-wcwidth/license)](https://packagist.org/packages/alecrabbit/php-wcwidth)
 [![Total Downloads](https://poser.pugx.org/alecrabbit/php-wcwidth/downloads)](https://packagist.org/packages/alecrabbit/php-wcwidth)
 
-This is kinda port of python's [jquast/wcwidth](https://github.com/jquast/wcwidth)
+> This is kinda port of python's [jquast/wcwidth](https://github.com/jquast/wcwidth)
+
+[Unicode release files](src/File/versions.md)
 
 ### Installation
 
@@ -35,4 +37,3 @@ echo wcswidth('🐘🐘🐘'); // 6
 
 If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`. See [docker-compose.yml](docker-compose.yml) for example.
 
-[Release files](src/File/versions.md)
