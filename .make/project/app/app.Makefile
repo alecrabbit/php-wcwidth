@@ -24,7 +24,7 @@ test_full: test test_coverage
 
 ##
 ## —— Application 📦 ———————————————————————————————————————————————————————————
-update: _update_message _generate_tables _cp_files _test_message test_full ## Update tables and run tests
+update: cleanse _update_message _generate_tables _cp_files _test_message test_full ## Update tables and run tests
 
 cleanse: _cleanse_message _do_cleanse ## Cleanse tmp files
 

@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace AlecRabbit\WCWidth\Kernel;
 
+use FFI;
+
+use RuntimeException;
+
+use function is_array;
 use function mb_ord;
 use function mb_strlen;
 
-use const AlecRabbit\WCWidth\UNICODE_VERSIONS;
 use const AlecRabbit\WCWidth\WIDE_EASTASIAN;
 use const AlecRabbit\WCWidth\ZERO_WIDTH;
 
 class UCode
 {
-    private const DEFAULT_UNICODE_VERSION = '15.0.0';
-
     // NOTE(jquast/wcwidth): created by hand, there isn't anything identifiable other than
     // general Cf category code to identify these, and some characters in Cf
     // category code are of non-zero width.
@@ -40,7 +42,8 @@ class UCode
         0x2063 => true,  // Invisible separator
     ];
 
-    private static ?\FFI $ffi = null;
+    private static ?FFI $ffi = null;
+
 
     public static function wcswidth(string $subject, ?int $n = null, ?string $version = null): int
     {
@@ -68,9 +71,9 @@ class UCode
     {
         $_split = preg_split('//u', $subject, -1, PREG_SPLIT_NO_EMPTY);
         // @codeCoverageIgnoreStart
-        if (!\is_array($_split)) {
+        if (!is_array($_split)) {
             // Should never happen
-            throw new \RuntimeException('Failed to split string.');
+            throw new RuntimeException('Failed to split string.');
         }
         // @codeCoverageIgnoreEnd
         return $_split;
@@ -78,6 +81,8 @@ class UCode
 
     public static function wcwidth(string $wc, ?string $version = null): int
     {
+        $version = UnicodeVersion::refine($version);
+
         $ucs = mb_ord($wc);
 
         if (self::ZERO_WIDTH_CF[$ucs] ?? false) { // 0 width
@@ -90,12 +95,13 @@ class UCode
         }
 
         # combining characters with zero width
-        if (static::bisearch($ucs, ZERO_WIDTH[self::version($version)])) {
+        if (static::bisearch($ucs, ZERO_WIDTH[$version])) {
             return 0;
         }
 
-        return 1 + static::bisearch($ucs, WIDE_EASTASIAN[self::version($version)]);
+        return 1 + static::bisearch($ucs, WIDE_EASTASIAN[$version]);
     }
+
 
     protected static function bisearch(int $ucs, array $table): int
     {
@@ -118,32 +124,14 @@ class UCode
         return 0;
     }
 
-    private static function version(?string $version): string
-    {
-        $version ??= self::DEFAULT_UNICODE_VERSION;
-        self::assertVersion($version);
-        return $version;
-    }
-
-    private static function assertVersion(string $version): void
-    {
-        if (!\in_array($version, UNICODE_VERSIONS, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'Unknown Unicode version: %s',
-                    $version
-                )
-            );
-        }
-    }
-
     // @codeCoverageIgnoreStart
     public static function ffi_wcwidth(string $wc, ?string $version = null): int
     {
         // Note: $version is ignored
         if (null === self::$ffi) {
             self::$ffi =
-                \FFI::cdef("
+                FFI::cdef(
+                    "
                     typedef uint32_t wchar_t;
                     int wcwidth(wchar_t wc);
                     ",
