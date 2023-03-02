@@ -43,11 +43,8 @@ final class UnicodeVersion implements IUnicodeVersion
             UNICODE_VERSIONS[array_key_last(UNICODE_VERSIONS)];
     }
 
-    private static function assertVersion(?string $version): void
+    private static function assertVersion(string $version): void
     {
-        if (null === $version) {
-            return;
-        }
         if (!\in_array($version, UNICODE_VERSIONS, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
