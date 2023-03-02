@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AlecRabbit\WCWidth\Kernel;
 
+use FFI;
+
+use RuntimeException;
+
+use function is_array;
 use function mb_ord;
 use function mb_strlen;
 
@@ -37,7 +42,7 @@ class UCode
         0x2063 => true,  // Invisible separator
     ];
 
-    private static ?\FFI $ffi = null;
+    private static ?FFI $ffi = null;
 
 
     public static function wcswidth(string $subject, ?int $n = null, ?string $version = null): int
@@ -66,9 +71,9 @@ class UCode
     {
         $_split = preg_split('//u', $subject, -1, PREG_SPLIT_NO_EMPTY);
         // @codeCoverageIgnoreStart
-        if (!\is_array($_split)) {
+        if (!is_array($_split)) {
             // Should never happen
-            throw new \RuntimeException('Failed to split string.');
+            throw new RuntimeException('Failed to split string.');
         }
         // @codeCoverageIgnoreEnd
         return $_split;
@@ -125,7 +130,7 @@ class UCode
         // Note: $version is ignored
         if (null === self::$ffi) {
             self::$ffi =
-                \FFI::cdef(
+                FFI::cdef(
                     "
                     typedef uint32_t wchar_t;
                     int wcwidth(wchar_t wc);

@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth;
 
 use AlecRabbit\WCWidth\Kernel\UCode;
-
 use AlecRabbit\WCWidth\Kernel\UnicodeVersion;
+
+use Throwable;
 
 use function function_exists;
 
-if($version = getenv('UNICODE_VERSION')) {
+if ($version = getenv('UNICODE_VERSION')) {
     try {
         UnicodeVersion::setVersion($version);
-    } catch (\Throwable $_) {
+    } catch (Throwable $_) {
         // silently ignore
         dump($_->getMessage()); // do not forget to remove this line!
     }

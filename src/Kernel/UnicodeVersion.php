@@ -6,6 +6,10 @@ namespace AlecRabbit\WCWidth\Kernel;
 
 use AlecRabbit\WCWidth\Kernel\Contract\IUnicodeVersion;
 
+use InvalidArgumentException;
+
+use function in_array;
+
 use const AlecRabbit\WCWidth\UNICODE_VERSIONS;
 
 /** @internal */
@@ -18,6 +22,7 @@ final class UnicodeVersion implements IUnicodeVersion
     {
         // no instances
     }
+
     // @codeCoverageIgnoreEnd
 
     public static function setVersion(string $version): void
@@ -45,8 +50,8 @@ final class UnicodeVersion implements IUnicodeVersion
 
     private static function assertVersion(string $version): void
     {
-        if (!\in_array($version, UNICODE_VERSIONS, true)) {
-            throw new \InvalidArgumentException(
+        if (!in_array($version, UNICODE_VERSIONS, true)) {
+            throw new InvalidArgumentException(
                 sprintf(
                     'Unknown Unicode version: %s',
                     $version
