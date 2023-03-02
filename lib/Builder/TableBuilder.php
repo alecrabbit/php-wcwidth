@@ -34,24 +34,6 @@ final class TableBuilder
             '3.1.0',
             '3.2.0',
             '4.0.0',
-            //
-            '4.1.0',
-            '5.0.0',
-            '5.1.0',
-            '5.2.0',
-            '6.0.0',
-            '6.1.0',
-            '6.2.0',
-            '6.3.0',
-            '7.0.0',
-            '8.0.0',
-            '9.0.0',
-            '10.0.0',
-            '11.0.0',
-            '12.0.0',
-            '12.1.0',
-            '13.0.0',
-            '14.0.0',
         ];
     protected ITableHeaderExtractor $tableHeaderExtractor;
 
@@ -92,10 +74,10 @@ final class TableBuilder
             $headers[$version] = $this->getHeaders($version);
         }
         Logger::comment('Saving files...');
-        dump($headers);
         $this->saver->save('versions.php', $this->templateRenderer->render('versions', $versions));
         $this->saver->save('zero.php', $this->templateRenderer->render('zero', $zero));
         $this->saver->save('wide.php', $this->templateRenderer->render('wide', $wide));
+        $this->saver->save('versions.md', $this->templateRenderer->render('versions.md', $headers));
     }
 
     private function getVersions(): iterable
@@ -157,11 +139,11 @@ final class TableBuilder
     private function getHeaders(string $version): array
     {
         return [
-            'east_asian_width' =>
+            'ea' =>
                 $this->tableHeaderExtractor->extractHeader(
                     $this->versionedUrl(self::URL_EASTASIAN_WIDTH, $version),
                 ),
-            'derived_category' =>
+            'dc' =>
                 $this->tableHeaderExtractor->extractHeader(
                     $this->versionedUrl(self::URL_DERIVED_CATEGORY, $version),
                 ),

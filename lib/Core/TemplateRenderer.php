@@ -60,6 +60,7 @@ final class TemplateRenderer implements ITemplateRenderer
     {
         return
             match ($type) {
+                'versions.md' => 'versions.md.twig',
                 'versions' => 'versions.php.twig',
                 'zero' => 'zero.php.twig',
                 'wide' => 'wide.php.twig',

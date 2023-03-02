@@ -21,6 +21,7 @@ final class TableHeaderExtractor implements Contract\ITableHeaderExtractor
 
     public function extractHeader(string $url): TableHeader
     {
+        Logger::debug(sprintf('Extracting header from %s', $url));
         $data = $this->client->get($url);
         $exploded = explode(PHP_EOL, $data);
         foreach ($exploded as $line) {
