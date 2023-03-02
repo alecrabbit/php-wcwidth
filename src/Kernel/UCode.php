@@ -1,7 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
-namespace AlecRabbit\WCWidth\Helpers;
+namespace AlecRabbit\WCWidth\Kernel;
+
+use function mb_ord;
+use function mb_strlen;
 
 use const AlecRabbit\WCWidth\UNICODE_VERSIONS;
 use const AlecRabbit\WCWidth\WIDE_EASTASIAN;
@@ -35,6 +39,8 @@ class UCode
         0x2062 => true,  // Invisible times
         0x2063 => true,  // Invisible separator
     ];
+
+    private static ?\FFI $ffi = null;
 
     public static function wcswidth(string $subject, ?int $n = null, ?string $version = null): int
     {
@@ -129,5 +135,19 @@ class UCode
                 )
             );
         }
+    }
+
+    public static function ffi_wcwidth(string $wc, ?string $version = null): int
+    {
+        // Note: $version is ignored
+        if (null === self::$ffi) {
+            self::$ffi =
+                \FFI::cdef("
+                    typedef uint32_t wchar_t;
+                    int wcwidth(wchar_t wc);
+                    ",
+                );
+        }
+        return self::$ffi->wcwidth(mb_ord($wc));
     }
 }

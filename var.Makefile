@@ -13,7 +13,7 @@ _FILES = \
 
 # ------------------------------------------------------------------------------
 PROJECT_NAME=php-wcwidth
-PROJECT_SHORT_TITLE=📦
+PROJECT_SHORT_TITLE=🇼
 
 TEST_REPETITION=10
 APP_CONTAINER=app

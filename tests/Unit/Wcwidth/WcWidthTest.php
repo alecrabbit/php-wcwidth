@@ -4,6 +4,8 @@ namespace AlecRabbit\Tests\Unit\Wcwidth;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+
+use function AlecRabbit\WCWidth\ffiEnabled;
 use function AlecRabbit\WCWidth\wcswidth;
 use function AlecRabbit\WCWidth\wcwidth;
 
@@ -145,8 +147,12 @@ class WcWidthTest extends TestCase
     #[Test]
     public function wcwidthUnknownVersion(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unknown Unicode version: 0');
-        wcwidth('a', '0');
+        if (ffiEnabled()) {
+            self::assertSame(1, wcwidth('a')); // version is ignored
+        } else {
+            $this->expectException(\InvalidArgumentException::class);
+            $this->expectExceptionMessage('Unknown Unicode version: 0');
+            wcwidth('a', '0');
+        }
     }
 }
