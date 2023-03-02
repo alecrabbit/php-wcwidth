@@ -42,7 +42,8 @@
     }
   },
   "suggest": {
-    "ext-mbstring": "For multibyte Unicode string functionality."
+    "ext-mbstring": "For multibyte Unicode string functionality.",
+    "ext-ffi": "For FFI bindings."
   },
   "prefer-stable": true
 }
