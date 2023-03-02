@@ -83,11 +83,15 @@ final class TableBuilder
     private function getVersions(): iterable
     {
         Logger::comment('Getting versions...');
-        yield from $this->parseVersions(
-            $this->client->get(
-                self::URL_UNICODE_DERIVED_AGE
+        $parsedVersions = iterator_to_array(
+            $this->parseVersions(
+                $this->client->get(
+                    self::URL_UNICODE_DERIVED_AGE
+                )
             )
         );
+        Logger::comment('Versions: [' . implode(', ', $parsedVersions) . ']');
+        yield from $parsedVersions;
     }
 
     private function parseVersions(string $content): iterable

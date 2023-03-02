@@ -5,8 +5,7 @@ services:
     image: dralec/php82-cli-dev
     volumes:
       - *bash-rc
-    ports:
-        - 8080:8080
     environment:
       USE_FFI: "${ENABLE_FFI:-0}"
+      UNICODE_VERSION: "${USE_UNICODE_VERSION:-latest}"
       VAR_DUMPER_SERVER: "app:9912"
