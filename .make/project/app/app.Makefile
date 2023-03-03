@@ -24,9 +24,17 @@ test_full: test test_coverage
 
 ##
 ## —— Application 📦 ———————————————————————————————————————————————————————————
-update: cleanse _update_message _generate_tables _cp_files _test_message test_full ## Update tables and run tests
+update: cleanse _update_message _generate_tables _cp_files _test_message test_full release done ## Update tables and run tests
 
 cleanse: _cleanse_message _do_cleanse ## Cleanse tmp files
+
+release: _release_message _do_release ## Prepare for release
+
+_release_message:
+	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Preparing for release...${_C_STOP}\n";
+
+_do_release:
+	@-${_DC_EXEC} ${APP_CONTAINER} /app/.make/.bin/gitattributes.sh
 
 _cleanse_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Cleansing...${_C_STOP}\n";
@@ -41,7 +49,7 @@ _update_message:
 
 _generate_tables:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Generating tables...${_C_STOP}\n";
-	@-${_DC_EXEC} ${APP_CONTAINER} php bin/console generate:tables -vv
+	@${_DC_EXEC} ${APP_CONTAINER} php bin/console generate:tables -vv
 
 _cp_files:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Copying files...${_C_STOP}\n";
