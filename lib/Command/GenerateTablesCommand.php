@@ -37,10 +37,6 @@ final class GenerateTablesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // return this to indicate incorrect command usage; e.g. invalid options
-        // or missing arguments (it's equivalent to returning int(2))
-        // return Command::INVALID
-
         Logger::setOutput(new OutputAdapter($output));
 
         {
@@ -63,14 +59,16 @@ final class GenerateTablesCommand extends Command
     private function getOptions(InputInterface $input): array
     {
         Logger::debug('Processing options...');
+
         $options = [];
+
         if ($input->getOption('comments')) {
             $options['comments'] = true;
-            Logger::debug(' - Comments enabled.');
+            Logger::debug('✅ Comments in generated tables enabled.');
         }
         if ($input->getOption('debug')) {
             $options['debug'] = true;
-            Logger::debug(' - Twig debug mode enabled.');
+            Logger::debug('✅ Debug mode for Twig template engine enabled.');
         }
         return $options;
     }
