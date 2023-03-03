@@ -34,6 +34,14 @@ class UnicodeVersionTest extends TestCase
         self::assertEquals(UniCodeVersion::latest(), UniCodeVersion::refine(null));
     }
 
+    #[Test]
+    public function throwsOnInvalidVersion(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown Unicode version: "invalid".');
+        UniCodeVersion::refine('invalid');
+    }
+
     protected function setUp(): void
     {
         UniCodeVersion::reset();

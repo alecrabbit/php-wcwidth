@@ -53,7 +53,7 @@ final class UnicodeVersion implements IUnicodeVersion
         if (!in_array($version, UNICODE_VERSIONS, true)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'Unknown Unicode version: %s',
+                    'Unknown Unicode version: "%s".',
                     $version
                 )
             );
