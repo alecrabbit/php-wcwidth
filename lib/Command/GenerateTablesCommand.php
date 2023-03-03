@@ -41,39 +41,23 @@ final class GenerateTablesCommand extends Command
         // or missing arguments (it's equivalent to returning int(2))
         // return Command::INVALID
 
-        $outputAdapter = $this->getOutputAdapter($output);
+        Logger::setOutput(new OutputAdapter($output));
 
-        $options = $this->getOptions($input);
+        {
+            $options = $this->getOptions($input);
 
-        $tableBuilder =
-            new TableBuilder(
-                templateRenderer: new TemplateRenderer($options),
-                output: $outputAdapter,
-            );
+            $tableBuilder =
+                new TableBuilder(
+                    templateRenderer: new TemplateRenderer($options),
+                );
 
-        $tableBuilder->build();
+            $tableBuilder->build();
+        }
 
         Logger::comment($this->memoryReport());
 
         Logger::info('Done!');
         return Command::SUCCESS;
-    }
-
-    protected function memoryReport(): string
-    {
-        return sprintf(
-            '%sMemory Usage [%sK/%sK]',
-            PHP_EOL,
-            number_format(memory_get_usage(true) / 1024),
-            number_format(memory_get_peak_usage(true) / 1024),
-        );
-    }
-
-    private function getOutputAdapter(OutputInterface $output): OutputAdapter
-    {
-        $outputAdapter = new OutputAdapter($output);
-        Logger::setOutput($outputAdapter);
-        return $outputAdapter;
     }
 
     private function getOptions(InputInterface $input): array
@@ -89,5 +73,15 @@ final class GenerateTablesCommand extends Command
             Logger::debug(' - Twig debug mode enabled.');
         }
         return $options;
+    }
+
+    protected function memoryReport(): string
+    {
+        return sprintf(
+            '%sMemory Usage [%sK/%sK]',
+            PHP_EOL,
+            number_format(memory_get_usage(true) / 1024),
+            number_format(memory_get_peak_usage(true) / 1024),
+        );
     }
 }
