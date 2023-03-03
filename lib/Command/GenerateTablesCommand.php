@@ -41,24 +41,21 @@ final class GenerateTablesCommand extends Command
         // or missing arguments (it's equivalent to returning int(2))
         // return Command::INVALID
 
-        $options = [];
-        if ($input->getOption('comments')) {
-            $options['comments'] = true;
-        }
-        if ($input->getOption('debug')) {
-            $options['debug'] = true;
-        }
+        $outputAdapter = $this->getOutputAdapter($output);
+
+        $options = $this->getOptions($input);
+
         $tableBuilder =
             new TableBuilder(
                 templateRenderer: new TemplateRenderer($options),
-                output: new OutputAdapter($output),
+                output: $outputAdapter,
             );
 
         $tableBuilder->build();
 
         Logger::comment($this->memoryReport());
-        Logger::info('Done!');
 
+        Logger::info('Done!');
         return Command::SUCCESS;
     }
 
@@ -70,5 +67,27 @@ final class GenerateTablesCommand extends Command
             number_format(memory_get_usage(true) / 1024),
             number_format(memory_get_peak_usage(true) / 1024),
         );
+    }
+
+    private function getOutputAdapter(OutputInterface $output): OutputAdapter
+    {
+        $outputAdapter = new OutputAdapter($output);
+        Logger::setOutput($outputAdapter);
+        return $outputAdapter;
+    }
+
+    private function getOptions(InputInterface $input): array
+    {
+        Logger::debug('Processing options...');
+        $options = [];
+        if ($input->getOption('comments')) {
+            $options['comments'] = true;
+            Logger::debug(' - Comments enabled.');
+        }
+        if ($input->getOption('debug')) {
+            $options['debug'] = true;
+            Logger::debug(' - Twig debug mode enabled.');
+        }
+        return $options;
     }
 }
