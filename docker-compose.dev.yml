@@ -2,10 +2,7 @@ x-bash-rc: &bash-rc ./docker/.cli/.bashrc:/root/.bashrc
 
 services:
   app:
-    image: dralec/php82-cli-dev
+    build:
+      context: ./docker
     volumes:
       - *bash-rc
-    environment:
-      USE_FFI: "${ENABLE_FFI:-0}"
-      UNICODE_VERSION: "${USE_UNICODE_VERSION:-latest}"
-      VAR_DUMPER_SERVER: "app:9912"
