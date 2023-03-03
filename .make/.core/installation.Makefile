@@ -23,4 +23,4 @@ _installation_message:
 	@${_ECHO} "\n${_C_INFO} Installation...${_C_STOP}\n";
 
 done:
-	@${_ECHO} "\n${_C_INFO}Done! ${_C_STOP}\n";
+	@${_ECHO} "${_C_GREEN}Done! ${_C_STOP}\n";
