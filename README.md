@@ -1,4 +1,4 @@
-# 🇼 PHP Wide Character Width
+# 🇺🇦 🇼 PHP Wide Character Width
 [![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-wcwidth/dev-master.svg)](https://php.net)
 [![Build Status](https://github.com/alecrabbit/php-wcwidth/workflows/build/badge.svg)](https://github.com/alecrabbit/php-wcwidth/actions)
 
@@ -14,6 +14,11 @@
 [![Total Downloads](https://poser.pugx.org/alecrabbit/php-wcwidth/downloads)](https://packagist.org/packages/alecrabbit/php-wcwidth)
 
 > This is kinda port of python's [jquast/wcwidth](https://github.com/jquast/wcwidth)
+
+### New version 1.0.0
+
+> - WIP
+> - ‼️ API is subject to change until `1.0.0-BETA.0`
 
 [Unicode release files](src/File/versions.md)
 
