@@ -1,12 +1,10 @@
 phpunit.xml export-ignore
 CHANGELOG.md export-ignore
-src/ export-ignore
 .chglog/ export-ignore
+phpcs.xml export-ignore
 .github/ export-ignore
-LICENSE export-ignore
 .git/ export-ignore
 README.md export-ignore
-composer.json export-ignore
 vendor/ export-ignore
 .gitattributes export-ignore
 composer.lock export-ignore
@@ -28,6 +26,7 @@ tests/ export-ignore
 .dockerignore export-ignore
 phpunit.coverage.xml export-ignore
 .scrutinizer.yml export-ignore
+.gitattributes.keep export-ignore
 bin/ export-ignore
 .tools/ export-ignore
 .make/ export-ignore
