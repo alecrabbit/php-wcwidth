@@ -7,7 +7,7 @@ directory=${1:-$(pwd)}
 > "$directory/.gitattributes"
 
 # Collect the contents of the directory and exclude those listed in .gitattributes.keep
-contents=$(find "$directory" -mindepth 1 -maxdepth 1 -not -path '*/.gitattributes.keep' -printf '%P\n')
+contents=$(find "$directory" -mindepth 1 -maxdepth 1 -not -path '*/.gitattributes.keep' -exec basename {} \;)
 
 # Loop over each file or directory in the contents
 while read -r item; do
