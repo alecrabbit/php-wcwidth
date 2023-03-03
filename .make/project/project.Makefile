@@ -13,4 +13,4 @@ _release_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Preparing for release...${_C_STOP}\n";
 
 _do_release:
-	@-${_DC_EXEC} ${APP_CONTAINER} /app/.make/.bin/gitattributes.sh
+	@${_BIN_DIR}/gitattributes.sh
