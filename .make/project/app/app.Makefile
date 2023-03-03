@@ -28,14 +28,6 @@ update: cleanse _update_message _generate_tables _cp_files _test_message test_fu
 
 cleanse: _cleanse_message _do_cleanse ## Cleanse tmp files
 
-release: _release_message _do_release ## Prepare for release
-
-_release_message:
-	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Preparing for release...${_C_STOP}\n";
-
-_do_release:
-	@-${_DC_EXEC} ${APP_CONTAINER} /app/.make/.bin/gitattributes.sh
-
 _cleanse_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Cleansing...${_C_STOP}\n";
 
