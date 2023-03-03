@@ -1,6 +1,6 @@
 build:
   environment:
-    php: 7.3.25
+    php: 8.2.3
 
   nodes:
     analysis:
@@ -16,3 +16,4 @@ filter:
   excluded_paths:
     - tests/
     - bin/
+    - lib/
