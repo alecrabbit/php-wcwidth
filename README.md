@@ -1,6 +1,5 @@
 # 🇼 PHP Wide Character Width
-
-[![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-wcwidth.svg)](https://php.net)
+[![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-wcwidth/dev-master.svg)](https://php.net)
 [![Build Status](https://github.com/alecrabbit/php-wcwidth/workflows/build/badge.svg)](https://github.com/alecrabbit/php-wcwidth/actions)
 
 [![Build Status](https://scrutinizer-ci.com/g/alecrabbit/php-wcwidth/badges/build.png?b=master)](https://scrutinizer-ci.com/g/alecrabbit/php-wcwidth/build-status/master)
