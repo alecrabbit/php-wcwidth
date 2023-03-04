@@ -10,22 +10,12 @@ EXCLUDES=$(awk '{print $1}' "$KEEP_FILE" | sed 's|^/||')
 # Get the list of files and directories to ignore
 IGNORES=$(awk '{print $1}' "$IGNORE_FILE" | sed 's|^/||')
 
-echo ""
-echo "Ignoring:"
-echo "${IGNORES[*]}"
-
 # Get the contents of the directory and sort them alphabetically
 CONTENTS=$(find "$DIRECTORY" -mindepth 1 -maxdepth 1 -exec basename {} \; | sort)
 
-echo ""
-echo "Contents:"
-echo "${CONTENTS[*]}"
 
 # Create an empty .gitattributes file
 >"$DIRECTORY/.gitattributes"
-
-echo ""
-echo "Adding to .gitattributes:"
 
 # Loop over each file or directory in the contents
 while read -r item; do

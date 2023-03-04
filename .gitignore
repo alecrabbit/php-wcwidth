@@ -3,9 +3,8 @@
 /vendor/
 .env
 /.phive
-/.report/.build/*
 .ready
 .last_init_time
 .start_time
-docker-stack.yml
+*r-stack.yml
 .phpunit.result.cache
