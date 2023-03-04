@@ -25,7 +25,8 @@
 + [Installation](#installation)
 + [Quick start](#quickstart)
 + [Usage](doc/usage.md)
-
++ [FFI Extension](#ffi-extension)
++ 
 ### <a name="installation"></a> Installation
 
 ```bash
@@ -45,7 +46,7 @@ echo wcswidth('🐘🐘🐘'); // 6
 ```
 > see [doc/usage.md](doc/usage.md) for more details. 
 
-### FFI extension
+### <a name="ffi-extension"></a> FFI extension
 > ‼️ Experimental feature. 
 
 If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`.
