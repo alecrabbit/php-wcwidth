@@ -54,3 +54,5 @@ use AlecRabbit\WcWidth\UnicodeVersion;
 
 UnicodeVersion::reset();
 ```
+
+> Note: The package suggests to install `ext-mbstring` but it's implied that it is already installed or some polyfill is used.
