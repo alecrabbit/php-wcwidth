@@ -26,7 +26,7 @@
 + [Quick start](#quickstart)
 + [Usage](doc/usage.md)
 + [FFI Extension](#ffi-extension)
-+ 
+
 ### <a name="installation"></a> Installation
 
 ```bash
