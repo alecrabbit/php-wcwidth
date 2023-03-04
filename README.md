@@ -20,15 +20,19 @@
 > - WIP
 > - ‼️ API is subject to change until `1.0.0-BETA.0`
 
-[Unicode release files](src/File/versions.md)
+[🌐 Unicode release files](src/File/versions.md)
 
-### Installation
++ [Installation](#installation)
++ [Quick start](#quickstart)
++ [Usage](doc/usage.md)
+
+### <a name="installation"></a> Installation
 
 ```bash
 $ composer require alecrabbit/php-wcwidth
 ```
 
-### Usage
+### <a name="quickstart"></a> Quick start
 
 ```php
 use function AlecRabbit\WcWidth\wcwidth;
@@ -39,9 +43,15 @@ echo wcwidth('é'); // 1
 echo wcwidth('🐘'); // 2
 echo wcswidth('🐘🐘🐘'); // 6
 ```
+> see [doc/usage.md](doc/usage.md) for more details. 
 
 ### FFI extension
 > ‼️ Experimental feature. 
 
-If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`'ish value. See [docker-compose.dev.yml](docker-compose.dev.yml) for example.
+If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`.
 
+```dotenv
+USE_FFI=true
+```
+
+> Note: When using ffi extension version is ignored completely.

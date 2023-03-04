@@ -12,18 +12,18 @@ class UnicodeVersionTest extends TestCase
     public function canSetAndGetVersion(): void
     {
         $version = '13.0.0';
-        UnicodeVersion::setVersion($version);
-        self::assertEquals($version, UnicodeVersion::getVersion());
+        UnicodeVersion::set($version);
+        self::assertEquals($version, UnicodeVersion::get());
     }
 
     #[Test]
     public function canRefine(): void
     {
         $version = '13.0.0';
-        UnicodeVersion::setVersion($version);
+        UnicodeVersion::set($version);
         self::assertEquals($version, UnicodeVersion::refine('latest'));
         $version = UnicodeVersion::latest();
-        UnicodeVersion::setVersion($version);
+        UnicodeVersion::set($version);
         self::assertEquals($version, UnicodeVersion::refine('latest'));
     }
 
