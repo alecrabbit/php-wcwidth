@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function add_entry {
+  local item="$1"
+  local file="$2"
+  if [[ ! "${IGNORES[*]}" =~ ${item} ]] && [[ ! "${EXCLUDES[*]}" =~ ${item} ]]; then
+      echo "$item export-ignore" >>"$file"
+  fi
+}
+
 DIRECTORY=${1:-$(pwd)}
 KEEP_FILE=".gitattributes.keep"
 IGNORE_FILE=".gitignore"
@@ -21,18 +29,9 @@ while read -r item; do
   # Remove leading forward slash from item path
   item=${item#/}
   if [[ -d "$item" ]]; then
-    # Add a trailing slash to the directory name
-    item="$item/"
-    if [[ ! "${IGNORES[*]}" =~ ${item} ]]; then
-      if [[ ! "${EXCLUDES[*]}" =~ ${item} ]]; then
-        echo "$item export-ignore" >>"$DIRECTORY/.gitattributes"
-      fi
-    fi
+    add_entry "$item/" "$DIRECTORY/.gitattributes"
   else
-    if [[ ! "${IGNORES[*]}" =~ ${item} ]]; then
-      if [[ ! "${EXCLUDES[*]}" =~ ${item} ]]; then
-        echo "$item export-ignore" >>"$DIRECTORY/.gitattributes"
-      fi
-    fi
+    add_entry "$item" "$DIRECTORY/.gitattributes"
   fi
 done <<<"$CONTENTS"
+
