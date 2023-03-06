@@ -14,14 +14,17 @@ DIRECTORY=${1:-$(pwd)}
 KEEP_FILE=".gitattributes.keep"
 IGNORE_FILE=".gitignore"
 FILE="$DIRECTORY/.gitattributes"
+GIT_DIR="'\n.git/'"
 
 # Get the list of files and directories to exclude
 KEEPS=$(awk '{print $1}' "$KEEP_FILE"  | sed 's|^./|/|' | sed 's|^/||')
+# Add .git entry to KEEPS list
+KEEPS="$(echo -e "$KEEPS""$GIT_DIR")"
 
 # Get the list of files and directories to ignore
 IGNORES=$(awk '{print $1}' "$IGNORE_FILE"  | sed 's|^./|/|' | sed 's|^/||')
 # Add .git entry to IGNORES list
-IGNORES="$(echo -e "$IGNORES"'\n.git')"
+IGNORES="$(echo -e "$IGNORES""$GIT_DIR")"
 
 echo -e "KEEPS:\n${KEEPS[*]}\n"
 echo -e "IGNORES:\n${IGNORES[*]}\n"
