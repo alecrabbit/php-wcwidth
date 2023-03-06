@@ -44,9 +44,7 @@ final class TableBuilder
         protected ITableProcessor $tableProcessor = new TableProcessor(),
         protected ITemplateRenderer $templateRenderer = new TemplateRenderer(),
         protected IFileSaver $saver = new FileSaver(),
-        protected IOutput $output = new NullOutput(),
     ) {
-        Logger::setOutput($this->output);
         $this->tableHeaderExtractor = $tableHeaderExtractor ?? new TableHeaderExtractor($this->client);
     }
 

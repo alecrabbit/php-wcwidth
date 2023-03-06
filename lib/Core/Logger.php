@@ -13,6 +13,9 @@ final class Logger implements ILogger
 
     public static function setOutput(IOutput $output): void
     {
+        if (self::$output === $output) {
+            return;
+        }
         if (self::$output instanceof IOutput) {
             throw new \LogicException('Output already set.');
         }

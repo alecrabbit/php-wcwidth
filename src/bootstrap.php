@@ -13,10 +13,9 @@ use function function_exists;
 
 if ($version = getenv('UNICODE_VERSION')) {
     try {
-        UnicodeVersion::setVersion($version);
+        UnicodeVersion::set($version);
     } catch (Throwable $_) {
         // silently ignore
-        dump($_->getMessage()); // do not forget to remove this line!
     }
 }
 
