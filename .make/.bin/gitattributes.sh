@@ -3,6 +3,8 @@
 function add_entry {
   local item="$1"
   local file="$2"
+  # Remove leading forward slash from item path
+  item=${item#/}
   if [[ ! "${IGNORES[*]}" =~ ${item} ]] && [[ ! "${EXCLUDES[*]}" =~ ${item} ]]; then
       echo "$item export-ignore" >>"$file"
   fi
@@ -26,8 +28,6 @@ CONTENTS=$(find "$DIRECTORY" -mindepth 1 -maxdepth 1 -exec basename {} \; | sort
 
 # Loop over each file or directory in the contents
 while read -r item; do
-  # Remove leading forward slash from item path
-  item=${item#/}
   if [[ -d "$item" ]]; then
     item="$item/"
   fi
