@@ -43,6 +43,8 @@ echo wcwidth('a'); // 1
 echo wcwidth('é'); // 1
 echo wcwidth('🐘'); // 2
 echo wcswidth('🐘🐘🐘'); // 6
+
+echo wcwidth('🐘🐘🐘'); // 2 - only first char is considered
 ```
 > see [doc/usage.md](doc/usage.md) for more details. 
 
