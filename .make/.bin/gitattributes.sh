@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-function add_entry {
+function add_export_ignore_entry {
   local item="$1"
   local file="$2"
-  local ignores="$3"
-  local excludes="$4"
+  local ignores="${3:-}"
+  local excludes="${4:-}"
   # Remove leading forward slash from item path
   item=${item#/}
   if [[ ! "${ignores[*]}" =~ ${item} ]] && [[ ! "${excludes[*]}" =~ ${item} ]]; then
@@ -34,6 +34,5 @@ while read -r item; do
   if [[ -d "$item" ]]; then
     item="$item/"
   fi
-  add_entry "$item" "$FILE" "$IGNORES" "$EXCLUDES"
+  add_export_ignore_entry "$item" "$FILE" "$IGNORES" "$EXCLUDES"
 done <<<"$CONTENTS"
-
