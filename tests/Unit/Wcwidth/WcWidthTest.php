@@ -149,8 +149,9 @@ class WcWidthTest extends TestCase
     #[Test]
     public function wcwidthUnknownVersion(): void
     {
-        $version =  PickLock::getValue(UnicodeVersion::class, 'useVersion');
-        PickLock::setValue(UnicodeVersion::class, 'useVersion', null);
+        $propertyName = 'currentVersion';
+        $version =  PickLock::getValue(UnicodeVersion::class, $propertyName);
+        PickLock::setValue(UnicodeVersion::class, $propertyName, null);
         if (ffiEnabled()) {
             self::assertSame(1, wcwidth('a')); // version is ignored
         } else {
@@ -158,6 +159,6 @@ class WcWidthTest extends TestCase
             $this->expectExceptionMessage('Unknown Unicode version: 0');
             wcwidth('a', '0');
         }
-        PickLock::setValue(UnicodeVersion::class, 'useVersion', $version);
+        PickLock::setValue(UnicodeVersion::class, $propertyName, $version);
     }
 }

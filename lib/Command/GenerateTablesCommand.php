@@ -37,29 +37,40 @@ final class GenerateTablesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // return this to indicate incorrect command usage; e.g. invalid options
-        // or missing arguments (it's equivalent to returning int(2))
-        // return Command::INVALID
+        Logger::setOutput(new OutputAdapter($output));
+
+        {
+            $options = $this->getOptions($input);
+
+            $tableBuilder =
+                new TableBuilder(
+                    templateRenderer: new TemplateRenderer($options),
+                );
+
+            $tableBuilder->build();
+        }
+
+        Logger::comment($this->memoryReport());
+
+        Logger::info('Done!');
+        return Command::SUCCESS;
+    }
+
+    private function getOptions(InputInterface $input): array
+    {
+        Logger::debug('Processing options...');
 
         $options = [];
+
         if ($input->getOption('comments')) {
             $options['comments'] = true;
+            Logger::debug('✅ Comments in generated tables enabled.');
         }
         if ($input->getOption('debug')) {
             $options['debug'] = true;
+            Logger::debug('✅ Debug mode for Twig template engine enabled.');
         }
-        $tableBuilder =
-            new TableBuilder(
-                templateRenderer: new TemplateRenderer($options),
-                output: new OutputAdapter($output),
-            );
-
-        $tableBuilder->build();
-
-        Logger::comment($this->memoryReport());
-        Logger::info('Done!');
-
-        return Command::SUCCESS;
+        return $options;
     }
 
     protected function memoryReport(): string

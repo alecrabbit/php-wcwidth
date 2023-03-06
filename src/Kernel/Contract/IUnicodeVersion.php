@@ -7,9 +7,9 @@ namespace AlecRabbit\WCWidth\Kernel\Contract;
 /** @internal */
 interface IUnicodeVersion
 {
-    public static function setVersion(string $version): void;
+    public static function set(string $version): void;
 
-    public static function getVersion(): ?string;
+    public static function get(): ?string;
 
     public static function reset(): void;
 
