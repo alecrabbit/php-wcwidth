@@ -4,9 +4,9 @@ __INIT=$(date)
 __FILE=".last_init_time"
 _INITS_DIR=$1
 
-mkdir -p $_INITS_DIR
+mkdir -p "$_INITS_DIR"
 
 if [ -f "$__FILE" ]; then
-  mv "$__FILE" ${_INITS_DIR}/"${__NOW}".init
+  mv "$__FILE" "${_INITS_DIR}"/"${__NOW}".init
 fi
 echo "${__INIT}" > ${__FILE}
