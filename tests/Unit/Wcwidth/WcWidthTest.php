@@ -156,7 +156,7 @@ class WcWidthTest extends TestCase
             self::assertSame(1, wcwidth('a')); // version is ignored
         } else {
             $this->expectException(\InvalidArgumentException::class);
-            $this->expectExceptionMessage('Unknown Unicode version: 0');
+            $this->expectExceptionMessage('Unknown Unicode version: "0".');
             wcwidth('a', '0');
         }
         PickLock::setValue(UnicodeVersion::class, $propertyName, $version);
