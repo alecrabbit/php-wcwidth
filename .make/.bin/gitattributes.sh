@@ -29,9 +29,8 @@ while read -r item; do
   # Remove leading forward slash from item path
   item=${item#/}
   if [[ -d "$item" ]]; then
-    add_entry "$item/" "$DIRECTORY/.gitattributes"
-  else
-    add_entry "$item" "$DIRECTORY/.gitattributes"
+    item="$item/"
   fi
+  add_entry "$item" "$DIRECTORY/.gitattributes"
 done <<<"$CONTENTS"
 
