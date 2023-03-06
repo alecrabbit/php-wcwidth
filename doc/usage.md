@@ -31,7 +31,7 @@ UNICODE_VERSION=latest # or 15.0.0
 ```
 Or you can pass `$version` argument to `wcwidth()` and `wcswidth()` functions.
 
-> Note: `$version` is ignored if version is already set globally.
+> Note: `$version` parameter is ignored if version is already set globally.
 
 ```php
 use function AlecRabbit\WcWidth\wcwidth;
