@@ -4,6 +4,8 @@ else
     include $(_ENV_FILE) # to include environment variables
 endif
 
+GLOBAL_DEBUG=0
+
 # Git related variables
 WORKING_BRANCH=dev
 DEFAULT_COMMIT_MESSAGE=~wp

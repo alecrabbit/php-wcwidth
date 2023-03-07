@@ -6,5 +6,5 @@
 .ready
 .last_init_time
 .start_time
-*r-stack.yml
-.phpunit.result.cache
+docker-stack.yml
+/.tools/.dam/
