@@ -1,8 +1,8 @@
+/.deprecated/
 /.idea/
 /.eval/
 /vendor/
 .env
-/.phive
 .ready
 .last_init_time
 .start_time

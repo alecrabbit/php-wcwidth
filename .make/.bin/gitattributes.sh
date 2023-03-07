@@ -14,7 +14,7 @@ DIRECTORY=${1:-$(pwd)}
 KEEP_FILE=".gitattributes.keep"
 IGNORE_FILE=".gitignore"
 FILE="$DIRECTORY/.gitattributes"
-GIT_DIR="'\n.git/'"
+GIT_DIR="\n.git/"
 
 # Get the list of files and directories to exclude
 KEEPS=$(awk '{print $1}' "$KEEP_FILE"  | sed 's|^./|/|' | sed 's|^/||')
