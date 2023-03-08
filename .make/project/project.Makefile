@@ -1,5 +1,6 @@
 include ${_PROJECT_DIR}/project.init.Makefile
 include ${_PROJECT_DIR}/project.install.Makefile
+include ${_APP_DIR}/app.Makefile
 
 PROJECT_SEL=${_C_SELECT} ${PROJECT_NAME} ${_C_STOP}
 
