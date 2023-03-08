@@ -8,7 +8,7 @@ GLOBAL_DEBUG=0
 
 # Git related variables
 WORKING_BRANCH=dev
-DEFAULT_COMMIT_MESSAGE=~wp
+COMMIT_MESSAGE=~wp
 
 # Docker compose files
 
