@@ -56,5 +56,5 @@ If `FFI` extension is available, it will be used for better performance. To enab
 ```dotenv
 USE_FFI=true
 ```
-
-> Note: When using ffi extension version is ignored completely.
+> **Note**
+> When using ffi extension version is ignored completely.
