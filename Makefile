@@ -1,44 +1,34 @@
-include ./.make/.core/*
-include ./.make/.include/*
-include ./.make/project/project.Makefile
-include ./var.Makefile
+# # #
+# # ‼️            STOP           ‼️
+# # ‼️ DO **NOT** EDIT THIS FILE ‼️
+# # #
+# # https://github.com/alecrabbit/dev-app-makefile
 
+# Project: DAM tool
+SHELL=/bin/bash
+.DEFAULT_GOAL=help_dam_tool
 
-## ——————————————————————————————— #️⃣  Makefile #️⃣  ——————————————————————————————
-##
-help: ## Outputs this help screen
-	@grep -h -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "${_C_GREEN}%-30s${_C_STOP} %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+# Root(Tools) directory
+_DN_TOOLS=.tools
+# DAM directory
+_DN_DAM=.dam
 
-##
-## —— Installation 🏗️  ——————————————————————————-———————————————————————————————
-install: _install_done ## Perform installation procedure
-uninstall: _docker_down _uninstall ## Run uninstall procedure
+__CORE_FILE=./${_DN_TOOLS}/${_DN_DAM}/core.Makefile
 
-##
-## —— Docker 🐳 ————————————————————————————————————————————————————————————————
-up: _docker_up time_current ## Start the docker hub in detached mode
+# Include core if present
+ifneq ("$(wildcard $(__CORE_FILE))","")
+  include $(__CORE_FILE)
+endif
 
-down: _docker_down time_current ## Stop the docker hub
+__DAM_URL="https://github.com/alecrabbit/dev-app-makefile"
 
-reload: _docker_down _docker_generate_stack _docker_up _docker_ps time_current ## Recreate stack file, restart the docker hub and show the current status
+install_dam_tool:
+	@echo -e "Installing DAM tool...\n";
+	@wget -qO- "${__DAM_URL}/archive/refs/heads/dev.tar.gz" | tar -xz \
+	 && shopt -s dotglob && cp -r dev-app-makefile-dev/* . && shopt -u dotglob \
+	 && rm -r dev-app-makefile-dev && ./install && make upgrade c=dev
 
-restart: _docker_down _docker_up time_current ## Restart the docker hub
-
-ps: _docker_ps time_current ## List all running containers
-
-clear: _docker_down_clear time_current ## Stop the docker hub and remove volumes
-
-cfg: _docker_config time_current ## Display docker-compose config
-
-logs: _docker_logs ## Show live logs
-
-stack: _docker_generate_stack time_current ## Create docker-compose stack file
-
-build: _docker_pull _docker_build time_current ## Build the docker images
-
-##
-## —— Project 🚧 ———————————————————————————————————————————————————————————————
-init: _initialize ## Initialize project and start docker hub
-
-chown: ## Change the owner(user) of the project
-	sudo chown -R ${USER_ID}:${GROUP_ID} .
+help_dam_tool:
+	@echo -e "DAM tool help:\n";
+	@echo "  make do_install_dam_tool - install DAM tool";
+	@echo "";

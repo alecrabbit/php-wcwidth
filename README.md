@@ -43,6 +43,8 @@ echo wcwidth('a'); // 1
 echo wcwidth('é'); // 1
 echo wcwidth('🐘'); // 2
 echo wcswidth('🐘🐘🐘'); // 6
+
+echo wcwidth('🐘🐘🐘'); // 2 - only first char is considered
 ```
 > see [doc/usage.md](doc/usage.md) for more details. 
 
@@ -54,5 +56,5 @@ If `FFI` extension is available, it will be used for better performance. To enab
 ```dotenv
 USE_FFI=true
 ```
-
-> Note: When using ffi extension version is ignored completely.
+> **Note**
+> When using ffi extension version is ignored completely.

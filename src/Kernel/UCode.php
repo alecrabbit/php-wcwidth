@@ -137,6 +137,7 @@ class UCode
                     ",
                 );
         }
+        /** @psalm-suppress PossiblyUndefinedMethod */
         return self::$ffi->wcwidth(mb_ord($wc));
     }
     // @codeCoverageIgnoreEnd
