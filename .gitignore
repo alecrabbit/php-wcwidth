@@ -7,6 +7,5 @@
 .last_init_time
 .start_time
 docker-stack.yml
-/.tools/.dam/
 .php-cs-fixer.php
 .php-cs-fixer.cache
