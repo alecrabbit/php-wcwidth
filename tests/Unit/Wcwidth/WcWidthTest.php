@@ -23,16 +23,16 @@ class WcWidthTest extends TestCase
 
         $phrase = '〈コンニチハ, セカイ!〉';
         $expect_length_each = [2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 2];
-        $expect_length_phrase = array_sum($expect_length_each);
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
-    protected function validate(array $expect_length_each, int $expect_length_phrase, string $phrase): void
+    protected static function doAsserts(array $expect_length_each, string $phrase, ?int $expect_length_phrase = null): void
     {
         $chrArray = preg_split('//u', $phrase, -1, PREG_SPLIT_NO_EMPTY);
         $length_each = array_map(wcwidth(...), $chrArray);
         $length_phrase = wcswidth($phrase, mb_strlen($phrase));
+        $expect_length_phrase ??= array_sum($expect_length_each);
 
         self::assertSame($expect_length_each, $length_each);
         self::assertSame($expect_length_phrase, $length_phrase);
@@ -42,11 +42,10 @@ class WcWidthTest extends TestCase
     public function nullWidthZero(): void
     {
         // NULL (0) reports width 0.
-        $phrase = "abc\x00def";
-        $expect_length_each = [1, 1, 1, 0, 1, 1, 1];
-        $expect_length_phrase = array_sum($expect_length_each);
+        $phrase = "abc\x00def〉";
+        $expect_length_each = [1, 1, 1, 0, 1, 1, 1, 2];
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]
@@ -60,9 +59,8 @@ class WcWidthTest extends TestCase
     {
         $phrase = 'mᚹä漢d字';
         $expect_length_each = [1, 1, 1, 2, 1, 2,];
-        $expect_length_phrase = array_sum($expect_length_each);
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]
@@ -73,7 +71,7 @@ class WcWidthTest extends TestCase
         $expect_length_each = [-1, 1, 1, 1];
         $expect_length_phrase = -1;
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase, $expect_length_phrase);
     }
 
     #[Test]
@@ -82,9 +80,8 @@ class WcWidthTest extends TestCase
         // Simple test combining reports total width of 4.
         $phrase = "- -\u{05bf}--";
         $expect_length_each = [1, 1, 1, 0, 1, 1];
-        $expect_length_phrase = 5;
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]
@@ -93,9 +90,8 @@ class WcWidthTest extends TestCase
         // Phrase cafe + COMBINING ACUTE ACCENT is café of length 4.
         $phrase = "cafe\u{0301}";
         $expect_length_each = [1, 1, 1, 1, 0];
-        $expect_length_phrase = 4;
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]
@@ -104,9 +100,8 @@ class WcWidthTest extends TestCase
         // String containing clock symbols
         $phrase = '🕐🕑';
         $expect_length_each = [2, 2];
-        $expect_length_phrase = 4;
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]
@@ -115,9 +110,8 @@ class WcWidthTest extends TestCase
         // CYRILLIC CAPITAL LETTER A + COMBINING CYRILLIC HUNDRED THOUSANDS SIGN is А҈ of length 1.
         $phrase = "\u{0410}\u{0488}";
         $expect_length_each = [1, 0];
-        $expect_length_phrase = 1;
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]
@@ -128,7 +122,7 @@ class WcWidthTest extends TestCase
         $expect_length_each = [1, 1, 1, 1];
         $expect_length_phrase = 4;
 
-        $this->validate($expect_length_each, $expect_length_phrase, $phrase);
+        self::doAsserts($expect_length_each, $phrase);
     }
 
     #[Test]

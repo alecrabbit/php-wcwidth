@@ -1,0 +1,18 @@
+parameters:
+  namespace: 'AlecRabbit\\WCWidth'
+
+# Add module files here
+imports:
+  - .common/paths.yaml
+
+deptrac:
+  layers:
+    - name: ModuleKernel
+      collectors:
+        - type: className
+          value: '%namespace%\\Kernel\\.*'
+  ruleset:
+    ModuleKernel: ~
+#  skip_violations:
+#    NS\Class:
+#      - AnotherNS\Class
