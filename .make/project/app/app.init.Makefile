@@ -8,8 +8,8 @@ _app_init_message:
 _do_app_init: _app_composer_install
 	@${_NO_OP};
 
-_do_app_set_flags:
+_do_app_clear_flags:
 	@${_ECHO_DISABLED};
 
-_do_app_clear_flags:
+_do_app_set_flags:
 	@${_ECHO_DISABLED};

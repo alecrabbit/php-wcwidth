@@ -1,5 +1,3 @@
-
-
 _do_project_set_flags: _do_app_set_flags
 	@${_NO_OP};
 
