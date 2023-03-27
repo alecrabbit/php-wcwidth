@@ -1,6 +1,7 @@
 {
   "name": "alecrabbit/php-wcwidth",
   "description": "Calculate width of unicode strings rendered to a terminal",
+  "license": "MIT",
   "type": "library",
   "keywords": [
     "php",
@@ -13,21 +14,25 @@
     "php": ">=8.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^10.0",
     "nunomaduro/collision": "^7.0",
-    "symfony/var-dumper": "^6.2",
-    "symfony/http-client": "^6.2",
+    "phpunit/phpunit": "^10.0",
     "symfony/cache": "^6.2",
     "symfony/console": "^6.2",
+    "symfony/http-client": "^6.2",
+    "symfony/var-dumper": "^6.2",
     "twig/twig": "^3.5"
   },
-  "license": "MIT",
+  "suggest": {
+    "ext-ffi": "For FFI bindings.",
+    "ext-mbstring": "For multibyte Unicode string functionality."
+  },
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\WCWidth\\Kernel\\": "src\\Kernel",
       "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder",
+      "AlecRabbit\\WCWidth\\Command\\": "lib\\Command",
       "AlecRabbit\\WCWidth\\Core\\": "lib\\Core",
-      "AlecRabbit\\WCWidth\\Command\\": "lib\\Command"
+      "AlecRabbit\\WCWidth\\Kernel\\": "src\\Kernel"
     },
     "files": [
       "src\\File\\versions.php",
@@ -40,10 +45,5 @@
     "psr-4": {
       "AlecRabbit\\Tests\\": "tests\\"
     }
-  },
-  "suggest": {
-    "ext-mbstring": "For multibyte Unicode string functionality.",
-    "ext-ffi": "For FFI bindings."
-  },
-  "prefer-stable": true
+  }
 }
