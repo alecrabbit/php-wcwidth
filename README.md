@@ -15,11 +15,6 @@
 
 > This is kinda port of python's [jquast/wcwidth](https://github.com/jquast/wcwidth)
 
-### New version 1.0.0
-
-> - WIP
-> - ‼️ API is subject to change until `1.0.0-BETA.0`
-
 [🌐 Unicode release files](src/File/versions.md)
 
 + [Installation](#installation)
@@ -51,10 +46,9 @@ echo wcwidth('🐘🐘🐘'); // 2 - only first char is considered
 ### <a name="ffi-extension"></a> FFI extension
 > ‼️ Experimental feature. 
 
-If `FFI` extension is available, it will be used for better performance. To enable it, set `USE_FFI` environment variable to `true`.
+If `FFI` extension is available, it can be used for better performance. To enable it, set `USE_FFI` environment variable to `true`.
 
 ```dotenv
 USE_FFI=true
 ```
-> **Note**
-> When using ffi extension version is ignored completely.
+> **Note** When using ffi extension `version` is ignored completely.
