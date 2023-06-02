@@ -1,0 +1,1 @@
+/app/src/bootstrap.php:26:17:warning - DocblockTypeContradiction: false|string does not contain true
