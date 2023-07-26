@@ -46,9 +46,10 @@ echo wcwidth('🐘🐘🐘'); // 2 - only first char is considered
 ### <a name="ffi-extension"></a> FFI extension
 > ‼️ Experimental feature. 
 
-If `FFI` extension is available, it can be used for better performance. To enable it, set `USE_FFI` environment variable to `true`.
+For improved performance, consider leveraging the Foreign Function Interface (`FFI`) extension, if available. To enable 
+this feature, set the `USE_FFI` environment variable to `true`.
 
 ```dotenv
 USE_FFI=true
 ```
-> **Note** When using ffi extension `version` is ignored completely.
+> **Note** When using `ffi` extension `version` value is ignored completely.
