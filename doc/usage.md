@@ -18,9 +18,10 @@ function wcswidth(string $wcs, ?string $version = null): int;
 
 ### Unicode version
 
-> Note: When using ffi extension version is ignored completely.
+> Note: When using `ffi` extension version value is ignored completely.
 
-Unicode version can be set globally for all functions using `UnicodeVersion::set()` method or through `UNICODE_VERSION` environment variable automatically.  
+Unicode version can be set globally for all functions using `UnicodeVersion::set()` method or through `UNICODE_VERSION` 
+environment variable automatically.  
 ```php
 use AlecRabbit\WcWidth\UnicodeVersion;
 
@@ -47,12 +48,13 @@ use AlecRabbit\WcWidth\UnicodeVersion;
 echo UnicodeVersion::get(); // 14.0.0
 ```
 
-If, for some reason, you need to reset current version to `null`, use `UnicodeVersion::reset()` method.
-
+In case you need to reset the current version to `null` for any specific reason, you can achieve this by utilizing the 
+`UnicodeVersion::reset()` method.
 ```php
 use AlecRabbit\WcWidth\UnicodeVersion;
 
 UnicodeVersion::reset();
 ```
 
-> Note: The package suggests to install `ext-mbstring` but it's implied that it is already installed or some polyfill is used.
+> The package recommends installing `ext-mbstring`, although it assumes that this extension is either already installed
+> or that a suitable polyfill is being used.
