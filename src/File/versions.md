@@ -182,3 +182,13 @@ Date: 2022-04-26, 23:14:35 GMT
 
 ---
 
+### EastAsianWidth-15.1.0.txt
+
+Date: 2023-07-28, 23:34:08 GMT
+
+### DerivedGeneralCategory-15.1.0.txt
+
+Date: 2023-07-28, 23:34:02 GMT
+
+---
+
