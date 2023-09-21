@@ -44,7 +44,7 @@ echo wcwidth('🐘🐘🐘'); // 2 - only first char is considered
 > see [doc/usage.md](doc/usage.md) for more details. 
 
 ### <a name="ffi-extension"></a> FFI extension
-> ‼️ Experimental feature. 
+> ** NOTE ** ‼️ Experimental feature. 
 
 For improved performance, consider leveraging the Foreign Function Interface (`FFI`) extension, if available. To enable 
 this feature, set the `USE_FFI` environment variable to `true`.
