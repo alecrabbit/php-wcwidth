@@ -23,7 +23,7 @@ if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
     {
         return
             match (getenv('USE_FFI')) {
-                '1', 'true', 'yes', 'on', true => true,
+                '1', 'true', 'yes', 'on' => true,
                 default => false,
             };
     }
