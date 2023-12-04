@@ -6,6 +6,7 @@ namespace AlecRabbit\WCWidth\Core;
 
 use AlecRabbit\WCWidth\Core\Contract\ILogger;
 use AlecRabbit\WCWidth\Core\Contract\IOutput;
+use LogicException;
 
 final class Logger implements ILogger
 {
@@ -17,7 +18,7 @@ final class Logger implements ILogger
             return;
         }
         if (self::$output instanceof IOutput) {
-            throw new \LogicException('Output already set.');
+            throw new LogicException('Output already set.');
         }
         self::$output = $output;
     }
@@ -25,16 +26,6 @@ final class Logger implements ILogger
     public static function debug(string $message): void
     {
         self::message($message, 'fg=gray', IOutput::VERBOSITY_DEBUG);
-    }
-
-    public static function info(string $message): void
-    {
-        self::message($message, 'info', IOutput::VERBOSITY_NORMAL);
-    }
-
-    public static function comment(string $message): void
-    {
-        self::message($message, 'comment', IOutput::VERBOSITY_VERBOSE);
     }
 
     private static function message(string $message, string $color, int $verbosity): void
@@ -49,6 +40,16 @@ final class Logger implements ILogger
                 $verbosity
             );
         }
+    }
+
+    public static function info(string $message): void
+    {
+        self::message($message, 'info', IOutput::VERBOSITY_NORMAL);
+    }
+
+    public static function comment(string $message): void
+    {
+        self::message($message, 'comment', IOutput::VERBOSITY_VERBOSE);
     }
 
     public static function error(string $message): void

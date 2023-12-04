@@ -6,6 +6,8 @@ namespace AlecRabbit\WCWidth\Core;
 
 use AlecRabbit\WCWidth\Core\Contract\ICategoryParser;
 
+use function trim;
+
 final class CategoryParser implements ICategoryParser
 {
 
@@ -21,8 +23,8 @@ final class CategoryParser implements ICategoryParser
             [$data, $comment] = $this->split($line);
             $data_fields = explode(';', $data);
             if ($data_fields[1] ?? false) {
-                $codepoints = \trim($data_fields[0] ?? '');
-                $properties = \trim($data_fields[1] ?? '');
+                $codepoints = trim($data_fields[0] ?? '');
+                $properties = trim($data_fields[1] ?? '');
                 if (in_array($properties, $categories, true)) {
                     if (str_contains($codepoints, '..')) {
                         [$start, $end] = explode('..', $codepoints);
@@ -56,6 +58,14 @@ final class CategoryParser implements ICategoryParser
         ];
     }
 
+    private function getSorter(): callable
+    {
+        return
+            static function (TableEntry $a, TableEntry $b): int {
+                return $a->start <=> $b->start;
+            };
+    }
+
     private function normalizeValue(string $value): string
     {
         return
@@ -66,13 +76,5 @@ final class CategoryParser implements ICategoryParser
                 '0',
                 STR_PAD_LEFT
             );
-    }
-
-    private function getSorter(): callable
-    {
-        return
-            static function (TableEntry $a, TableEntry $b): int {
-                return $a->start <=> $b->start;
-            };
     }
 }

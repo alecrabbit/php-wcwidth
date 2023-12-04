@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth\Core;
 
 use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
+use Exception;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -59,12 +60,12 @@ final class CachingClient implements ICachingClient
         $statusCode = $response->getStatusCode();
         Logger::debug(sprintf('Status code: %s', $statusCode));
         if (200 !== $statusCode) {
-            throw new \Exception('Error: Status code "' . $statusCode . '". Url: "' . $response->getInfo('url') . '"');
+            throw new Exception('Error: Status code "' . $statusCode . '". Url: "' . $response->getInfo('url') . '"');
         }
         $contentType = $response->getHeaders()['content-type'][0];
         Logger::debug(sprintf('Content type: %s', $contentType));
         if (!str_contains($contentType, 'text/plain')) {
-            throw new \Exception('Error: Content type "' . $contentType . '"');
+            throw new Exception('Error: Content type "' . $contentType . '"');
         }
     }
 }

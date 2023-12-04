@@ -7,6 +7,7 @@ namespace AlecRabbit\WCWidth\Core;
 
 use AlecRabbit\WCWidth\Core\Contract\ICachingClient;
 use AlecRabbit\WCWidth\Core\Contract\TableHeader;
+use RuntimeException;
 
 final class TableHeaderExtractor implements Contract\ITableHeaderExtractor
 {
@@ -14,8 +15,7 @@ final class TableHeaderExtractor implements Contract\ITableHeaderExtractor
 
     public function __construct(
         protected ICachingClient $client,
-    )
-    {
+    ) {
     }
 
 
@@ -34,6 +34,6 @@ final class TableHeaderExtractor implements Contract\ITableHeaderExtractor
                 );
             }
         }
-        throw new \RuntimeException(sprintf('Header not found in %s', $url));
+        throw new RuntimeException(sprintf('Header not found in %s', $url));
     }
 }

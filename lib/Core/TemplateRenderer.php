@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth\Core;
 
 use AlecRabbit\WCWidth\Core\Contract\ITemplateRenderer;
+use InvalidArgumentException;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
@@ -64,7 +65,7 @@ final class TemplateRenderer implements ITemplateRenderer
                 'versions' => 'versions.php.twig',
                 'zero' => 'zero.php.twig',
                 'wide' => 'wide.php.twig',
-                default => throw new \InvalidArgumentException(sprintf('Unknown template type: "%s".', $type)),
+                default => throw new InvalidArgumentException(sprintf('Unknown template type: "%s".', $type)),
             };
     }
 }

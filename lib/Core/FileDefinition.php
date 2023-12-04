@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 // 28.02.23
 namespace AlecRabbit\WCWidth\Core;
@@ -11,8 +12,7 @@ final class FileDefinition implements IFileDefinition
         protected string $filename,
         protected string $template,
         protected mixed $data,
-    )
-    {
+    ) {
         self::assertData($this->data);
     }
 

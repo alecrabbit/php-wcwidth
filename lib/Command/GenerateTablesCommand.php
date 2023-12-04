@@ -32,7 +32,8 @@ final class GenerateTablesCommand extends Command
                 'd',
                 InputOption::VALUE_NONE,
                 'Enable debug mode for Twig template engine.'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -23,11 +23,6 @@ final readonly class TableEntry implements ITableEntry
         return self::normalizeValue($this->start);
     }
 
-    public function normalizedEnd(): string
-    {
-        return self::normalizeValue($this->end);
-    }
-
     private static function normalizeValue(int $value): string
     {
         return
@@ -38,5 +33,10 @@ final readonly class TableEntry implements ITableEntry
                 '0',
                 STR_PAD_LEFT
             );
+    }
+
+    public function normalizedEnd(): string
+    {
+        return self::normalizeValue($this->end);
     }
 }
