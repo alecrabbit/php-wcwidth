@@ -80,5 +80,4 @@ final class UnicodeVersion implements IUnicodeVersion
 
         return self::doRefine($version);
     }
-
 }
