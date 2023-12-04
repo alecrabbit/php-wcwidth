@@ -29,9 +29,7 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\WCWidth\\Builder\\": "lib\\Builder",
-      "AlecRabbit\\WCWidth\\Command\\": "lib\\Command",
-      "AlecRabbit\\WCWidth\\Core\\": "lib\\Core",
+      "AlecRabbit\\WCWidth\\App\\": "lib\\App",
       "AlecRabbit\\WCWidth\\Kernel\\": "src\\Kernel"
     },
     "files": [

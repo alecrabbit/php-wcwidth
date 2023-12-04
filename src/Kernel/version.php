@@ -10,6 +10,7 @@ use Throwable;
 use function getenv;
 use function is_string;
 
+// @codeCoverageIgnoreStart
 $version = getenv('UNICODE_VERSION');
 
 if (is_string($version)) {
@@ -19,3 +20,4 @@ if (is_string($version)) {
         // silently ignore
     }
 }
+// @codeCoverageIgnoreEnd
