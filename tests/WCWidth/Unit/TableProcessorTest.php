@@ -1,6 +1,6 @@
 <?php
 
-namespace AlecRabbit\Tests\Unit\Core;
+namespace AlecRabbit\Tests\WCWidth\Unit;
 
 use AlecRabbit\Tests\TestCase\TestCase;
 use AlecRabbit\WCWidth\Core\TableEntry;

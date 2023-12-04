@@ -5,24 +5,17 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth;
 
 use AlecRabbit\WCWidth\Kernel\UCode;
-use AlecRabbit\WCWidth\Kernel\UnicodeVersion;
-use Throwable;
 
 use function function_exists;
-
-if ($version = getenv('UNICODE_VERSION')) {
-    try {
-        UnicodeVersion::set($version);
-    } catch (Throwable $_) {
-        // silently ignore
-    }
-}
+use function getenv;
 
 if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
     function ffiEnabled(): bool
     {
+        $var = getenv('USE_FFI');
+
         return
-            match (getenv('USE_FFI')) {
+            match ($var) {
                 '1', 'true', 'yes', 'on' => true,
                 default => false,
             };

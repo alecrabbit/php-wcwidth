@@ -1,6 +1,6 @@
 <?php
 
-namespace AlecRabbit\Tests\Unit\Kernel;
+namespace AlecRabbit\Tests\WCWidth\Unit\Kernel;
 
 use AlecRabbit\Tests\TestCase\TestCase;
 use AlecRabbit\WCWidth\Kernel\UnicodeVersion;

@@ -1,8 +1,8 @@
 <?php
 
-namespace AlecRabbit\Tests\Unit\Wcwidth;
+namespace AlecRabbit\Tests\WCWidth\Unit\Wcwidth;
 
-use AlecRabbit\Tests\Helper\PickLock;
+use AlecRabbit\Tests\TestCase\Helper\PickLock;
 use AlecRabbit\WCWidth\Kernel\UnicodeVersion;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

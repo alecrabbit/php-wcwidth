@@ -4,8 +4,8 @@ declare(strict_types=1);
 // 16.06.22
 namespace AlecRabbit\Tests\TestCase;
 
-use AlecRabbit\Tests\Helper\PickLock;
-use AlecRabbit\Tests\Mixin\AppRelatedConstantsTrait;
+use AlecRabbit\Tests\TestCase\Helper\PickLock;
+use AlecRabbit\Tests\TestCase\Mixin\AppRelatedConstantsTrait;
 use ArrayAccess;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Mixin;
+namespace AlecRabbit\Tests\TestCase\Mixin;
 
 trait AppRelatedConstantsTrait
 {
