@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-// 27.02.23
+
 namespace AlecRabbit\WCWidth\App\Core;
 
 use AlecRabbit\WCWidth\App\Core\Contract\ICachingClient;

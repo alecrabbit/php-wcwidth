@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-// 02.03.23
+
 namespace AlecRabbit\WCWidth\App\Core\Contract;
 
 final readonly class TableHeader

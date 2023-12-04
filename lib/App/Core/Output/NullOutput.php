@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-// 01.03.23
+
 namespace AlecRabbit\WCWidth\App\Core\Output;
 
 use AlecRabbit\WCWidth\App\Core\Contract\IOutput;
