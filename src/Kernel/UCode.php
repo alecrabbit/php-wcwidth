@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth\Kernel;
 
 use FFI;
-
 use RuntimeException;
 
 use function is_array;
@@ -132,7 +131,10 @@ class UCode
         return 0;
     }
 
-    // @codeCoverageIgnoreStart
+    /**
+     * // TODO (2024-01-23 17:34) [Alec Rabbit]: extract to class `UCodeFFI` [9a1baaf1-51f1-408a-9882-d555e35535cf]
+     * @codeCoverageIgnore
+     */
     public static function ffi_wcwidth(string $wc, ?string $version = null): int
     {
         // Note: $version is ignored

@@ -12,13 +12,12 @@ use function getenv;
 if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
     function ffiEnabled(): bool
     {
-        $var = getenv('USE_FFI');
+        $value = getenv('USE_FFI');
 
-        return
-            match ($var) {
-                '1', 'true', 'yes', 'on' => true,
-                default => false,
-            };
+        return match ($value) {
+            '1', 'true', 'yes', 'on' => true,
+            default => false,
+        };
     }
 }
 
@@ -26,6 +25,7 @@ if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
     if (extension_loaded('ffi') && ffiEnabled()) {
         function wcwidth(string $wc, ?string $version = null): int
         {
+            // TODO (2024-01-23 17:34) [Alec Rabbit]: extract to separate class [9a1baaf1-51f1-408a-9882-d555e35535cf]
             return UCode::ffi_wcwidth($wc, $version);
         }
     } else {
