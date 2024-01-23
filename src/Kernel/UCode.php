@@ -95,15 +95,15 @@ class UCode
         }
 
         # combining characters with zero width
-        if (static::bisearch($ucs, ZERO_WIDTH[$version])) {
+        if (static::binarySearch($ucs, ZERO_WIDTH[$version])) {
             return 0;
         }
 
-        return 1 + static::bisearch($ucs, WIDE_EASTASIAN[$version]);
+        return 1 + static::binarySearch($ucs, WIDE_EASTASIAN[$version]);
     }
 
 
-    protected static function bisearch(int $ucs, array $table): int
+    protected static function binarySearch(int $ucs, array $table): int
     {
         $lbound = 0;
         $ubound = count($table) - 1;
