@@ -96,7 +96,7 @@ _cleanse_message:
 
 _do_cleanse:
 	@-${_DC_EXEC} ${APP_CONTAINER} find /app/lib/.rendered -mindepth 1 -not -name '.gitignore' -delete
-	@-${_DC_EXEC} ${APP_CONTAINER} find /app/lib/template/.cache -mindepth 1 -not -name '.gitignore' -delete
+	@-${_DC_EXEC} ${APP_CONTAINER} find /app/lib/App/template/.cache -mindepth 1 -not -name '.gitignore' -delete
 
 _update_message:
 	@${_ECHO} "\n${_C_SELECT} ${PROJECT_NAME} ${_C_STOP} ${_C_INFO}Update tables...${_C_STOP}\n";

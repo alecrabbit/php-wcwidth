@@ -34,7 +34,7 @@ final class UnicodeVersion implements IUnicodeVersion
 
     private static function doRefine(?string $version): string
     {
-        if (self::LATEST === $version || null === $version) {
+        if ($version === self::LATEST || $version === null) {
             $version = self::latest();
         }
 
@@ -80,5 +80,4 @@ final class UnicodeVersion implements IUnicodeVersion
 
         return self::doRefine($version);
     }
-
 }
