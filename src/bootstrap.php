@@ -5,27 +5,19 @@ declare(strict_types=1);
 namespace AlecRabbit\WCWidth;
 
 use AlecRabbit\WCWidth\Kernel\UCode;
-use AlecRabbit\WCWidth\Kernel\UnicodeVersion;
-use Throwable;
 
 use function function_exists;
-
-if ($version = getenv('UNICODE_VERSION')) {
-    try {
-        UnicodeVersion::set($version);
-    } catch (Throwable $_) {
-        // silently ignore
-    }
-}
+use function getenv;
 
 if (!function_exists(__NAMESPACE__ . '\ffiEnabled')) {
     function ffiEnabled(): bool
     {
-        return
-            match (getenv('USE_FFI')) {
-                '1', 'true', 'yes', 'on' => true,
-                default => false,
-            };
+        $value = getenv('USE_FFI');
+
+        return match ($value) {
+            '1', 'true', 'yes', 'on' => true,
+            default => false,
+        };
     }
 }
 
@@ -33,6 +25,7 @@ if (!function_exists(__NAMESPACE__ . '\wcwidth')) {
     if (extension_loaded('ffi') && ffiEnabled()) {
         function wcwidth(string $wc, ?string $version = null): int
         {
+            // TODO (2024-01-23 17:34) [Alec Rabbit]: extract to separate class [9a1baaf1-51f1-408a-9882-d555e35535cf]
             return UCode::ffi_wcwidth($wc, $version);
         }
     } else {

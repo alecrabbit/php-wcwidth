@@ -4,6 +4,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $application = new Symfony\Component\Console\Application();
 
-$application->add(new AlecRabbit\WCWidth\Command\GenerateTablesCommand());
+$application->add(new AlecRabbit\WCWidth\App\Command\GenerateTablesCommand());
 
 $application->run();
